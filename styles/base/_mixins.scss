@@ -40,8 +40,8 @@
 @mixin font($name, $weight:normal) {
   @font-face {
     font-family: $name;
-    src: url("../fonts/"+ $name +".woff") format("woff"),
-    url("../fonts/"+ $name +".woff2") format("woff2");
+    src: url("../../public/static/fonts/"+ $name +".woff") format("woff"),
+    url("../../public/static/fonts/"+ $name +".woff2") format("woff2");
     font-weight: $weight;
     font-style: normal;
     font-display: swap;

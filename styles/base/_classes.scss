@@ -1,0 +1,65 @@
+.h-1{
+	@extend h1;
+}
+
+.h-2{
+	@extend h2;
+}
+
+.h-3{
+	@extend h3;
+}
+
+.h-4{
+	@extend h4;
+}
+
+.h-5{
+	@extend h5;
+}
+
+.h-6{
+	@extend h6;
+}
+
+.color{
+	&-primary{
+		color: var(--color-primary);
+	}
+	&-blue{
+		color: var(--color-blue);
+	}
+	&-orange{
+		color: var(--color-orange);
+	}
+	&-violet{
+		color: var(--color-violet);
+	}
+	&-turquoise{
+		color: var(--color-turquoise);
+	}
+}
+
+.font{
+	&-base{
+		font-family: var(--font-base);
+		letter-spacing: .03em;
+	}
+	&-book{
+		font-family: var(--font-base-book);
+		letter-spacing: .03em;
+	}
+	&-bold{
+		font-family: var(--font-base-bold);
+		letter-spacing: .03em;
+	}
+	&-title{
+		font-family: var(--font-title-regular);
+			&-bold{
+				font-family: var(--font-title-bold);
+			}
+	}
+	&-16{
+		font-size: 16px;
+	}
+}

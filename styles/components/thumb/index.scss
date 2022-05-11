@@ -1,0 +1,24 @@
+.thumb{
+	overflow: hidden;
+	border-radius: 50%;
+		img{
+			@include imageCover(center);
+		}
+}
+
+.size{
+	&-30{
+		width: 30px;
+		height: 30px;
+		min-width: 30px;
+	}
+}
+
+.position{
+	&-left{
+		margin-right: 9px;
+	}
+	&-right{
+		margin-left: 9px;
+	}
+}

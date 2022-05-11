@@ -1,0 +1,61 @@
+.box{
+	min-height: 400px;
+	border-radius: 7px;
+	position: relative;
+	background-color: var(--color-black-100);
+	margin: 16px 0;
+	padding: 32px;
+		&-theme{
+			&-1{
+				background: linear-gradient(54.89deg, #1E1F1F 57.82%, #102C27 123.61%);
+			}
+			&-2{
+				background: linear-gradient(55.7deg, #1E1F1F 53.09%, #0F316A 154.42%);
+			}
+			&-3{
+				background: linear-gradient(55.7deg, #1E1F1F 53.09%, #342F55 154.42%);
+			}
+			&-4{
+				background: linear-gradient(55.7deg, #1E1F1F 53.09%, #2F3868 154.42%);
+			}
+		}
+		&-header{
+			display: flex;
+			align-items: center;
+			margin-bottom: 20px;
+				&-thumb{
+					width: 64px;
+					height: 64px;
+					min-width: 64px;
+					border-radius: 50%;
+					background-color: var(--color-black-200);
+					color: var(--color-black);
+					display: flex;
+					align-items: center;
+					justify-content: center;
+						& ~ .box-header-title{
+							margin-left: 24px;
+						}
+						&.color{
+								&-primary{
+									background-color: var(--color-primary);
+								}
+								&-blue{
+									background-color: var(--color-blue);
+								}
+								&-violet{
+									background-color: var(--color-violet);
+								}
+								&-orange{
+									background-color: var(--color-orange);
+								}
+								&-turquoise{
+									background-color: var(--color-turquoise);
+								}
+						}
+				}
+				&-title{
+				
+				}
+		}
+}

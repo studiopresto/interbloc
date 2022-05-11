@@ -1,22 +1,29 @@
 :root {
-  --color-black:                          #0F0F0F;
-  --color-black-100:                      #3D3F43;
+  --color-black:                          #151616;
+  --color-black-100:                      #1E1F1F;
+  --color-black-200:                      #2C2C2C;
   --color-white:                          #FFFFFF;
-  --color-error:                          #E60A14;
-  --color-primary:                        #094E95;
-  --color-primary-light:                  #9CBDF0;
-  --color-gray:                           #70797A;
-  --color-gray-100:                       #828282;
-  --color-gray-200:                       #656B74;
-  --color-gray-300:                       #E0E0E0;
-  --font-base-regular:                    'Poppins-Regular';
-  --font-base-mediumn:                    'Poppins-Medium';
-  --font-base-semibold:                   'Poppins-SemiBold';
-  --font-title-bold:                      'Jones-Bold';
-  --hover-duration:                       .2s;
-  --scale-duration:                       1s;
-  --show-duration:                        1.4s;
-  --hover-ease:                           ease;
+  --color-grey:                           #939FAB;
+  --color-grey-100:                       #4E4E4E;
+  --color-grey-200:                       #717D89;
+  --color-grey-300:                       #4B4B4B;
+  --color-grey-400:                       #8B909A;
+  --color-grey-500:                       #6C6C6C;
+  --color-grey-600:                       #A7A7A7;
+  --color-gery-700:                       #E3EBEF;
+  --color-primary:                        #47D0FE;
+  --color-blue:                           #1A70FE;
+  --color-violet:                         #9485FE;
+  --color-orange:                         #FFB342;
+  --color-turquoise:                      #4FF0D7;
+  --color-success:                        #2BBF6F;
+  --font-base:                            'Nexa-Regular', sans-serif;
+  --font-base-book:                       'Nexa-Book', sans-serif;
+  --font-base-bold:                       'SpaceMono-Bold', sans-serif;
+  --font-title-bold:                      'RobotoMono-Bold', sans-serif;
+  --font-title-regular:                   'RobotoMono-Regular', sans-serif;
+  --duration:                             .3s;
+  --ease:                                 ease;
 }
 
 $xl:                                      1330;

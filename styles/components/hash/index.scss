@@ -1,0 +1,31 @@
+.hash{
+	display: flex;
+	align-items: center;
+	position: relative;
+	padding: 0 30px;
+	margin-top: -8px;
+		&-icon{
+			margin-right: 14px;
+		}
+		&-title{
+			line-height: 1em;
+			display: inline-block;
+				& ~ .hash-value{
+					margin-left: 48px;
+				}
+		}
+		&-value{
+			color: var(--color-grey-600);
+			line-height: 1em;
+			display: inline-block;
+			padding-top: 2px;
+		}
+		&-action{
+			margin-left: 25px;
+				.btn{
+					&:not(:last-child){
+						margin-right: 15px;
+					}
+				}
+		}
+}

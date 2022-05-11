@@ -1,130 +1,45 @@
 h1{
+	font-size: 40px;
 	font-family: var(--font-title-bold);
-	font-size: 64px;
 	line-height: 1.2em;
-	color: var(--color-black);
-	word-break: break-word;
-		@include d($xl){
-			font-size: 58px;
-		}
-		@include d($lg){
-			font-size: 52px;
-		}
-		@include d($md){
-			font-size: 48px;
-		}
-		@include d($sm){
-			font-size: 42px;
-		}
-		@include d($xs){
-			font-size: 38px;
-		}
-		@include d($xxs){
-			font-size: 32px;
-		}
+	color: var(--color-white);
 }
 
 h2{
+	font-size: 32px;
 	font-family: var(--font-title-bold);
-	font-size: 56px;
-	line-height: 1em;
-	color: var(--color-black);
-		@include d($md){
-			font-size: 48px;
-		}
-		@include d($sm){
-			font-size: 42px;
-		}
-		@include d($xs){
-			font-size: 36px;
-		}
-		@include d($xxs){
-			font-size: 28px;
-		}
+	line-height: 1.2em;
+	letter-spacing: .02em;
+	color: var(--color-gery-700);
 }
 
 h3{
-	font-family: var(--font-title-bold);
-	font-size: 48px;
-	line-height: 1.21em;
-	color: var(--color-black);
-		@include d($xl){
-			font-size: 36px;
-		}
-		@include d($md){
-			font-size: 32px;
-		}
-		@include d($xs){
-			font-size: 28px;
-		}
-		@include d($xxs){
-			font-size: 22px;
-		}
+	font-size: 20px;
+	font-family: var(--font-title-regular);
+	line-height: 1em;
+	color: var(--color-gery-700);
 }
 
 h4{
-	font-size: 42px;
-	font-family: var(--font-title-bold);
+	font-size: 20px;
+	font-family: var(--font-base);
 	line-height: 1em;
-	color: var(--color-black);
-		@include d($xl){
-			font-size: 30px;
-		}
-		@include d($md){
-			font-size: 24px;
-		}
+	color: var(--color-gery-700);
 }
 
 h5{
-	font-family: var(--font-base-semibold);
-	font-size: 36px;
-	line-height: 1.2em;
-	color: var(--color-black);
-		@include d($md){
-			font-size: 30px;
-		}
-		@include d($sm){
-			font-size: 26px;
-		}
+
 }
 
 h6{
-	font-family: var(--font-title-bold);
-	font-size: 28px;
-	text-transform: uppercase;
-	line-height: 1.2em;
-	color: var(--color-black);
-		@include d($xl){
-			font-size: 24px;
-		}
-		@include d($md){
-			font-size: 18px;
-		}
-		@include d($xs){
-			font-size: 16px;
-		}
-		@include d($xxs){
-			font-size: 14px;
-		}
-}
-
-h1, h2, h3, h4, h5, h6 {
-		strong, b{
-			font-weight: normal;
-		}
-}
-
-p{
-	color: var(--color-gray);
-}
-
-p, li, span{
-	font-size: inherit;
-		strong, b{
-			font-weight: normal;
-		}
+	font-size: 15px;
+	font-family: var(--font-title-regular);
+	color: var(--color-grey-400);
 }
 
 a{
 	color: inherit;
+		&:hover{
+			color: inherit;
+		}
 }
