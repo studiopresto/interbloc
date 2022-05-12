@@ -6,9 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint --dir",
-    "lint:strict": "next lint --dir . --max-warnings 0",
-    "prepare": "husky install"
+    "lint": "next lint --dir"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.1",
