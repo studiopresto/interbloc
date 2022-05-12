@@ -57,6 +57,11 @@
 						& > *{
 							position: relative;
 						}
+						& > span{
+							display: inline-flex;
+							align-items: center;
+							min-height: 30px;
+						}
 				}
 		}
 		th{

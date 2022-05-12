@@ -11,6 +11,7 @@ import BlocksIcon from '~ui/icons/Blocks';
 Utils
  */
 import hashShortening from '~utils/string/hashShortening';
+import NumberFormat from "react-number-format";
 
 
 
@@ -42,13 +43,21 @@ export default function BlocksPage() {
 						{
 							Array.from({ length: 22 }).map((_, index) => (
 								<tr key={index}>
-									<td><strong className="color-turquoise">5,522,818</strong></td>
+									<td>
+										<NumberFormat
+											value={5522818}
+											displayType="text"
+											thousandSeparator={true}
+											renderText={(value, props) => {
+												return <span className="font-secondary-bold color-turquoise" {...props}>{value}</span>;
+											}}/>
+									</td>
 									<td>
 										<div className="d-inline-flex align-items-center">
 											<div className="thumb size-30 position-left">
 												<img src="https://seeklogo.com/images/C/coinmarketcap-logo-064D167A0E-seeklogo.com.png" alt="Ping"/>
 											</div>
-											<span className="font-bold">Ping</span>
+											<span className="font-secondary-bold">Ping</span>
 										</div>
 									</td>
 									<td>

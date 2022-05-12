@@ -24,7 +24,7 @@ export default function TransactionsPage() {
 				</div>
 				<div>
 					<h1 className="h-2">Transactions</h1>
-					<p className="font-16 font-bold">Eth: <span className="color-violet">$3,093,59</span> (+3.81%)</p>
+					<p className="font-16 font-secodary-bold">Eth: <span className="color-violet">$3,093,59</span> (+3.81%)</p>
 				</div>
 			</div>
 			<div className="page-body">

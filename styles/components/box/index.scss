@@ -3,8 +3,11 @@
 	border-radius: 7px;
 	position: relative;
 	background-color: var(--color-black-100);
-	margin: 16px 0;
+	margin-bottom: 32px;
 	padding: 32px;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
 		&-theme{
 			&-1{
 				background: linear-gradient(54.89deg, #1E1F1F 57.82%, #102C27 123.61%);
@@ -22,7 +25,7 @@
 		&-header{
 			display: flex;
 			align-items: center;
-			margin-bottom: 20px;
+			margin-bottom: 15px;
 				&-thumb{
 					width: 64px;
 					height: 64px;
@@ -56,6 +59,22 @@
 				}
 				&-title{
 				
+				}
+		}
+		&-body{
+			height: 100%;
+			width: 100%;
+				&-height{
+					height: calc(400px - 143px);
+				}
+		}
+		/*
+		Table
+		 */
+		.table{
+				&-box{
+					padding-left: 0;
+					padding-right: 0;
 				}
 		}
 }

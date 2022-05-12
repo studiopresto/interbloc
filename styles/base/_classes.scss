@@ -38,6 +38,9 @@
 	&-turquoise{
 		color: var(--color-turquoise);
 	}
+	&-grey{
+		color: var(--color-grey-400);
+	}
 }
 
 .font{
@@ -59,7 +62,22 @@
 				font-family: var(--font-title-bold);
 			}
 	}
+	&-secondary{
+			&-bold{
+				font-family: var(--font-secodary-bold);
+				letter-spacing: .03em;
+			}
+	}
+	&-12{
+		font-size: 12px;
+	}
 	&-16{
 		font-size: 16px;
+	}
+	&-18{
+		font-size: 18px;
+	}
+	&-20{
+		font-size: 20px;
 	}
 }
