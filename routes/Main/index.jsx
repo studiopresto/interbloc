@@ -96,10 +96,32 @@ export default function MainPage() {
 					</Box>
 				</div>
 				<div className="col-3">
-					<Box title="Mempool" theme={3} icon={<PhoneIcon/>} color="violet">
+					<Box title="Mempool" theme={4} icon={<PhoneIcon/>} color="violet">
 						<p className="font-16 color-grey font-bold">Transactions pending:</p>
 						<p className="h-2">5</p>
 					</Box>
+				</div>
+			</div>
+			<div className="row">
+				<div className="col-6">
+					<Box title="Price Statistics" theme={1}/>
+				</div>
+				<div className="col-3">
+					<Box title="Consensus" theme={3}>
+						<div className="row">
+							<div className="col-6">
+								<p className="color-grey font-bold mt-1">Voting Power <br/> Online:</p>
+								<p className="font-secondary-bold color-orange font-16 mt-1">89%</p>
+							</div>
+							<div className="col-6">
+								<p className="color-grey font-bold mt-1">Number Of <br/> Validators:</p>
+								<p className="font-secondary-bold color-violet font-16 mt-1">25/40</p>
+							</div>
+						</div>
+					</Box>
+				</div>
+				<div className="col-3">
+					<Box title="Node Locations" theme={4}/>
 				</div>
 			</div>
 			<div className="row">
