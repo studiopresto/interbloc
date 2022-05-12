@@ -1,10 +1,10 @@
+import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 /*
 Icons
  */
 import TransactionsIcon from '~ui/icons/Transactions';
-import {useEffect} from "react";
-import {fetchTransactions} from "~store/slices/getBlocksSlice";
+import {fetchTransactions} from "~store/slices/getTransactionsSlice";
 
 
 

@@ -1,5 +1,9 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import { STATUS } from '~config/constants';
+import dataProvider from '~utils/requestProviders/dataProvider';
+import resources from '~utils/requestProviders/resources';
+
+
 
 const initialState = {
 	data: null,
@@ -12,11 +16,7 @@ export const transactionsKey = 'Transactions';
 export const fetchTransactions = createAsyncThunk(
 	`${transactionsKey}/fetch`,
 	async () => {
-		const response = await fetch('https://jsonplaceholder.typicode.com/users', {
-			method: 'GET',
-		});
-
-		return await response.json();
+		return dataProvider.getList(resources.posts);
 	}
 );
 
@@ -29,10 +29,10 @@ export const getTransactionsSlice = createSlice({
 			state.status = STATUS.PENDING;
 		},
 		[fetchTransactions.fulfilled]: (state, action) => {
-			console.log('action - ', action.payload);
-			state.status = STATUS.FULFILLED;
 			state.data = action.payload;
-		}
+			state.status = STATUS.FULFILLED;
+			console.log('state - ',  action.payload);
+		},
 	}
 });
 
