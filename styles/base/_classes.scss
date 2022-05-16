@@ -43,6 +43,21 @@
 	}
 }
 
+.bg{
+		&-success{
+			background-color: var(--color-success) !important;
+		}
+		&-danger{
+			background-color: var(--color-danger) !important;
+		}
+		&-turquoise{
+			background-color: var(--color-turquoise) !important;
+		}
+		&-primary{
+			background-color: var(--color-primary) !important;
+		}
+}
+
 .font{
 	&-base{
 		font-family: var(--font-base);
@@ -67,6 +82,13 @@
 				font-family: var(--font-secodary-bold);
 				letter-spacing: .03em;
 			}
+	}
+	&-hash{
+		display: inline-block;
+		max-width: 208px;
+		text-overflow: ellipsis;
+		overflow: hidden;
+		white-space: nowrap;
 	}
 	&-12{
 		font-size: 12px;

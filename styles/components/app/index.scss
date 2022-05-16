@@ -9,3 +9,75 @@ strong{
 	font-family: var(--font-base-bold);
 	letter-spacing: .03em;
 }
+
+.dot{
+	&-row{
+		display: flex;
+		align-items: center;
+		white-space: nowrap;
+			&-title{
+			
+			}
+			&-item{
+				flex: 1;
+				height: 2px;
+				background-color: #323232;
+				margin: 0 0 0 18px;
+				position: relative;
+					&:before,
+					&:after{
+						content: '';
+						position: absolute;
+						pointer-events: none;
+						background-repeat: no-repeat;
+						background-size: contain;
+						background-position: center;
+					}
+					&:before{
+						background-image: url(/static/images/dot-start.svg);
+						width: 11px;
+						height: 20px;
+						left: -9px;
+						top: -9px;
+					}
+					&:after{
+						width: 23px;
+						height: 20px;
+						background-image: url(/static/images/dot-end.svg);
+						right: 0;
+						top: -9px;
+					}
+			}
+			&-icon{
+				position: absolute;
+				width: 12px;
+				height: 12px;
+				border-radius: 2px;
+				right: 4px;
+				top: -5px;
+				z-index: 1;
+			}
+	}
+}
+
+.status{
+	display: inline-block;
+	border-radius: 40px;
+	height: 34px;
+	line-height: 34px;
+	white-space: nowrap;
+	width: 124px;
+	max-width: 124px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	text-align: center;
+	padding: 0 20px;
+	background-color: var(--color-black-200);
+}
+
+.signal{
+	width: 12px;
+	height: 12px;
+	border-radius: 50%;
+	box-shadow: 0 0 6px currentColor;
+}

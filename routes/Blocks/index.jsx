@@ -61,8 +61,7 @@ export default function BlocksPage() {
 										</div>
 									</td>
 									<td>
-										<Link href={`${routes.public.blocks}/0xc6fcvzc6fsdf68678z3345v6546zc578zcv99790987987`}
-													className="font-book">{hashShortening('0xc6fcvzc6fsdf68678z3345v6546zc578zcv99790987987')}</Link>
+										<p className="font-book">{hashShortening('0xc6fcvzc6fsdf68678z3345v6546zc578zcv99790987987')}</p>
 									</td>
 									<td><span className="font-book">0</span></td>
 									<td><span className="font-book">9s ago</span></td>
