@@ -1,35 +1,44 @@
 import NumberFormat from 'react-number-format';
 import Plot from 'react-plotly.js';
+import data from './data';
 
 
 
 export default function Tokenomics() {
+
+	const { supply, bonded, unbonding } = data;
+	let boundedPercent = parseFloat(( ( bonded * 100 ) / supply ).toFixed(2));
+	let unBoundedPercent = parseFloat(( ( unbonding * 100 ) / supply ).toFixed(2));
+	let boundedPercentFake = ( boundedPercent / 100 ) * 50;
+	let unBoundedPercentFake = ( unBoundedPercent / 100 ) * 50;
+	const values = [boundedPercentFake, unBoundedPercentFake, 50];
+
 	return (
 		<>
 			<div className="row">
 				<div className="col-6">
 					<p className="color-grey font-bold">Bonded:</p>
 					<NumberFormat
-						value={45349414}
+						value={bonded}
 						displayType="text"
 						thousandSeparator={true}
 						renderText={(value, props) => {
 							return <p className="font-16 font-secondary-bold color-orange" {...props}>{value}</p>
 						}}/>
 					<p className="color-grey font-secondary-bold font-12">BTSG</p>
-					<p className="mt-2">36.07 %</p>
+					<p className="mt-2">{boundedPercent.toFixed(2)} %</p>
 				</div>
 				<div className="col-6">
 					<p className="color-grey font-bold">Unbonded:</p>
 					<NumberFormat
-						value={79978477}
+						value={unbonding}
 						displayType="text"
 						thousandSeparator={true}
 						renderText={(value, props) => {
 							return <p className="font-16 font-secondary-bold color-violet" {...props}>{value}</p>
 						}}/>
 					<p className="color-grey font-secondary-bold font-12">BTSG</p>
-					<p className="mt-2">63.62 %</p>
+					<p className="mt-2">{unBoundedPercent.toFixed(2)} %</p>
 				</div>
 			</div>
 			<div className="row">
@@ -38,13 +47,14 @@ export default function Tokenomics() {
 						<Plot
 							data={[
 								{
-									values: [30, 20, 50],
+									values,
 									labels: ['', '', ''],
 									type: 'pie',
 									rotation: 90,
 									marker: {
 										colors: ['#D69F4D', '#9485FE', '#1E1F1F'],
 									},
+									textinfo: 'none',
 								}
 							]}
 							layout={{
@@ -97,7 +107,13 @@ export default function Tokenomics() {
 				</div>
 				<div className="col-6">
 					<div className="d-flex justify-content-end">
-						<p className="font-16 font-secondary-bold">5,522,818</p>
+						<NumberFormat
+							value={supply}
+							displayType="text"
+							thousandSeparator={true}
+							renderText={(value, props) => {
+								return <p className="font-16 font-secondary-bold" {...props}>{value}</p>
+							}}/>
 					</div>
 				</div>
 			</div>
