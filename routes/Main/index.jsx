@@ -1,10 +1,12 @@
+import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import logo from '~static/images/logo-white.png';
 import NumberFormat from 'react-number-format';
 /*
 Components
  */
-import UnionIcon from '~ui/icons/Union';
+import BlocksLatest from '~components/BlocksLatest';
+import Tokenomics from '~components/Tokenomics';
 import Button from '~ui/components/Button';
 /*
 Icons
@@ -14,6 +16,7 @@ import Box from '~ui/components/Box';
 import BlocksIcon from '~ui/icons/Blocks';
 import RSSIcon from '~ui/icons/RSS';
 import PhoneIcon from '~ui/icons/Phone';
+import UnionIcon from '~ui/icons/Union';
 /*
 Utils
  */
@@ -41,48 +44,12 @@ export default function MainPage() {
 			<div className="row">
 				<div className="col-3">
 					<Box title="Blocks" theme={1} icon={<BlocksIcon/>} color="turquoise" staticHeight>
-						<div className="h-100 d-flex flex-column justify-content-end pb-2">
-							<p className="font-16 color-grey font-bold">Latest Block:</p>
-							<NumberFormat
-								value={5510127}
-								displayType="text"
-								thousandSeparator={true}
-								renderText={(value, props) => {
-									return <p className="h-2 mb-4" {...props}>{value}</p>
-								}}/>
-							<p className="font-16 color-grey font-bold">Average Block Time:</p>
-							<p className="h-2">5.95 s</p>
-						</div>
+						<BlocksLatest/>
 					</Box>
 				</div>
 				<div className="col-3">
 					<Box title="Tokenomics" theme={2} icon={<UnionIcon/>} color="orange">
-						<div className="row">
-							<div className="col-6">
-								<p className="color-grey font-bold">Bonded:</p>
-								<NumberFormat
-									value={45349414}
-									displayType="text"
-									thousandSeparator={true}
-									renderText={(value, props) => {
-										return <p className="font-16 font-secondary-bold color-orange" {...props}>{value}</p>
-									}}/>
-								<p className="color-grey font-secondary-bold font-12">BTSG</p>
-								<p className="mt-2">36.07 %</p>
-							</div>
-							<div className="col-6">
-								<p className="color-grey font-bold">Unbonded:</p>
-								<NumberFormat
-									value={79978477}
-									displayType="text"
-									thousandSeparator={true}
-									renderText={(value, props) => {
-										return <p className="font-16 font-secondary-bold color-violet" {...props}>{value}</p>
-									}}/>
-								<p className="color-grey font-secondary-bold font-12">BTSG</p>
-								<p className="mt-2">63.62 %</p>
-							</div>
-						</div>
+						<Tokenomics/>
 					</Box>
 				</div>
 				<div className="col-3">
