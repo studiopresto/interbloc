@@ -6,7 +6,9 @@ import NumberFormat from 'react-number-format';
 Components
  */
 import BlocksLatest from '~components/BlocksLatest';
-import Tokenomics from '~components/Tokenomics';
+const Tokenomics = dynamic(async () => {
+	return  await import('~components/Tokenomics');
+}, { ssr: false });
 import Button from '~ui/components/Button';
 /*
 Icons

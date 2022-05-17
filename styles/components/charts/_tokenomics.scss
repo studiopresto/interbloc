@@ -1,0 +1,18 @@
+.tokenomics{
+		&-chart {
+			height: 120px;
+			width: 190px;
+			position: relative;
+			overflow: hidden;
+			border-radius: 10px;
+			margin-bottom: 21px;
+				.js-plotly-plot {
+					position: absolute;
+					top: -76px;
+					left: -90px;
+				}
+		}
+		&-legends {
+			padding-top: 85px;
+		}
+}
