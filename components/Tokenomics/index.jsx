@@ -1,6 +1,6 @@
 import NumberFormat from 'react-number-format';
 import Plot from 'react-plotly.js';
-import data from './data';
+import { data } from './data';
 
 
 
@@ -58,10 +58,11 @@ export default function Tokenomics() {
 								}
 							]}
 							layout={{
-								width: 370,
-								height: 370,
+								width: null,
+								height: null,
 								autosize: true,
 								showlegend: false,
+								margin: { t: 0, r: 0, b: 0, l: 0 },
 								font: {
 									family: 'Nexa-Book',
 									color: '#8B909A',
@@ -81,10 +82,10 @@ export default function Tokenomics() {
 							config={{
 								displayModeBar: false,
 							}}
-							// style={{
-							// 	width: '100%',
-							// 	height: '100%',
-							// }}
+							style={{
+								width: '100%',
+								height: '100%',
+							}}
 						/>
 					</div>
 				</div>
@@ -102,19 +103,17 @@ export default function Tokenomics() {
 				</div>
 			</div>
 			<div className="row align-items-center">
-				<div className="col-6">
+				<div className="col-8">
 					<p className="color-grey font-bold">Staking:</p>
 				</div>
-				<div className="col-6">
-					<div className="d-flex justify-content-end">
-						<NumberFormat
-							value={supply}
-							displayType="text"
-							thousandSeparator={true}
-							renderText={(value, props) => {
-								return <p className="font-16 font-secondary-bold" {...props}>{value}</p>
-							}}/>
-					</div>
+				<div className="col-4">
+					<NumberFormat
+						value={supply}
+						displayType="text"
+						thousandSeparator={true}
+						renderText={(value, props) => {
+							return <p className="font-16 font-secondary-bold" {...props}>{value}</p>
+						}}/>
 				</div>
 			</div>
 		</>

@@ -8,8 +8,9 @@
 			margin-bottom: 21px;
 				.js-plotly-plot {
 					position: absolute;
-					top: -76px;
-					left: -90px;
+					top: 0;
+					left: 0;
+					height: 200% !important;
 				}
 		}
 		&-legends {

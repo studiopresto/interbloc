@@ -8,6 +8,6 @@ function generateQuery(url, obj) {
 }
 
 export default {
-	getOne: (resource, query) => requestClient('GET', generateQuery(resource, query)),
-	getList: (resource, query) => requestClient('GET', generateQuery(resource, query)),
+	getOne: (resource, query, external) => requestClient('GET', generateQuery(resource, query), external),
+	getList: (resource, query, external) => requestClient('GET', generateQuery(resource, query), external),
 };

@@ -3,10 +3,10 @@ import HttpError from '~utils/requestProviders/error';
 
 
 
-export default async function fetcher(method, url, data = undefined, authenticated, isFormData = false) {
+export default async function fetcher(method, url, external, data = undefined, authenticated, isFormData = false) {
 	try {
 		const headers = getHeaders(authenticated, isFormData);
-		const response = await fetch(`${process.env.API_SERVER}${url}`, {
+		const response = await fetch(`${external ? url : process.env.API_SERVER + url}`, {
 			headers,
 			method,
 			body: data && !isFormData ? JSON.stringify(data) : data

@@ -5,11 +5,20 @@ import NumberFormat from 'react-number-format';
 /*
 Components
  */
+import Preloader from '~ui/components/Preloader';
 import BlocksLatest from '~components/BlocksLatest';
+import Button from '~ui/components/Button';
+
 const Tokenomics = dynamic(async () => {
 	return  await import('~components/Tokenomics');
-}, { ssr: false });
-import Button from '~ui/components/Button';
+}, { ssr: false, loading: () => <Preloader/> });
+const Mempool = dynamic(async () => {
+	return await import('~components/Mempool');
+}, { ssr: false, loading: () => <Preloader/> });
+const Prices = dynamic(async () => {
+	return await import('~components/Prices');
+}, { ssr: false, loading: () => <Preloader/> });
+
 /*
 Icons
  */
@@ -76,14 +85,15 @@ export default function MainPage() {
 				</div>
 				<div className="col-3">
 					<Box title="Mempool" theme={4} icon={<PhoneIcon/>} color="violet">
-						<p className="font-16 color-grey font-bold">Transactions pending:</p>
-						<p className="h-2">5</p>
+						<Mempool/>
 					</Box>
 				</div>
 			</div>
 			<div className="row">
 				<div className="col-6">
-					<Box title="Price Statistics" theme={1}/>
+					<Box title="Price Statistics" theme={1}>
+						<Prices/>
+					</Box>
 				</div>
 				<div className="col-3">
 					<Box title="Consensus" theme={3}>

@@ -16,7 +16,7 @@ export const transactionsKey = 'Transactions';
 export const fetchTransactions = createAsyncThunk(
 	`${transactionsKey}/fetch`,
 	async () => {
-		return dataProvider.getList(resources.latestBlock);
+		return dataProvider.getList(resources.users);
 	}
 );
 
