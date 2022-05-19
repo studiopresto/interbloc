@@ -36,6 +36,10 @@ const Prices = dynamic(async () => {
 const Consensus = dynamic(async () => {
 	return await import('~components/Consensus');
 }, { ssr: false, loading: () => <Preloader/> });
+const NodeLocations = dynamic(async () => {
+	return await import('~components/NodeLocations');
+}, { ssr: false, loading: () => <Preloader/> });
+
 
 
 export default function MainPage() {
@@ -105,7 +109,9 @@ export default function MainPage() {
 					</Box>
 				</div>
 				<div className="col-3">
-					<Box title="Node Locations" theme={4}/>
+					<Box title="Node Locations" theme={4}>
+						<NodeLocations/>
+					</Box>
 				</div>
 			</div>
 			<div className="row">
