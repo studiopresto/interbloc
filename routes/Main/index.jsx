@@ -61,17 +61,17 @@ export default function MainPage() {
 				</Button>
 			</div>
 			<div className="row">
-				<div className="col-3">
+				<div className="col-xl-3 col-md-6">
 					<Box title="Blocks" theme={1} icon={<BlocksIcon/>} color="turquoise" staticHeight>
 						<BlocksLatest/>
 					</Box>
 				</div>
-				<div className="col-3">
+				<div className="col-xl-3 col-md-6">
 					<Box title="Tokenomics" theme={2} icon={<UnionIcon/>} color="orange">
 						<Tokenomics/>
 					</Box>
 				</div>
-				<div className="col-3">
+				<div className="col-xl-3 col-md-6">
 					<Box title="Relayers" theme={3} icon={<RSSIcon/>} color="blue" staticHeight>
 						<div className="h-100 d-flex flex-column justify-content-end">
 							<p className="font-16 color-grey font-bold">Packets Pending:</p>
@@ -91,31 +91,31 @@ export default function MainPage() {
 						</div>
 					</Box>
 				</div>
-				<div className="col-3">
+				<div className="col-xl-3 col-md-6">
 					<Box title="Mempool" theme={4} icon={<PhoneIcon/>} color="violet">
 						<Mempool/>
 					</Box>
 				</div>
 			</div>
 			<div className="row">
-				<div className="col-6">
+				<div className="col-xl-6">
 					<Box title="Price Statistics" theme={1}>
 						<Prices/>
 					</Box>
 				</div>
-				<div className="col-3">
+				<div className="col-xl-3 col-md-6">
 					<Box title="Consensus" theme={3}>
 						<Consensus/>
 					</Box>
 				</div>
-				<div className="col-3">
+				<div className="col-xl-3 col-md-6">
 					<Box title="Node Locations" theme={4}>
 						<NodeLocations/>
 					</Box>
 				</div>
 			</div>
 			<div className="row">
-				<div className="col-6">
+				<div className="col-xl-6">
 					<Box title="Transactions">
 						<div className="table-box">
 							<table className="table">
@@ -157,7 +157,7 @@ export default function MainPage() {
 						</div>
 					</Box>
 				</div>
-				<div className="col-6">
+				<div className="col-xl-6">
 					<Box title="Blocks">
 						<div className="table-box">
 							<table className="table">
