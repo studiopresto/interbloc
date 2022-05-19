@@ -1,6 +1,7 @@
-import {useEffect} from 'react';
+import {useEffect,useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import Plot from 'react-plotly.js';
+import NumberFormat from 'react-number-format';
 /*
 Store
  */
@@ -16,16 +17,69 @@ export default function Prices() {
 
 	const dispatch = useDispatch();
 	const { data } = useSelector(selectPrices);
+	const [price, setPrice] = useState(0);
+	const [marketCap, setMarketCap] = useState(0);
+	const [totalVolumes, setTotalVolumes] = useState(0);
 
 	useEffect(() => {
 		dispatch(fetchPrices());
 	}, [dispatch]);
 
+	useEffect(() => {
+		if (!!data?.price) {
+			setPrice(data.price[0]);
+		}
+	}, [data]);
+
+	useEffect(() => {
+		if (!!price) {
+			let index = data.price.indexOf(price);
+			!!data.total_volumes[index] ? setTotalVolumes(data.total_volumes[index].toFixed()) : null;
+			!!data.market_caps[index] ? setMarketCap(data.market_caps[index].toFixed()) : null;
+		}
+	}, [price, data.market_caps, data.price, data.total_volumes]);
+
 	if (!!data?.price && !!data?.date) {
 		return (
 			<>
-				<div>
-
+				<div className="row">
+					<div className="col-6">
+						<div className="h-100 d-flex flex-column justify-content-end">
+							<p className="color-grey font-16">Price</p>
+							<p className="h-2 color-primary">${price}</p>
+						</div>
+					</div>
+					<div className="col-6">
+						<ul className="table-list">
+							<li>
+								<span className="color-grey font-bold">Market Cap:</span>
+								<NumberFormat
+									value={marketCap}
+									displayType="text"
+									thousandSeparator={true}
+									renderText={(value, props) => {
+										return <span className="font-16 font-secondary-bold" {...props}>{value}</span>
+									}}/>
+							</li>
+							<li>
+								<span className="color-grey font-bold">Total Voting Power:</span>
+								<span className="font-16 font-secondary-bold">
+									<NumberFormat
+										value={totalVolumes}
+										displayType="text"
+										thousandSeparator={true}
+										renderText={(value, props) => {
+											return <span {...props}>{value}</span>
+										}}/>
+									<span className="color-grey text-uppercase font-12"> token</span>
+								</span>
+							</li>
+							{/*<li>*/}
+							{/*	<span className="color-grey font-bold">Etc:</span>*/}
+							{/*	<span className="font-16 font-secondary-bold">500</span>*/}
+							{/*</li>*/}
+						</ul>
+					</div>
 				</div>
 				<div className="prices-chart">
 					<Plot
@@ -38,14 +92,18 @@ export default function Prices() {
 								marker: {
 									color: '#42BAE2',
 								},
-							}
+								line: {
+									width: 5,
+									color: '#42BAE2',
+								},
+							},
 						]}
 						layout={{
 							width: null,
 							height: null,
 							autosize: true,
 							showlegend: false,
-							margin: {t: 10, r: 0, b: 30, l: 35},
+							margin: {t: 5, r: 0, b: 30, l: 35},
 							font: {
 								family: 'Nexa-Book',
 								color: '#8B909A',
@@ -89,7 +147,7 @@ export default function Prices() {
 									size: 10,
 								},
 							},
-							// hovermode: false,
+							// hovermode: 'x unified',
 						}}
 						config={{
 							displayModeBar: false,
@@ -98,6 +156,7 @@ export default function Prices() {
 							width: '100%',
 							height: '100%',
 						}}
+						onHover={({ points }) => setPrice(points[0].y)}
 					/>
 				</div>
 			</>

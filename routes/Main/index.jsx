@@ -8,17 +8,6 @@ Components
 import Preloader from '~ui/components/Preloader';
 import BlocksLatest from '~components/BlocksLatest';
 import Button from '~ui/components/Button';
-
-const Tokenomics = dynamic(async () => {
-	return  await import('~components/Tokenomics');
-}, { ssr: false, loading: () => <Preloader/> });
-const Mempool = dynamic(async () => {
-	return await import('~components/Mempool');
-}, { ssr: false, loading: () => <Preloader/> });
-const Prices = dynamic(async () => {
-	return await import('~components/Prices');
-}, { ssr: false, loading: () => <Preloader/> });
-
 /*
 Icons
  */
@@ -32,6 +21,21 @@ import UnionIcon from '~ui/icons/Union';
 Utils
  */
 import hashShortening from '~utils/string/hashShortening';
+/*
+Lazy components
+ */
+const Tokenomics = dynamic(async () => {
+	return  await import('~components/Tokenomics');
+}, { ssr: false, loading: () => <Preloader/> });
+const Mempool = dynamic(async () => {
+	return await import('~components/Mempool');
+}, { ssr: false, loading: () => <Preloader/> });
+const Prices = dynamic(async () => {
+	return await import('~components/Prices');
+}, { ssr: false, loading: () => <Preloader/> });
+const Consensus = dynamic(async () => {
+	return await import('~components/Consensus');
+}, { ssr: false, loading: () => <Preloader/> });
 
 
 export default function MainPage() {
@@ -97,16 +101,7 @@ export default function MainPage() {
 				</div>
 				<div className="col-3">
 					<Box title="Consensus" theme={3}>
-						<div className="row">
-							<div className="col-6">
-								<p className="color-grey font-bold mt-1">Voting Power <br/> Online:</p>
-								<p className="font-secondary-bold color-orange font-16 mt-1">89%</p>
-							</div>
-							<div className="col-6">
-								<p className="color-grey font-bold mt-1">Number Of <br/> Validators:</p>
-								<p className="font-secondary-bold color-violet font-16 mt-1">25/40</p>
-							</div>
-						</div>
+						<Consensus/>
 					</Box>
 				</div>
 				<div className="col-3">
