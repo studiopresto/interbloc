@@ -1,0 +1,24 @@
+.page-body-detail{
+	margin-top: -84px;
+	margin-bottom: 32px;
+		.detail{
+				&-list{
+					justify-content: flex-end;
+				}
+		}
+}
+
+.detail{
+		&-list{
+			display: flex;
+			align-items: center;
+				&-item{
+					display: flex;
+					flex-direction: column;
+					align-items: flex-start;
+						&:not(:last-child){
+							margin-right: 115px;
+						}
+				}
+		}
+}

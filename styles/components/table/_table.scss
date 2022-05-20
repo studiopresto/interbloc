@@ -97,4 +97,12 @@
 						}
 				}
 		}
+		/*
+		Input
+		 */
+		.form{
+			&-control{
+				background-color: var(--color-black-200);
+			}
+		}
 }

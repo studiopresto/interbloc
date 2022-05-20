@@ -23,5 +23,5 @@ export default function VerticalNavItem({ children, href = '/', label }) {
 
 VerticalNavItem.propTypes = {
 	href: PropTypes.string.isRequired,
-	label: PropTypes.string,
+	label: PropTypes.string.isRequired,
 };

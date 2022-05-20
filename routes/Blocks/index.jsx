@@ -1,8 +1,4 @@
-import Link from 'next/link';
-/*
-Config
- */
-import routes from '~config/routes';
+import NumberFormat from 'react-number-format';
 /*
 Icons
  */
@@ -11,7 +7,6 @@ import BlocksIcon from '~ui/icons/Blocks';
 Utils
  */
 import hashShortening from '~utils/string/hashShortening';
-import NumberFormat from "react-number-format";
 
 
 

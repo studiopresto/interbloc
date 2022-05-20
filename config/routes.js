@@ -3,5 +3,6 @@ export default {
 		index: '/',
 		blocks: '/blocks',
 		transactions: '/transactions',
+		validators: '/validators',
 	}
 }

@@ -1,0 +1,36 @@
+.card{
+	@extend .box;
+	min-height: 0;
+	flex-direction: row;
+		&-theme{
+			&-1{
+				background: linear-gradient(54.89deg, #1E1F1F 57.82%, #102C27 123.61%);
+			}
+			&-2{
+				background: linear-gradient(55.7deg, #1E1F1F 53.09%, #0F316A 154.42%);
+			}
+			&-3{
+				background: linear-gradient(55.7deg, #1E1F1F 53.09%, #342F55 154.42%);
+			}
+			&-4{
+				background: linear-gradient(55.7deg, #1E1F1F 53.09%, #2F3868 154.42%);
+			}
+		}
+		&-thumb{
+			width: 64px;
+			height: 64px;
+			min-width: 64px;
+			border-radius: 50%;
+			background-color: var(--color-black-200);
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			color: var(--color-black);
+				& ~ .card-content{
+					margin-left: 32px;
+				}
+		}
+		&-content{
+		
+		}
+}

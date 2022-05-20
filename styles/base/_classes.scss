@@ -41,6 +41,12 @@
 	&-grey{
 		color: var(--color-grey-400);
 	}
+	&-success{
+		color: var(--color-success);
+	}
+	&-danger{
+		color: var(--color-danger);
+	}
 }
 
 .bg{
@@ -61,6 +67,9 @@
 		}
 		&-violet{
 			background-color: var(--color-violet) !important;
+		}
+		&-blue{
+			background-color: var(--color-blue) !important;
 		}
 }
 

@@ -1,5 +1,6 @@
 .verticalNav{
 	height: 100vh;
+	width: 100%;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -50,6 +51,14 @@
 									color: var(--color-primary);
 								}
 						}
+						.link{
+							&-title{
+								visibility: hidden;
+								opacity: 0;
+								display: none;
+								transition: visibility var(--duration) var(--ease), opacity var(--duration) var(--ease);
+							}
+						}
 						&.is-active{
 								.link{
 									&-title{
@@ -78,7 +87,8 @@
 				width: 320px;
 					.link-title{
 						opacity: 1;
-						transition: opacity var(--duration) var(--ease);
+						visibility: visible;
+						display: inline-block;
 					}
 			}
 		}

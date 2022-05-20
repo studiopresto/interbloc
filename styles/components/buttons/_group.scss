@@ -1,0 +1,10 @@
+.btns-group{
+		.btn{
+			max-width: 196px;
+			width: 100%;
+			justify-content: center;
+				&:not(:last-child){
+					margin-right: 12px;
+				}
+		}
+}

@@ -1,0 +1,23 @@
+.table-sort{
+	display: inline-flex;
+	align-items: center;
+	position: relative;
+	cursor: pointer;
+		&-icon{
+			display: inline-flex;
+			flex-direction: column;
+			align-items: center;
+			color: var(--color-grey);
+				& ~ .table-sort-title{
+					margin-left: 13px;
+				}
+				svg{
+					&:not(:last-child){
+						margin-bottom: 2px;
+					}
+				}
+		}
+		&-title{
+		
+		}
+}
