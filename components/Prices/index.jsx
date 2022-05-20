@@ -9,7 +9,7 @@ import {fetchPrices, selectPrices} from '~store/slices/getPricesSlice';
 /*
 Components
  */
-import Preloader from '~ui/components/Preloader';
+import ErrorBlock from '~ui/components/Error';
 
 
 
@@ -162,6 +162,6 @@ export default function Prices() {
 			</>
 		)
 	} else {
-		return <Preloader/>;
+		return <ErrorBlock/>;
 	}
 }

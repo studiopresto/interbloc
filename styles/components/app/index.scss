@@ -91,3 +91,7 @@ strong{
 	justify-content: center;
 	flex-direction: column;
 }
+
+.error-block{
+	@extend .preloader;
+}

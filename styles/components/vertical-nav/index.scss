@@ -3,13 +3,15 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	padding: 32px;
+	align-items: flex-start;
+	padding: 32px 32px 32px 57px;
 	position: sticky;
 	top: 0;
 	background-color: var(--color-black-100);
 	border-radius: 0 20px 20px 0;
 	border: 1px var(--color-grey-100) solid;
 	margin-left: -1px;
+	transition: width var(--duration) var(--ease);
 		&:before{
 			content: '';
 			position: absolute;
@@ -24,26 +26,40 @@
 		&-logo{
 			position: absolute;
 			top: 40px;
-			left: 50%;
-			transform: translateX(-50%);
+			left: 58px;
+			z-index: 1;
 		}
 		&-list{
 			display: flex;
 			flex-direction: column;
 			justify-content: center;
-			align-items: center;
+			align-items: flex-start;
 				&-item{
-					width: 32px;
-					height: 32px;
 					display: flex;
 					align-items: center;
 					justify-content: center;
 					color: var(--color-grey);
 					transition: color var(--duration) var(--ease);
 					margin: 22px 0;
+						a{
+							display: inline-flex;
+							align-items: center;
+							color: var(--color-grey-700);
+								&:hover{
+									text-decoration: none;
+									color: var(--color-primary);
+								}
+						}
 						&.is-active{
-							color: var(--color-primary);
-							filter: drop-shadow(0 0 6px var(--color-primary));
+								.link{
+									&-title{
+										color: var(--color-primary);
+									}
+									&-icon{
+										color: var(--color-primary);
+										filter: drop-shadow(0 0 6px var(--color-primary));
+									}
+								}
 						}
 						@include hover($md){
 							&:hover{
@@ -55,7 +71,36 @@
 		&-detail{
 			position: absolute;
 			bottom: 58px;
-			left: 50%;
-			transform: translateX(-50%);
+			left: 57px;
+		}
+		@include hover($md){
+			&:hover{
+				width: 320px;
+					.link-title{
+						opacity: 1;
+						transition: opacity var(--duration) var(--ease);
+					}
+			}
+		}
+}
+
+.link{
+		&-icon{
+			width: 32px;
+			height: 32px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+				& ~ .link-title{
+					margin-left: 40px;
+				}
+		}
+		&-title{
+			@extend .font-secondary-bold, .font-16;
+			display: inline-block;
+			line-height: 1em;
+			padding-top: 1px;
+			color: inherit;
+			opacity: 0;
 		}
 }

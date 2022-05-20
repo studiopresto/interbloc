@@ -27,18 +27,18 @@ export default function VerticalNav() {
 				</Link>
 			</div>
 			<div className="verticalNav-list">
-				<VerticalNavItem href={routes.public.index}>
+				<VerticalNavItem href={routes.public.index} label="Home">
 					<HomeIcon/>
 				</VerticalNavItem>
-				<VerticalNavItem href={routes.public.blocks}>
+				<VerticalNavItem href={routes.public.blocks} label="Blocks">
 					<BlocksIcon/>
 				</VerticalNavItem>
-				<VerticalNavItem href={routes.public.transactions}>
+				<VerticalNavItem href={routes.public.transactions} label="Transactions">
 					<TransactionsIcon/>
 				</VerticalNavItem>
 			</div>
 			<div className="verticalNav-detail">
-				<VerticalNavItem href="#">
+				<VerticalNavItem href="#" label="Settings">
 					<SettingsIcon/>
 				</VerticalNavItem>
 			</div>
