@@ -1,3 +1,44 @@
 .header{
-	
+		&-panel{
+			display: flex;
+				&-search{
+					flex: 1;
+						& ~ .header-panel-action{
+							padding-left: 72px;
+						}
+				}
+				&-action{
+					display: flex;
+					align-items: center;
+					justify-content: flex-end;
+					padding-bottom: 7px;
+				}
+		}
+		&-action{
+				&-item{
+					flex: 1;
+					position: relative;
+						&:not(:last-child){
+							padding-right: 30px;
+							margin-right: 30px;
+								&:before{
+									content: '';
+									position: absolute;
+									width: 6px;
+									height: 6px;
+									border-radius: 2px;
+									background-color: var(--color-black-200);
+									right: 0;
+									top: 13px;
+									pointer-events: none;
+							}
+						}
+						&:last-child{
+							.btn{
+								margin-right: -9px;
+								color: var(--color-grey);
+							}
+						}
+				}
+		}
 }

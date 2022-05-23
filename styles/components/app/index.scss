@@ -95,3 +95,18 @@ strong{
 .error-block{
 	@extend .preloader;
 }
+
+.list{
+		&-custom{
+			padding: 30px 0;
+				li{
+					display: flex;
+					align-items: center;
+					justify-content: space-between;
+					padding: 13px 0;
+						&:not(:last-child){
+							border-bottom: 1px #323232 solid;
+						}
+				}
+		}
+}

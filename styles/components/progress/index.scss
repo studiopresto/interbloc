@@ -1,22 +1,2 @@
-.progress{
-	@extend .font-bold;
-	height: 34px;
-	background-color: var(--color-black-200);
-	border-radius: 20px;
-	padding: 10px;
-	font-size: 12px;
-	color: var(--color-grey-400);
-	justify-content: space-between;
-		&-bar{
-			border-radius: 16px;
-			background: linear-gradient(180deg, #1A70FE 9.41%, rgba(26, 112, 254, 0.24) 148.92%);
-			opacity: .8;
-		}
-		&-value{
-			//position: absolute;
-			//right: 32px;
-			//top: 10px;
-			margin-left: 16px;
-			margin-right: 16px;
-		}
-}
+@import "progress";
+@import "progress-multiple";

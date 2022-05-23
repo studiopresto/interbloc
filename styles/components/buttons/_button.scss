@@ -92,6 +92,11 @@
 		 */
 		&-outline{
 			background-color: transparent;
+				@include hover($md){
+					&:hover{
+						color: var(--color-white);
+					}
+				}
 		}
 		/*
 		focus
