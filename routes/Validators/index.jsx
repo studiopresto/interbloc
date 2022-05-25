@@ -135,8 +135,8 @@ export default function ValidatorsPage() {
 											</div>
 										</td>
 										<td>
-											<p className="font-bold">14, 312,787</p>
-											<p className="font-12 font-bold color-grey">11, 72%</p>
+											<p className="font-bold">{(14.312787 * ( index + 1 )).toFixed(6)}</p>
+											<p className="font-12 font-bold color-grey">{1.72 * ( index + 1)}%</p>
 										</td>
 										<td>
 											<Progress value={7 * ( index + 2 )}/>
@@ -147,10 +147,10 @@ export default function ValidatorsPage() {
 											</p>
 										</td>
 										<td>
-											<span className="font-bold">100%</span>
+											<span className="font-bold">{100 - index * 4}%</span>
 										</td>
 										<td>
-											<span className="font-bold">5.00%</span>
+											<span className="font-bold">{5.00 * index + 1}%</span>
 										</td>
 									</tr>
 								))

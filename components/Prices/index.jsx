@@ -10,13 +10,22 @@ import {fetchPrices, selectPrices} from '~store/slices/getPricesSlice';
 Components
  */
 import ErrorBlock from '~ui/components/Error';
+import Preloader from '~ui/components/Preloader';
+/*
+Utils
+ */
+import {isEmptyObject} from '~utils/object/detectEmptyObject';
+/*
+Config
+ */
+import {STATUS} from '~config/constants';
 
 
 
 export default function Prices() {
 
 	const dispatch = useDispatch();
-	const { data } = useSelector(selectPrices);
+	const { data, status } = useSelector(selectPrices);
 	const [price, setPrice] = useState(0);
 	const [marketCap, setMarketCap] = useState(0);
 	const [totalVolumes, setTotalVolumes] = useState(0);
@@ -32,14 +41,18 @@ export default function Prices() {
 	}, [data]);
 
 	useEffect(() => {
-		if (!!price) {
+		if (!!price && !isEmptyObject(data)) {
 			let index = data.price.indexOf(price);
 			!!data.total_volumes[index] ? setTotalVolumes(data.total_volumes[index].toFixed()) : null;
 			!!data.market_caps[index] ? setMarketCap(data.market_caps[index].toFixed()) : null;
 		}
-	}, [price, data.market_caps, data.price, data.total_volumes]);
+	}, [price, data.market_caps, data.price, data.total_volumes, data]);
 
-	if (!!data?.price && !!data?.date) {
+	if (isEmptyObject(data) && status === STATUS.PENDING) {
+		return <Preloader/>
+	}
+
+	if (!isEmptyObject(data) && status === STATUS.FULFILLED) {
 		return (
 			<>
 				<div className="row">
@@ -161,7 +174,7 @@ export default function Prices() {
 				</div>
 			</>
 		)
-	} else {
-		return <ErrorBlock/>;
 	}
+
+	return <ErrorBlock/>;
 }

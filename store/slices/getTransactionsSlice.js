@@ -16,7 +16,7 @@ export const transactionsKey = 'Transactions';
 export const fetchTransactions = createAsyncThunk(
 	`${transactionsKey}/fetch`,
 	async () => {
-		return dataProvider.getList(resources.nodes);
+		return dataProvider.getList(resources.transactions);
 	}
 );
 
@@ -31,8 +31,12 @@ export const getTransactionsSlice = createSlice({
 		[fetchTransactions.fulfilled]: (state, action) => {
 			state.data = action.payload;
 			state.status = STATUS.FULFILLED;
-			console.log('state - ',  action.payload);
 		},
+		[fetchTransactions.rejected]: (state, action) => {
+			state.status = STATUS.REJECTED;
+			state.data = null;
+			state.error = action.payload;
+		}
 	}
 });
 

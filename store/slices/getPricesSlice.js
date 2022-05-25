@@ -1,7 +1,7 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import { STATUS } from '~config/constants';
 import dataProvider from '~utils/requestProviders/dataProvider';
-import resources from "~utils/requestProviders/resources";
+import resources from '~utils/requestProviders/resources';
 
 
 
@@ -16,7 +16,7 @@ export const pricesKey = 'Prices';
 export const fetchPrices = createAsyncThunk(
 	`${pricesKey}/fetch`,
 	async () => {
-		return dataProvider.getList(resources.prices, { vs_currency: 'usd', days: 7 }, true)
+		return await dataProvider.getList(resources.prices, { vs_currency: 'usd', days: 7 }, true)
 			.then(res => {
 				const prices = res?.prices;
 				const marketCaps = res?.market_caps;

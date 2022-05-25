@@ -9,11 +9,15 @@ import routes from '~config/routes';
 Components
  */
 import VerticalNavItem from '~components/VerticalNav/VerticalNavItem';
+/*
+Icons
+ */
 import HomeIcon from '~ui/icons/Home';
 import BlocksIcon from '~ui/icons/Blocks';
 import SettingsIcon from '~ui/icons/Settings';
 import TransactionsIcon from '~ui/icons/Transactions';
-import UserIcon from "~ui/icons/User";
+import UserIcon from '~ui/icons/User';
+import DirectoryIcon from '~ui/icons/Directory';
 
 
 
@@ -36,6 +40,9 @@ export default function VerticalNav() {
 				</VerticalNavItem>
 				<VerticalNavItem href={routes.public.transactions} label="Transactions">
 					<TransactionsIcon/>
+				</VerticalNavItem>
+				<VerticalNavItem href={routes.public.interbloc} label="Interbloc">
+					<DirectoryIcon/>
 				</VerticalNavItem>
 				<VerticalNavItem href={routes.public.validators} label="Validators">
 					<UserIcon/>

@@ -40,7 +40,7 @@ export default function BlocksPage() {
 								<tr key={index}>
 									<td>
 										<NumberFormat
-											value={5522818}
+											value={5522818 * ( index + 1 )}
 											displayType="text"
 											thousandSeparator={true}
 											renderText={(value, props) => {

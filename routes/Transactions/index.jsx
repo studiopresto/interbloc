@@ -84,7 +84,7 @@ export default function TransactionsPage() {
 										<span className="color-violet font-12 font-bold status">Deposit</span>
 									</td>
 									<td>
-										<span className="font-book">12122314</span>
+										<span className="font-book">{12122314 * ( index + 1 )}</span>
 									</td>
 									<td>
 										<span className="font-book">1 hr 3min ago</span>
@@ -101,10 +101,10 @@ export default function TransactionsPage() {
 										<span className="font-book font-hash">0xc6fcvzc6fsdf68678z3345v6546zc578zcv99790987987</span>
 									</td>
 									<td>
-										<span className="font-book">0.054 Ether</span>
+										<span className="font-book">{0.054 * ( index + 1 )} Ether</span>
 									</td>
 									<td>
-										<span className="font-book">0.00034556781244</span>
+										<span className="font-book">{0.00034556781244 * ( index + 1 )}</span>
 									</td>
 									<td>
 										<div className="signal bg-primary"/>

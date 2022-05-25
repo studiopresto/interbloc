@@ -67,7 +67,7 @@ export default function BlockOpenPage() {
 				</div>
 			</div>
 			<div className="page-body">
-				<Hash/>
+				<Hash title="Hash" value="0xc6fcvzc6fsdf68678z3345v6546zc578zcv99790987987"/>
 				<div className="row">
 					<div className="col-6">
 						<ProgressMultiple data={gas} label="top"/>

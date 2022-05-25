@@ -6,7 +6,6 @@ import NumberFormat from 'react-number-format';
 Components
  */
 import Preloader from '~ui/components/Preloader';
-import BlocksLatest from '~components/BlocksLatest';
 import Button from '~ui/components/Button';
 /*
 Icons
@@ -24,6 +23,9 @@ import hashShortening from '~utils/string/hashShortening';
 /*
 Lazy components
  */
+const BlocksLatest = dynamic(async () => {
+	return await import('~components/BlocksLatest');
+}, { ssr: false, loading: () => <Preloader/> });
 const Tokenomics = dynamic(async () => {
 	return  await import('~components/Tokenomics');
 }, { ssr: false, loading: () => <Preloader/> });
@@ -43,7 +45,6 @@ const NodeLocations = dynamic(async () => {
 
 
 export default function MainPage() {
-
 	return (
 		<>
 			<div className="page-header">
@@ -135,7 +136,7 @@ export default function MainPage() {
 										<tr key={index}>
 											<td>
 												<NumberFormat
-													value={5522818}
+													value={5522818 * ( index + 1 )}
 													displayType="text"
 													thousandSeparator={true}
 													renderText={(value, props) => {
@@ -146,7 +147,7 @@ export default function MainPage() {
 												<span className="font-book">{hashShortening('0xc6fcvzc6fsdf68678z3345v6546zc578zcv99790987987')}</span>
 											</td>
 											<td><span className="font-book">send</span></td>
-											<td><span className="font-book">0.00200token</span></td>
+											<td><span className="font-book">{0.00200 * ( index + 1 )}token</span></td>
 											<td><span className="font-book">0</span></td>
 											<td><span className="font-book">9s ago</span></td>
 										</tr>
@@ -175,7 +176,7 @@ export default function MainPage() {
 										<tr key={index}>
 											<td>
 												<NumberFormat
-													value={5522818}
+													value={5525463 * ( index + 2 )}
 													displayType="text"
 													thousandSeparator={true}
 													renderText={(value, props) => {
