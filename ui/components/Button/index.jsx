@@ -44,7 +44,7 @@ Button.propTypes = {
 	target: PropTypes.string,
 	label: PropTypes.string,
 	onClick: PropTypes.func,
-	size: PropTypes.oneOf(['sm']),
+	size: PropTypes.oneOf(['sm', 'md']),
 	color: PropTypes.oneOf(['primary', 'blue', 'violet', 'orange', 'turquoise', 'transparent']),
 	children: PropTypes.oneOfType([PropTypes.node, PropTypes.bool]),
 	withIcon: PropTypes.bool,
