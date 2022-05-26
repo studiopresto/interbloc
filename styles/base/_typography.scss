@@ -42,4 +42,11 @@ a{
 		&:hover{
 			color: inherit;
 		}
+		&[class*=font],
+		&[class*=color]{
+			&:hover{
+				text-decoration: none;
+				color: currentColor;
+			}
+		}
 }

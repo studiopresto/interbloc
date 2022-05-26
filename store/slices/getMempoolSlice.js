@@ -1,7 +1,7 @@
-import {STATUS} from '~config/constants';
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import dataProvider from '~utils/requestProviders/dataProvider';
 import resources from '~utils/requestProviders/resources';
+import {STATUS} from '~config/constants';
 
 const initialState = {
 	data: {},
@@ -41,9 +41,9 @@ export const getMempoolSlice = createSlice({
 			state.data = action.payload;
 		},
 		[fetchMempool.rejected]: (state, action) => {
-			state.status = STATUS.REJECTED;
 			state.data = null;
 			state.error = action.payload;
+			state.status = STATUS.REJECTED;
 		},
 	},
 });

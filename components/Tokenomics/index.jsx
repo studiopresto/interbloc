@@ -19,6 +19,7 @@ import {isEmptyObject} from '~utils/object/detectEmptyObject';
 Config
  */
 import {STATUS} from '~config/constants';
+import { styles } from '~config/chart';
 
 
 
@@ -94,12 +95,7 @@ export default function Tokenomics() {
 									autosize: true,
 									showlegend: false,
 									margin: {t: 0, r: 0, b: 0, l: 0},
-									font: {
-										family: 'Nexa-Book',
-										color: '#8B909A',
-										size: 12,
-										fontWeight: 400,
-									},
+									font: styles.font,
 									paper_bgcolor: 'transparent',
 									plot_bgcolor: 'transparent',
 									xaxis: {
@@ -110,13 +106,8 @@ export default function Tokenomics() {
 									},
 									hovermode: false,
 								}}
-								config={{
-									displayModeBar: false,
-								}}
-								style={{
-									width: '100%',
-									height: '100%',
-								}}
+								config={styles.config}
+								style={styles.style}
 							/>
 						</div>
 					</div>

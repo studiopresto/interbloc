@@ -1,7 +1,7 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
-import { STATUS } from '~config/constants';
 import dataProvider from '~utils/requestProviders/dataProvider';
 import resources from '~utils/requestProviders/resources';
+import { STATUS } from '~config/constants';
 
 
 
@@ -49,7 +49,9 @@ export const getPricesSlice = createSlice({
 			state.status = STATUS.FULFILLED;
 			state.data = action.payload;
 		},
-		[fetchPrices.rejected]: (state) => {
+		[fetchPrices.rejected]: (state, action) => {
+			state.data = null;
+			state.error = action.payload;
 			state.status = STATUS.REJECTED;
 		},
 	}

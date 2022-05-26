@@ -1,4 +1,15 @@
+import {useEffect} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 import NumberFormat from 'react-number-format';
+/*
+Store
+ */
+import {fetchBlocks, selectBlocks} from '~store/slices/getBlocksSlice';
+/*
+Components
+ */
+import Preloader from '~ui/components/Preloader';
+import ErrorBlock from '~ui/components/Error';
 /*
 Icons
  */
@@ -7,66 +18,87 @@ import BlocksIcon from '~ui/icons/Blocks';
 Utils
  */
 import hashShortening from '~utils/string/hashShortening';
+/*
+Config
+ */
+import {STATUS} from '~config/constants';
+import {getDateDifferent} from "~utils/date/getDateDifferent";
 
 
 
 export default function BlocksPage() {
-	return (
-		<>
-			<div className="page-header-inner">
-				<div className="page-header-thumb __turquoise">
-					<BlocksIcon/>
+
+	const dispatch = useDispatch();
+	const { data, status } = useSelector(selectBlocks);
+
+	useEffect(() => {
+		dispatch(fetchBlocks({ items_per_page: 20, page: 1 }));
+	}, [dispatch]);
+
+	if (!data.length && status === STATUS.PENDING) {
+		return <Preloader/>;
+	}
+
+	if (data.length && status === STATUS.FULFILLED) {
+		return (
+			<>
+				<div className="page-header-inner">
+					<div className="page-header-thumb __turquoise">
+						<BlocksIcon/>
+					</div>
+					<div>
+						<h1 className="h-2">Blocks</h1>
+						<p className="h-6">Last Actuals Blocks</p>
+					</div>
 				</div>
-				<div>
-					<h1 className="h-2">Blocks</h1>
-					<p className="h-6">Last Actuals Blocks</p>
-				</div>
-			</div>
-			<div className="page-body">
-				<div className="table-box">
-					<table className="table">
-						<thead>
+				<div className="page-body">
+					<div className="table-box">
+						<table className="table">
+							<thead>
 							<tr>
 								<th>Height</th>
 								<th>Proposer</th>
 								<th>Hash</th>
-								<th>Txs</th>
+								{/*<th>Txs</th>*/}
 								<th>Time</th>
 							</tr>
-						</thead>
-						<tbody>
-						{
-							Array.from({ length: 22 }).map((_, index) => (
-								<tr key={index}>
-									<td>
-										<NumberFormat
-											value={5522818 * ( index + 1 )}
-											displayType="text"
-											thousandSeparator={true}
-											renderText={(value, props) => {
-												return <span className="font-secondary-bold color-turquoise" {...props}>{value}</span>;
-											}}/>
-									</td>
-									<td>
-										<div className="d-inline-flex align-items-center">
-											<div className="thumb size-30 position-left">
-												<img src="https://seeklogo.com/images/C/coinmarketcap-logo-064D167A0E-seeklogo.com.png" alt="Ping"/>
+							</thead>
+							<tbody>
+							{
+								data.map((option, index) => (
+									<tr key={index}>
+										<td>
+											<NumberFormat
+												value={option.height}
+												displayType="text"
+												thousandSeparator={true}
+												renderText={(value, props) => {
+													return <span className="font-secondary-bold color-turquoise" {...props}>{value}</span>;
+												}}/>
+										</td>
+										<td>
+											<div className="d-inline-flex align-items-center">
+												<div className="thumb size-30 position-left">
+													<img src={`https://via.placeholder.com/60x60?text=${option.blockproposer}`} alt={option.blockproposer}/>
+												</div>
+												<span className="font-secondary-bold">{option.blockproposer}</span>
 											</div>
-											<span className="font-secondary-bold">Ping</span>
-										</div>
-									</td>
-									<td>
-										<p className="font-book">{hashShortening('0xc6fcvzc6fsdf68678z3345v6546zc578zcv99790987987')}</p>
-									</td>
-									<td><span className="font-book">0</span></td>
-									<td><span className="font-book">9s ago</span></td>
-								</tr>
-							))
-						}
-						</tbody>
-					</table>
+										</td>
+										<td>
+											<p className="font-book">{hashShortening(option.hash)}</p>
+										</td>
+										{/*<td><span className="font-book">0</span></td>*/}
+										<td><span className="font-book">{getDateDifferent(option.timestamp * 1000, new Date())} ago</span></td>
+									</tr>
+								))
+							}
+							</tbody>
+						</table>
+					</div>
 				</div>
-			</div>
-		</>
-	)
+			</>
+		)
+	}
+
+	return <ErrorBlock/>;
 }

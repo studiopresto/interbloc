@@ -9,6 +9,9 @@ const nextConfig = {
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],
   },
+  images: {
+    domains: ['via.placeholder.com'],
+  },
 };
 
 module.exports = nextConfig;

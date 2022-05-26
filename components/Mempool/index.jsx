@@ -1,11 +1,24 @@
 import {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import Plot from 'react-plotly.js';
+/*
+Store
+ */
 import {fetchMempool, selectMempool} from '~store/slices/getMempoolSlice';
+/*
+Utils
+ */
 import {isEmptyObject} from '~utils/object/detectEmptyObject';
-import {STATUS} from '~config/constants';
+/*
+Components
+ */
 import Preloader from '~ui/components/Preloader';
-import ErrorBlock from "~ui/components/Error";
+import ErrorBlock from '~ui/components/Error';
+/*
+Config
+ */
+import {STATUS} from '~config/constants';
+import { styles } from '~config/chart';
 
 
 
@@ -49,12 +62,7 @@ export default function Mempool() {
 							autosize: true,
 							showlegend: false,
 							margin: {t: 10, r: 0, b: 30, l: 30},
-							font: {
-								family: 'Nexa-Book',
-								color: '#8B909A',
-								size: 12,
-								fontWeight: 400,
-							},
+							font: styles.font,
 							paper_bgcolor: 'transparent',
 							plot_bgcolor: 'transparent',
 							xaxis: {
@@ -94,13 +102,8 @@ export default function Mempool() {
 							hovermode: false,
 							bargap: 0.4,
 						}}
-						config={{
-							displayModeBar: false,
-						}}
-						style={{
-							width: '100%',
-							height: '100%',
-						}}
+						config={styles.config}
+						style={styles.style}
 					/>
 				</div>
 			</>

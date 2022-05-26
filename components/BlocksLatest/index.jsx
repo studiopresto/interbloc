@@ -18,6 +18,7 @@ import {isEmptyObject} from '~utils/object/detectEmptyObject';
 Config
  */
 import {STATUS} from '~config/constants';
+import {getDateDifferent} from "~utils/date/getDateDifferent";
 
 
 
@@ -46,7 +47,7 @@ export default function BlocksLatest() {
 						return <p className="h-2 mb-4" {...props}>{value}</p>
 					}}/>
 				<p className="font-16 color-grey font-bold">Average Block Time:</p>
-				<p className="h-2">5.95 s</p>
+				<p className="h-2">{getDateDifferent(data?.timestamp * 1000, new Date())}</p>
 			</div>
 		)
 	}

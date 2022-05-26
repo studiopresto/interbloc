@@ -1,12 +1,11 @@
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import logo from '~static/images/logo-white.png';
-import NumberFormat from 'react-number-format';
 /*
 Components
  */
 import Preloader from '~ui/components/Preloader';
-import Button from '~ui/components/Button';
+// import Button from '~ui/components/Button';
 /*
 Icons
  */
@@ -16,10 +15,6 @@ import BlocksIcon from '~ui/icons/Blocks';
 import RSSIcon from '~ui/icons/RSS';
 import PhoneIcon from '~ui/icons/Phone';
 import UnionIcon from '~ui/icons/Union';
-/*
-Utils
- */
-import hashShortening from '~utils/string/hashShortening';
 /*
 Lazy components
  */
@@ -41,6 +36,12 @@ const Consensus = dynamic(async () => {
 const NodeLocations = dynamic(async () => {
 	return await import('~components/NodeLocations');
 }, { ssr: false, loading: () => <Preloader/> });
+const TransactionsMain = dynamic(async () => {
+	return await import('~routes/Main/Transactions');
+}, { ssr: false, loading: () => <Preloader/> });
+const BlocksMain = dynamic(async () => {
+	return await import('~routes/Main/Blocks');
+}, { ssr: false, loading: () => <Preloader/> });
 
 
 
@@ -57,9 +58,9 @@ export default function MainPage() {
 						<p className="h-3">and consulting</p>
 					</div>
 				</div>
-				<Button href="#" label="Projects" color="primary" withIcon>
-					<ArrowLongIcon/>
-				</Button>
+				{/*<Button href="#" label="Projects" color="primary" withIcon>*/}
+				{/*	<ArrowLongIcon/>*/}
+				{/*</Button>*/}
 			</div>
 			<div className="row">
 				<div className="col-xl-3 col-md-6">
@@ -118,87 +119,12 @@ export default function MainPage() {
 			<div className="row">
 				<div className="col-xl-6">
 					<Box title="Transactions">
-						<div className="table-box">
-							<table className="table">
-								<thead>
-								<tr>
-									<th>Block</th>
-									<th>Hash</th>
-									<th>Type</th>
-									<th>Fee</th>
-									<th>Results</th>
-									<th>Time</th>
-								</tr>
-								</thead>
-								<tbody>
-								{
-									Array.from({ length: 6 }).map((_, index) => (
-										<tr key={index}>
-											<td>
-												<NumberFormat
-													value={5522818 * ( index + 1 )}
-													displayType="text"
-													thousandSeparator={true}
-													renderText={(value, props) => {
-														return <span className="font-secondary-bold color-turquoise" {...props}>{value}</span>;
-													}}/>
-											</td>
-											<td>
-												<span className="font-book">{hashShortening('0xc6fcvzc6fsdf68678z3345v6546zc578zcv99790987987')}</span>
-											</td>
-											<td><span className="font-book">send</span></td>
-											<td><span className="font-book">{0.00200 * ( index + 1 )}token</span></td>
-											<td><span className="font-book">0</span></td>
-											<td><span className="font-book">9s ago</span></td>
-										</tr>
-									))
-								}
-								</tbody>
-							</table>
-						</div>
+						<TransactionsMain/>
 					</Box>
 				</div>
 				<div className="col-xl-6">
 					<Box title="Blocks">
-						<div className="table-box">
-							<table className="table">
-								<thead>
-								<tr>
-									<th>Height</th>
-									<th>Proposer</th>
-									<th>Txs</th>
-									<th>Time</th>
-								</tr>
-								</thead>
-								<tbody>
-								{
-									Array.from({ length: 6 }).map((_, index) => (
-										<tr key={index}>
-											<td>
-												<NumberFormat
-													value={5525463 * ( index + 2 )}
-													displayType="text"
-													thousandSeparator={true}
-													renderText={(value, props) => {
-														return <span className="font-secondary-bold color-turquoise" {...props}>{value}</span>;
-													}}/>
-											</td>
-											<td>
-												<div className="d-inline-flex align-items-center">
-													<div className="thumb size-30 position-left">
-														<img src="https://seeklogo.com/images/C/coinmarketcap-logo-064D167A0E-seeklogo.com.png" alt="Ping"/>
-													</div>
-													<span className="font-secondary-bold">Ping</span>
-												</div>
-											</td>
-											<td><span className="font-book">0</span></td>
-											<td><span className="font-book">9s ago</span></td>
-										</tr>
-									))
-								}
-								</tbody>
-							</table>
-						</div>
+						<BlocksMain/>
 					</Box>
 				</div>
 			</div>

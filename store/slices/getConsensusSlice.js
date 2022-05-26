@@ -3,36 +3,34 @@ import dataProvider from '~utils/requestProviders/dataProvider';
 import resources from '~utils/requestProviders/resources';
 import {STATUS} from '~config/constants';
 
-
-
 const initialState = {
 	data: {},
 	status: STATUS.IDLE,
 	error: null,
 };
 
-export const latestKey = 'LatestBlock';
+export const consensusKey = 'Consensus';
 
-export const fetchLatestBlock = createAsyncThunk(
-	`${latestKey}/fetch`,
+export const fetchConsensus = createAsyncThunk(
+	`${consensusKey}/fetch`,
 	async () => {
-		return await dataProvider.getOne(resources.latestBlock);
+		return await dataProvider.getOne(resources.consensus);
 	}
 );
 
-export const getLatestBlockSlice = createSlice({
-	name: latestKey,
+export const getConsensusSlice = createSlice({
+	name: consensusKey,
 	initialState,
 	reducers: {},
 	extraReducers: {
-		[fetchLatestBlock.pending]: (state) => {
+		[fetchConsensus.pending]: (state) => {
 			state.status = STATUS.PENDING;
 		},
-		[fetchLatestBlock.fulfilled]: (state, action) => {
+		[fetchConsensus.fulfilled]: (state, action) => {
 			state.status = STATUS.FULFILLED;
 			state.data = action.payload;
 		},
-		[fetchLatestBlock.rejected]: (state, action) => {
+		[fetchConsensus.rejected]: (state, action) => {
 			state.data = null;
 			state.error = action.payload;
 			state.status = STATUS.REJECTED;
@@ -40,6 +38,6 @@ export const getLatestBlockSlice = createSlice({
 	},
 });
 
-export const selectLatestBlock = (state) => state[latestKey];
+export const selectConsensus = (state) => state[consensusKey];
 
-export default getLatestBlockSlice.reducer;
+export default getConsensusSlice.reducer;

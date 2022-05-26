@@ -1,12 +1,12 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
-import { STATUS } from '~config/constants';
 import dataProvider from '~utils/requestProviders/dataProvider';
 import resources from '~utils/requestProviders/resources';
+import { STATUS } from '~config/constants';
 
 
 
 const initialState = {
-	data: null,
+	data: [],
 	status: STATUS.IDLE,
 	error: null,
 };
@@ -15,8 +15,15 @@ export const transactionsKey = 'Transactions';
 
 export const fetchTransactions = createAsyncThunk(
 	`${transactionsKey}/fetch`,
-	async () => {
-		return dataProvider.getList(resources.transactions);
+	async ({ items_per_page = 10, page = 1 }) => {
+		return dataProvider.getList(resources.transactions, { items_per_page, page })
+			.then(res => {
+				let data = [];
+				Object.keys(res).forEach(el => {
+					data.push(res[el]);
+				});
+				return data;
+			});
 	}
 );
 

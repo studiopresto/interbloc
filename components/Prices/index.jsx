@@ -19,6 +19,7 @@ import {isEmptyObject} from '~utils/object/detectEmptyObject';
 Config
  */
 import {STATUS} from '~config/constants';
+import { styles } from '~config/chart';
 
 
 
@@ -117,12 +118,7 @@ export default function Prices() {
 							autosize: true,
 							showlegend: false,
 							margin: {t: 5, r: 0, b: 30, l: 35},
-							font: {
-								family: 'Nexa-Book',
-								color: '#8B909A',
-								size: 12,
-								fontWeight: 400,
-							},
+							font: styles.font,
 							paper_bgcolor: 'transparent',
 							plot_bgcolor: 'transparent',
 							xaxis: {
@@ -162,13 +158,8 @@ export default function Prices() {
 							},
 							// hovermode: 'x unified',
 						}}
-						config={{
-							displayModeBar: false,
-						}}
-						style={{
-							width: '100%',
-							height: '100%',
-						}}
+						config={styles.config}
+						style={styles.style}
 						onHover={({ points }) => setPrice(points[0].y)}
 					/>
 				</div>
