@@ -1,0 +1,89 @@
+.datepicker{
+	position: relative;
+	z-index: 1;
+		&-calendar{
+			position: absolute;
+			top: 100%;
+			right: 0;
+			display: none;
+		}
+		&-icon{
+			position: absolute;
+			color: var(--color-grey-300);
+			z-index: 1;
+			right: 22px;
+			top: 50%;
+			transform: translateY(-50%);
+		}
+		.form-control{
+			cursor: pointer;
+			padding: 0 50px 0 18px;
+		}
+}
+
+.react{
+		&-calendar{
+			background-color: var(--color-black-200);
+			width: 420px;
+			padding: 18px 32px;
+			border-radius: 25px;
+			color: var(--color-grey-700);
+			font-family: var(--font-base-bold);
+				&__navigation{
+					display: flex;
+					align-items: center;
+					color: var(--color-white);
+					margin-bottom: 2px;
+						&__arrow{
+							width: 40px;
+							height: 40px;
+							color: inherit;
+							font-size: 18px;
+								@include hover($md){
+									&:hover{
+										color: var(--color-primary);
+									}
+								}
+						}
+						&__label{
+							height: 40px;
+							font-size: 18px;
+							color: inherit;
+						}
+				}
+				&__viewContainer{
+					font-family: var(--font-base-book);
+					font-size: 14px;
+				}
+				&__month-view{
+						&__weekdays{
+							padding: 10px 0 5px;
+								&__weekday{
+									text-align: center;
+									line-height: 2.2em;
+										abbr{
+											text-decoration: none !important;
+										}
+								}
+						}
+				}
+				&__tile{
+					color: var(--color-grey-600);
+						&--active{
+							color: var(--color-primary);
+							font-family: var(--font-base-bold);
+						}
+						@include hover($md){
+							&:hover{
+								color: var(--color-primary);
+							}
+						}
+				}
+				button{
+					border: none;
+					background-color: transparent;
+					padding: 0;
+					line-height: 2.8em;
+				}
+		}
+}

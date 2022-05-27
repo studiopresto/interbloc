@@ -5,6 +5,14 @@
 			background-color: var(--color-black-100);
 			border-radius: 7px;
 			padding: 25px 32px;
+			/*
+			Input
+		 */
+			.form{
+					&-control{
+						background-color: var(--color-black-200);
+					}
+			}
 		}
 		&-header{
 			margin-bottom: 54px;
@@ -96,13 +104,5 @@
 							}
 						}
 				}
-		}
-		/*
-		Input
-		 */
-		.form{
-			&-control{
-				background-color: var(--color-black-200);
-			}
 		}
 }

@@ -1,10 +1,11 @@
 import Image from 'next/image';
+import NumberFormat from 'react-number-format';
+import placeholder from '~static/images/placeholder.svg';
 /*
 Components
  */
 import Input from '~ui/components/Input';
 import SelectCustom from '~ui/components/Select';
-import NumberFormat from "react-number-format";
 
 
 
@@ -53,7 +54,11 @@ export default function Assets() {
 							<td>
 								<div className="d-inline-flex align-items-center">
 									<div className="thumb size-30 position-left">
-										<img src="https://seeklogo.com/images/C/coinmarketcap-logo-064D167A0E-seeklogo.com.png" alt="Alt"/>
+										<Image
+											src={placeholder}
+											width={30}
+											height={30}
+											alt="Alt"/>
 									</div>
 									<span className="font-secondary-bold">STARS</span>
 								</div>

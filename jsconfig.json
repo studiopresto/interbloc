@@ -10,7 +10,8 @@
 			"~ui/*": ["./ui/*"],
 			"~config/*": ["./config/*"],
 			"~utils/*": ["./utils/*"],
-			"~store/*": ["./store/*"]
+			"~store/*": ["./store/*"],
+			"~hooks/*": ["./hooks/*"],
 		}
 	}
 }

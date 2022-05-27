@@ -64,7 +64,7 @@ strong{
 	display: inline-block;
 	border-radius: 40px;
 	height: 34px;
-	line-height: 34px;
+	line-height: 36px;
 	white-space: nowrap;
 	width: 124px;
 	max-width: 124px;
@@ -73,6 +73,12 @@ strong{
 	text-align: center;
 	padding: 0 20px;
 	background-color: var(--color-black-200);
+		&-md{
+			width: 56px;
+			font-size: 12px;
+			padding: 0 5px;
+			text-transform: uppercase;
+		}
 }
 
 .signal{
@@ -117,4 +123,22 @@ strong{
 			height: 100%;
 		}
 	}
+}
+
+.icon-dot{
+	width: 18px;
+	height: 18px;
+	background-color: var(--color-turquoise);
+	border-radius: 50%;
+	text-align: center;
+	display: flex;
+	position: relative;
+	margin: 0 5px;
+		&-item{
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%,-50%);
+			color: var(--color-black);
+		}
 }

@@ -1,0 +1,99 @@
+.tooltip{
+	position: relative;
+	display: inline-block;
+	opacity: 1;
+	font-size: inherit;
+	font-weight: normal;
+	line-height: 1.3em;
+	margin: 0;
+		&-trigger{
+			cursor: help;
+				&:hover{
+					& ~ .tooltip-body{
+						display: block;
+					}
+				}
+		}
+		&-body{
+			position: absolute;
+			background-color: var(--color-black-200);
+			border: 1px var(--color-grey-300) solid;
+			border-radius: 10px;
+			max-width: 324px;
+			width: 100vw;
+			padding: 20px;
+			color: var(--color-grey-700);
+			display: none;
+				&:before{
+					content: '';
+					position: absolute;
+					width: 30px;
+					height: 30px;
+					border-radius: 5px;
+					background-color: var(--color-black-200);
+					border: 1px var(--color-grey-300) solid;
+					transform: rotate(45deg);
+					pointer-events: none;
+				}
+				&:after{
+					content: '';
+					position: absolute;
+					inset: 0;
+					border-radius: 10px;
+					background-color: var(--color-black-200);
+					pointer-events: none;
+				}
+				&-content{
+					position: relative;
+					z-index: 1;
+				}
+				&-bottom{
+					top: calc(100% + 20px);
+					left: 50%;
+					transform: translateX(-50%);
+						&:before{
+							left: calc(50% - 5px);
+							top: -3px;
+							transform: rotate(45deg) translateX(-50%);
+							border-bottom: none;
+							border-right: none;
+						}
+				}
+				&-top{
+					bottom: calc(100% + 20px);
+					left: 50%;
+					transform: translateX(-50%);
+						&:before{
+							left: calc(50% - 5px);
+							bottom: -24px;
+							transform: rotate(45deg) translateX(-50%);
+							border-top: none;
+							border-left: none;
+						}
+				}
+				&-left{
+					top: 50%;
+					transform: translateY(-50%);
+					right: calc(100% + 20px);
+						&:before{
+							right: -3px;
+							top: calc(50% - 5px);
+							transform: rotate(45deg) translateY(-50%);
+							border-bottom: none;
+							border-left: none;
+						}
+				}
+				&-right{
+					top: 50%;
+					transform: translateY(-50%);
+					left: calc(100% + 20px);
+						&:before{
+							left: -24px;
+							top: calc(50% - 5px);
+							transform: rotate(45deg) translateY(-50%);
+							border-top: none;
+							border-right: none;
+						}
+				}
+		}
+}

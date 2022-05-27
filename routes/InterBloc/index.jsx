@@ -8,12 +8,17 @@ import Preloader from '~ui/components/Preloader';
 import ProgressMultiple from '~ui/components/ProgressMultiple';
 import Box from '~ui/components/Box';
 import Button from '~ui/components/Button';
+import Datepicker from "~ui/components/Datepicker";
+import Dot from "~ui/components/Dot";
+import Tooltip from '~ui/components/Tooltip';
 /*
 Icons
  */
 import DirectoryIcon from '~ui/icons/Directory';
 import SortDirectionIcon from '~ui/icons/SortDirection';
 import EyeIcon from '~ui/icons/Eye';
+import InfoIcon from '~ui/icons/Info';
+import SortIcon from "~ui/icons/Sort";
 /*
 Lazy components
  */
@@ -225,8 +230,12 @@ export default function InterBlocPage() {
 									Latest 25 from a total of
 									<span className="color-turquoise"> 232</span> transaction  ( +1 <span className="color-turquoise">Pending</span> )
 								</p>
-								<div>
-									<div className="btns-group">
+								<div className="d-flex align-items-center">
+									<p className="color-grey mr-2">From:</p>
+									<Datepicker size="md"/>
+									<p className="color-grey mr-2 ml-4">To:</p>
+									<Datepicker size="md"/>
+									<div className="btns-group ml-4">
 										<Button size="md" color="blue">Filter</Button>
 										<Button size="md">Clear</Button>
 									</div>
@@ -237,9 +246,34 @@ export default function InterBlocPage() {
 								<tr>
 									<th/>
 									<th>Txs Hash</th>
-									<th>Method</th>
-									<th>Status</th>
+									<th>
+										<div className="d-flex align-items-center">
+											Method
+											<Tooltip text="On recommend tolerably my belonging or am. Mutual has cannot beauty indeed now sussex merely you. It possible no husbands jennings ye offended packages pleasant he. Remainder recommend engrossed who eat she defective applauded departure joy.">
+												<Dot>
+													<InfoIcon/>
+												</Dot>
+											</Tooltip>
+										</div>
+									</th>
+									<th>
+										<div className="d-flex align-items-center">
+											Block
+											<Dot>
+												<SortIcon/>
+											</Dot>
+										</div>
+									</th>
+									<th>
+										<div className="d-flex align-items-center">
+											Age
+											<Dot>
+												<SortIcon/>
+											</Dot>
+										</div>
+									</th>
 									<th>From</th>
+									<th/>
 									<th>To</th>
 									<th>Value</th>
 									<th>Txn Fee</th>
@@ -262,10 +296,19 @@ export default function InterBlocPage() {
 												<span className="color-violet font-12 font-bold status">Deposit</span>
 											</td>
 											<td>
-												<span className="font-book color-success">Success</span>
+												<span className="font-book">{213123 * (index + 2)}</span>
+											</td>
+											<td>
+												<span className="font-book">{1 + (index * 2)}s ago</span>
 											</td>
 											<td>
 												<span className="font-book font-hash">0xc6fcvzc6fsdf68678z3345v6546zc578zcv99790987987</span>
+											</td>
+											<td>
+												<span className="font-12 font-bold status status-md"
+															style={{ color: index % 2 === 0 ? '#4D8C2F' : '#BCB96C' }}>
+													{index % 2 === 0 ? 'In' : 'Out'}
+												</span>
 											</td>
 											<td>
 												<span className="font-book font-hash">0xc6fcvzc6fsdf68678z3345v6546zc578zcv99790987987</span>

@@ -1,10 +1,14 @@
+import Image from 'next/image';
 import NumberFormat from 'react-number-format';
+import placeholder from '~static/images/placeholder.svg';
 /*
 Components
  */
 import Button from '~ui/components/Button';
 import Input from '~ui/components/Input';
 import Card from '~ui/components/Card';
+import Progress from '~ui/components/Progress';
+import Dot from '~ui/components/Dot';
 /*
 Icons
  */
@@ -12,8 +16,7 @@ import UserIcon from '~ui/icons/User';
 import GridIcon from '~ui/icons/Grid';
 import UnionIcon from '~ui/icons/Union';
 import RepeatIcon from '~ui/icons/Repeat';
-import Progress from "~ui/components/Progress";
-import SortButton from "~components/SortButton";
+import SortIcon from "~ui/icons/Sort";
 
 
 
@@ -110,13 +113,62 @@ export default function ValidatorsPage() {
 						<table className="table">
 							<thead>
 								<tr>
-									<th>Rank</th>
-									<th><SortButton label="Validator"/></th>
-									<th><SortButton label="Voting Power"/></th>
-									<th>Cumulative Share %</th>
-									<th><SortButton label="Participation"/></th>
-									<th><SortButton label="Uptime"/></th>
-									<th><SortButton label="Commission"/></th>
+									<th>
+										<div className="d-flex align-items-center">
+											Rank
+											<Dot>
+												<SortIcon/>
+											</Dot>
+										</div>
+									</th>
+									<th>
+										<div className="d-flex align-items-center">
+											Validator
+											<Dot>
+												<SortIcon/>
+											</Dot>
+										</div>
+									</th>
+									<th>
+										<div className="d-flex align-items-center">
+											Voting Power
+											<Dot>
+												<SortIcon/>
+											</Dot>
+										</div>
+									</th>
+									<th>
+										<div className="d-flex align-items-center">
+											Cumulative Share %
+											<Dot>
+												<SortIcon/>
+											</Dot>
+										</div>
+									</th>
+									<th>
+										<div className="d-flex align-items-center">
+											Participation
+											<Dot>
+												<SortIcon/>
+											</Dot>
+										</div>
+									</th>
+									<th>
+										<div className="d-flex align-items-center">
+											Uptime
+											<Dot>
+												<SortIcon/>
+											</Dot>
+										</div>
+									</th>
+									<th>
+										<div className="d-flex align-items-center">
+											Commission
+											<Dot>
+												<SortIcon/>
+											</Dot>
+										</div>
+									</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -129,7 +181,10 @@ export default function ValidatorsPage() {
 										<td>
 											<div className="d-inline-flex align-items-center">
 												<div className="thumb size-30 position-left">
-													<img src="https://seeklogo.com/images/C/coinmarketcap-logo-064D167A0E-seeklogo.com.png" alt="Ping"/>
+													<Image src={placeholder}
+																 width={30}
+																 height={30}
+																 alt="Ping"/>
 												</div>
 												<span className="font-secondary-bold">Farbole</span>
 											</div>

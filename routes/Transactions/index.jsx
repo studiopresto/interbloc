@@ -92,14 +92,16 @@ export default function TransactionsPage() {
 								data.map((option, index) => (
 									<tr key={index}>
 										<td>
-											<Button icon color="transparent">
-												<EyeIcon/>
-											</Button>
+											<Link href={`${routes.public.transactions}/${option.hash}`}>
+												<a>
+													<Button icon color="transparent">
+														<EyeIcon/>
+													</Button>
+												</a>
+											</Link>
 										</td>
 										<td>
-											<Link href={`${routes.public.transactions}/${option.hash}`}>
-												<a className="color-turquoise font-secondary-bold font-hash">{option.hash}</a>
-											</Link>
+											<span className="color-turquoise font-secondary-bold font-hash">{option.hash}</span>
 										</td>
 										{/*<td>*/}
 										{/*	<span className="color-violet font-12 font-bold status">Deposit</span>*/}

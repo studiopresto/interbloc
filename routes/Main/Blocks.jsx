@@ -1,6 +1,8 @@
 import {useEffect} from 'react';
+import Image from 'next/image';
 import {useDispatch, useSelector} from 'react-redux';
 import NumberFormat from 'react-number-format';
+import placeholder from '~static/images/placeholder.svg';
 /*
 Store
  */
@@ -62,7 +64,10 @@ export default function BlocksMain() {
 								<td>
 									<div className="d-inline-flex align-items-center">
 										<div className="thumb size-30 position-left">
-											<img src={`https://via.placeholder.com/60x60?text=${option.blockproposer}`} alt={option.blockproposer}/>
+											<Image src={placeholder}
+														 width={30}
+														 height={30}
+														 alt={option.blockproposer}/>
 										</div>
 										<span className="font-secondary-bold">{option.blockproposer}</span>
 									</div>

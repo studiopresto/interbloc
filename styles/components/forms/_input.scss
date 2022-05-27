@@ -30,6 +30,7 @@
 				&-container{
 					display: block;
 					position: relative;
+					margin: 0;
 				}
 				&::-webkit-input-placeholder {
 					color: var(--color-grey-300);
@@ -42,6 +43,13 @@
 				}
 				&:-moz-placeholder {
 					color: var(--color-grey-300);
+				}
+				/*
+				Sizes
+				 */
+				&-md{
+					height: 46px;
+					font-size: 14px;
 				}
 		}
 }
