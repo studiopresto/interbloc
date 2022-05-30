@@ -18,6 +18,7 @@ import SettingsIcon from '~ui/icons/Settings';
 import TransactionsIcon from '~ui/icons/Transactions';
 import UserIcon from '~ui/icons/User';
 import DirectoryIcon from '~ui/icons/Directory';
+import EyeIcon from '~ui/icons/Eye';
 
 
 
@@ -43,6 +44,9 @@ export default function VerticalNav() {
 				</VerticalNavItem>
 				<VerticalNavItem href={routes.public.interbloc} label="Interbloc">
 					<DirectoryIcon/>
+				</VerticalNavItem>
+				<VerticalNavItem href={routes.public.governance} label="Governance">
+					<EyeIcon/>
 				</VerticalNavItem>
 				<VerticalNavItem href={routes.public.validators} label="Validators">
 					<UserIcon/>

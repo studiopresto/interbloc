@@ -5,5 +5,6 @@ export default {
 		transactions: '/transactions',
 		validators: '/validators',
 		interbloc: '/interbloc',
+		governance: '/governance',
 	}
 }
