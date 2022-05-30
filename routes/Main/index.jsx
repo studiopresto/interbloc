@@ -75,20 +75,22 @@ export default function MainPage() {
 				</div>
 				<div className="col-xl-3 col-md-6">
 					<Box title="Relayers" theme={3} icon={<RSSIcon/>} color="blue" staticHeight>
-						<div className="h-100 d-flex flex-column justify-content-end">
-							<p className="font-16 color-grey font-bold">Packets Pending:</p>
-							<p className="h-2 mb-4">27</p>
-							<div className="dot-row">
-								<p className="color-grey font-bold dot-row-title">Osmosis Channel - 1:</p>
-								<div className="dot-row-item">
-									<div className="dot-row-icon bg-success"/>
+						<div className="h-100">
+							<div className="d-flex flex-column justify-content-end">
+								<p className="font-16 color-grey font-bold">Packets Pending:</p>
+								<p className="h-2 mb-4">27</p>
+								<div className="dot-row">
+									<p className="color-grey font-bold dot-row-title">Osmosis Channel - 1:</p>
+									<div className="dot-row-item">
+										<div className="dot-row-icon bg-success"/>
+									</div>
 								</div>
-							</div>
-							<div className="dot-row mt-3">
+								<div className="dot-row mt-3">
 								<p className="color-grey font-bold dot-row-title">Osmosis Channel - 2:</p>
 								<div className="dot-row-item">
 									<div className="dot-row-icon bg-danger"/>
 								</div>
+							</div>
 							</div>
 						</div>
 					</Box>

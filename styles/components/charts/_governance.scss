@@ -1,0 +1,12 @@
+.governance-chart{
+	@extend .consensus-chart;
+	height: 232px;
+		&:before{
+			width: 245px;
+			height: 245px;
+			top: -7px;
+		}
+		&:after{
+			display: none;
+		}
+}

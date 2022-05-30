@@ -17,6 +17,23 @@
 		&-header{
 			margin-bottom: 54px;
 		}
+		&-status{
+			position: relative;
+			line-height: 1em;
+			padding-left: 25px;
+				&:before{
+					content: '';
+					position: absolute;
+					pointer-events: none;
+					width: 12px;
+					height: 12px;
+					border-radius: 2px;
+					background-color: currentColor;
+					top: 44%;
+					left: 0;
+					transform: translateY(-50%);
+				}
+		}
 		thead{
 			th{
 				border: none;

@@ -95,6 +95,8 @@ export default function SelectCustom({ options, onChange, defaultValue }) {
 
 	return (
 		<Select
+			instanceId={new Date().getTime()}
+			id={new Date().getTime()}
 			options={options}
 			styles={customStyles}
 			onChange={onChange}

@@ -67,6 +67,29 @@
 				&-height{
 					height: calc(400px - 143px);
 				}
+				&-subtitle{
+					margin-top: -10px;
+				}
+				&-status{
+					position: absolute;
+					top: 32px;
+					right: 32px;
+					padding-right: 25px;
+					text-transform: capitalize;
+					line-height: 1em;
+						&:before{
+							content: '';
+							position: absolute;
+							pointer-events: none;
+							width: 12px;
+							height: 12px;
+							top: 45%;
+							right: 0;
+							transform: translateY(-50%);
+							border-radius: 2px;
+							background-color: currentColor;
+						}
+				}
 		}
 		/*
 		Table
@@ -78,4 +101,10 @@
 					padding-right: 0;
 				}
 		}
+}
+
+.governance-box{
+	.box{
+		min-height: 336px;
+	}
 }

@@ -25,10 +25,10 @@ export default function Assets() {
 		<div className="table-box mt-2">
 			<div className="table-header mb-4">
 				<div className="row">
-					<div className="col-6">
+					<div className="col-4">
 						<p className="font-20 font-bold">Assets</p>
 					</div>
-					<div className="col-6">
+					<div className="col-8">
 						<div className="d-flex align-items-center justify-content-end">
 							<p className="color-grey mr-3">Asset Type:</p>
 							<SelectCustom options={options} onChange={handleChange}/>
@@ -39,7 +39,7 @@ export default function Assets() {
 			<div className="table">
 				<Input search/>
 			</div>
-			<table className="table">
+			<table className="table mt-4">
 				<thead>
 					<tr>
 						<th>Validator</th>
