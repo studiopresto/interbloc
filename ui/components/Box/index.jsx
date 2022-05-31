@@ -2,12 +2,12 @@ import PropTypes from 'prop-types';
 
 
 
-export default function Box({ children, theme = '', title, icon, color = 'primary', staticHeight = false }) {
+export default function Box({ children, theme = '', title, icon, color = 'primary', staticHeight = false, adaptiveHeight = false }) {
 
 	const bodyHeight = typeof staticHeight === 'number' ? staticHeight : null;
 
 	return (
-		<div className={`box box-theme-${theme}`}>
+		<div className={`box box-theme-${theme} ${adaptiveHeight ? 'box-adaptive-height' : ''}`}>
 			<div className="box-header">
 				{
 					!!icon
@@ -32,4 +32,5 @@ Box.propTypes = {
 	icon: PropTypes.oneOfType([PropTypes.object, PropTypes.node]),
 	color: PropTypes.oneOf(['primary', 'blue', 'violet', 'orange', 'turquoise']),
 	staticHeight: PropTypes.oneOfType([PropTypes.bool, PropTypes.number]),
-}
+	adaptiveHeight: PropTypes.bool,
+};

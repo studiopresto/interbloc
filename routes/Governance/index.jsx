@@ -1,4 +1,5 @@
 import dynamic from 'next/dynamic';
+import {data} from './data';
 /*
 Components
  */
@@ -20,88 +21,6 @@ const GovernanceList = dynamic(async () => {
 
 
 export default function GovernancePage() {
-
-	const data = [
-		{
-			title: '#68  / Community Spend Proposal',
-			subtitle: 'Make Cosmos Hub the Lead Sponsor of Cosmoverse 2022',
-			type: {
-				label: 'Voting Period',
-				value: false,
-			},
-			proposer: 'cosmos1udcdc278lsaawuznfk7g00vn9n5cl6yzzsrk0c',
-			start: '2022-04-21 22:11:55',
-			end: '2022-05-25 22:11:55',
-			status: 'Remaining 12 Days',
-			values: [],
-		},
-		{
-			title: '#69  / Community Spend Proposal',
-			subtitle: 'Make Cosmos Hub the Lead Sponsor of Cosmoverse 2022',
-			type: {
-				label: 'Voting Period',
-				value: false,
-			},
-			proposer: 'cosmos1udcdc278lsaawuznfk7g00vn9n5cl6yzzsrk0c',
-			start: '2022-04-21 22:11:55',
-			end: '2022-05-25 22:11:55',
-			status: 'Remaining 12 Days',
-			values: [],
-		},
-		{
-			title: '#70  / Community Spend Proposal',
-			subtitle: 'Make Cosmos Hub the Lead Sponsor of Cosmoverse 2022',
-			type: {
-				label: 'Passed',
-				value: true,
-			},
-			proposer: 'cosmos1udcdc278lsaawuznfk7g00vn9n5cl6yzzsrk0c',
-			start: '2022-06-21 22:11:55',
-			end: '2022-07-25 22:11:55',
-			status: 'Remaining 12 Days',
-			values: [52, 10, 10, 8],
-		},
-		{
-			title: '#71  / Community Spend Proposal',
-			subtitle: 'Make Cosmos Hub the Lead Sponsor of Cosmoverse 2022',
-			type: {
-				label: 'Passed',
-				value: true,
-			},
-			proposer: 'cosmos1udcdc278lsaawuznfk7g00vn9n5cl6yzzsrk0c',
-			start: '2022-06-21 22:11:55',
-			end: '2022-07-25 22:11:55',
-			status: 'Remaining 12 Days',
-			values: [72, 10, 9, 5],
-		},
-		{
-			title: '#72  / Community Spend Proposal',
-			subtitle: 'Make Cosmos Hub the Lead Sponsor of Cosmoverse 2022',
-			type: {
-				label: 'Voting Period',
-				value: false,
-			},
-			proposer: 'cosmos1udcdc278lsaawuznfk7g00vn9n5cl6yzzsrk0c',
-			start: '2022-06-21 22:11:55',
-			end: '2022-07-25 22:11:55',
-			status: 'Remaining 12 Days',
-			values: [],
-		},
-		{
-			title: '#73  / Community Spend Proposal',
-			subtitle: 'Make Cosmos Hub the Lead Sponsor of Cosmoverse 2022',
-			type: {
-				label: 'Passed',
-				value: true,
-			},
-			proposer: 'cosmos1udcdc278lsaawuznfk7g00vn9n5cl6yzzsrk0c',
-			start: '2022-06-21 22:11:55',
-			end: '2022-07-25 22:11:55',
-			status: 'Remaining 12 Days',
-			values: [52, 22, 12, 10],
-		},
-	];
-
 	return (
 		<>
 			<div className="page-header-inner">

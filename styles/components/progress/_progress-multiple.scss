@@ -1,14 +1,27 @@
 .progress-multiple{
 	height: 29px;
 	display: flex;
+	justify-content: flex-start;
 	padding: 0;
 	margin: 40px 8px;
 	position: relative;
 	overflow: initial;
 		&-bar{
-			position: absolute;
+			position: relative;
 			inset: 0;
-			border-radius: 40px;
+			border-radius: 20px;
+				&:not(:first-child){
+					&:before{
+						content: '';
+						position: absolute;
+						pointer-events: none;
+						background-color: currentColor;
+						top: 0;
+						right: calc(100% - 15px);
+						width: 30px;
+						bottom: 0;
+					}
+				}
 				&:nth-child(1){
 					background-color: var(--color-primary);
 					color: var(--color-primary);
@@ -21,9 +34,10 @@
 					background-color: var(--color-turquoise);
 					color: var(--color-turquoise);
 				}
-				&:nth-child(4){
-					background-color: var(--color-violet);
-					color: var(--color-violet);
+				@for $i from 1 through 5 {
+					&:nth-child(#{$i}){
+						z-index: 5 - $i;
+					}
 				}
 		}
 		&-label{

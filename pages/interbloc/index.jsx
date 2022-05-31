@@ -1,6 +1,8 @@
 import Head from 'next/head';
 import InterBlocPage from '~routes/InterBloc';
 
+
+
 export default function InterBloc() {
 	return (
 		<>

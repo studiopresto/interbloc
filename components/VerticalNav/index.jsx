@@ -19,6 +19,7 @@ import TransactionsIcon from '~ui/icons/Transactions';
 import UserIcon from '~ui/icons/User';
 import DirectoryIcon from '~ui/icons/Directory';
 import EyeIcon from '~ui/icons/Eye';
+import BurgerIcon from '~ui/icons/Burger';
 
 
 
@@ -45,6 +46,9 @@ export default function VerticalNav() {
 				<VerticalNavItem href={routes.public.interbloc} label="Interbloc">
 					<DirectoryIcon/>
 				</VerticalNavItem>
+				<VerticalNavItem href={routes.public.proposal} label="Proposal">
+					<BurgerIcon/>
+				</VerticalNavItem>
 				<VerticalNavItem href={routes.public.governance} label="Governance">
 					<EyeIcon/>
 				</VerticalNavItem>
@@ -53,7 +57,7 @@ export default function VerticalNav() {
 				</VerticalNavItem>
 			</div>
 			<div className="verticalNav-detail">
-				<VerticalNavItem href="#" label="Settings">
+				<VerticalNavItem href={routes.public.index} label="Settings">
 					<SettingsIcon/>
 				</VerticalNavItem>
 			</div>

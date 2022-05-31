@@ -6,12 +6,12 @@ export default function ProgressMultiple({ data, label }) {
 
 	if (!!data.length) {
 
-		const sortedData = data.sort((a, b) => b.value - a.value);
+		// const sortedData = data.sort((a, b) => b.value - a.value);
 
 		return (
 			<div className="progress progress-multiple">
 				{
-					sortedData.map((option, key) => (
+					data.map((option, key) => (
 						<div key={key} className="progress-multiple-bar" style={{ width: option.value + '%' }}>
 							{ !!label ? <div className={`progress-multiple-label __${label}`}>{option.title}</div> : null }
 						</div>

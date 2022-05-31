@@ -32,7 +32,7 @@ export default function BlockOpenPage() {
 		},
 		{
 			title: 'Gas Limit',
-			value: 100,
+			value: 53,
 		},
 	];
 	const sign = [
@@ -42,7 +42,7 @@ export default function BlockOpenPage() {
 		},
 		{
 			title: 'Missed',
-			value: 100,
+			value: 19,
 		},
 	];
 	const info = [
@@ -54,7 +54,7 @@ export default function BlockOpenPage() {
 		['Gas', '12312314231 out of 24234342443'],
 		['Consensus Time', '6,5 seconds'],
 		['Proposer', 'Everstake'],
-	]
+	];
 
 	return (
 		<>

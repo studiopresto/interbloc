@@ -6,5 +6,6 @@ export default {
 		validators: '/validators',
 		interbloc: '/interbloc',
 		governance: '/governance',
+		proposal: '/proposal',
 	}
 }

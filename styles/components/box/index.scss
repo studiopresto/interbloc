@@ -90,6 +90,14 @@
 							background-color: currentColor;
 						}
 				}
+				&-detail{
+					margin-top: -35px;
+				}
+		}
+		&-adaptive{
+				&-height{
+					min-height: 0;
+				}
 		}
 		/*
 		Table

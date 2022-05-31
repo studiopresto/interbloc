@@ -63,10 +63,7 @@ export default function TransactionsMain() {
 											return <span className="font-secondary-bold color-turquoise" {...props}>{value}</span>;
 										}}/>
 								</td>
-								<td>
-									<span
-										className="font-book">{hashShortening(option.hash)}</span>
-								</td>
+								<td><span className="font-book">{hashShortening(option.hash)}</span></td>
 								<td><span className="font-book">{option.type}</span></td>
 								<td><span className="font-book">{option.fee.amount} {option.fee.denom}</span></td>
 								{/*<td><span className="font-book">0</span></td>*/}

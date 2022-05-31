@@ -33,29 +33,29 @@ export default function InterBlocPage() {
 	const ust = [
 		{
 			title: 'Atom',
-			value: 42,
+			value: 40,
 		},
 		{
 			title: 'Camo',
-			value: 70,
+			value: 20,
 		},
 		{
 			title: 'UST',
-			value: 100,
+			value: 40,
 		},
 	];
 	const reward = [
 		{
 			title: 'Delegated',
-			value: 33,
+			value: 30,
 		},
 		{
 			title: 'Available',
-			value: 55,
+			value: 50,
 		},
 		{
 			title: 'Reward',
-			value: 100,
+			value: 20,
 		},
 	];
 

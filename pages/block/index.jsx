@@ -1,5 +1,7 @@
-import BlockOpenPage from '~routes/BlockOpen';
 import Head from 'next/head';
+import BlockOpenPage from '~routes/BlockOpen';
+
+
 
 export default function Block() {
 	return (
