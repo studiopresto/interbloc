@@ -109,6 +109,7 @@ export default function Prices() {
 								line: {
 									width: 5,
 									color: '#42BAE2',
+									shape: 'spline'
 								},
 							},
 						]}

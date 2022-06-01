@@ -33,6 +33,13 @@
 					left: 0;
 					transform: translateY(-50%);
 				}
+				&-icon{
+					width: 18px;
+					height: 18px;
+					display: block;
+					border-radius: 2px;
+					background-color: currentColor;
+				}
 		}
 		thead{
 			th{

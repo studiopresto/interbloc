@@ -1,0 +1,98 @@
+.floater{
+	padding: 26px;
+	background-color: #323232;
+	border-radius: 80px;
+	box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+	position: relative;
+	margin: 113px 0 60px;
+		&-row{
+			display: flex;
+			background-color: #262626;
+			padding: 16px;
+			border-radius: 40px;
+			position: relative;
+				&-item{
+					position: relative;
+					flex: 1;
+					height: 44px;
+					margin: 0 1px;
+						&:nth-child(1){
+							margin-left: 0;
+								.floater{
+									&-point{
+										border-radius: 25px 4px 4px 25px;
+										background-color: #CC5353;
+									}
+								}
+						}
+						&:nth-child(2){
+								.floater{
+									&-point{
+										background-color: #EB8145;
+									}
+								}
+						}
+						&:nth-child(3){
+								.floater{
+									&-point{
+										background-color: #F6C929;
+									}
+								}
+						}
+						&:nth-child(4){
+								.floater{
+									&-point{
+										background-color: #D5E144;
+									}
+								}
+						}
+						&:nth-child(5){
+							margin-right: 0;
+								.floater{
+									&-point{
+										border-radius: 4px 25px 25px 4px;
+										background-color: #77BE40;
+									}
+								}
+						}
+						&.is-active{
+							.floater-point{
+								opacity: 1;
+							}
+						}
+				}
+		}
+		&-point{
+			position: absolute;
+			inset: 0;
+			opacity: .5;
+			box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+			border-radius: 4px;
+			transition: background-color var(--duration) var(--ease);
+		}
+		&-label{
+			position: absolute;
+			bottom: -80px;
+			width: 100%;
+			white-space: nowrap;
+			max-width: 100%;
+			text-overflow: ellipsis;
+			overflow: hidden;
+			text-align: center;
+		}
+		&-way{
+			position: absolute;
+			top: -10px;
+			left: 40px;
+			width: calc(100% - 110px);
+			height: 26px;
+				&-mark{
+					position: absolute;
+					color: #D1D1D1;
+					opacity: .8;
+					top: 0;
+					left: 0;
+					transition: left var(--duration) var(--ease);
+				}
+		}
+}
