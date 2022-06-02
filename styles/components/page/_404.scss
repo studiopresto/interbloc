@@ -1,0 +1,25 @@
+.pnf{
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-start;
+	padding-top: 20vh;
+		&-box{
+				&-banner{
+					margin-bottom: 10px;
+					width: 708px;
+					height: 292px;
+					position: relative;
+				}
+				&-description{
+					display: flex;
+					align-items: flex-end;
+				}
+		}
+		&-title{
+			font-size: 64px;
+			line-height: 1em;
+			margin-right: 34px;
+		}
+}
