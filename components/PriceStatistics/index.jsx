@@ -1,14 +1,11 @@
 import Plot from 'react-plotly.js';
-/*
-Config
- */
 import {styles} from '~config/chart';
 
 
 
-export default function IncomingOutgoing() {
+export default function PriceStatistics() {
 	return (
-		<div className="incoming-outgoing-chart">
+		<div className="price-statistics-chart">
 			<Plot
 				data={[
 					{
@@ -25,7 +22,7 @@ export default function IncomingOutgoing() {
 					},
 					{
 						x: [1, 2, 3, 4, 5, 6, 7],
-						y: [10, 13, 9, 13, 10, 14, 10],
+						y: [7, 10, 6, 10, 7, 11, 7],
 						type: 'scatter',
 						mode: 'lines',
 						name: 'Voting Power',
@@ -66,7 +63,7 @@ export default function IncomingOutgoing() {
 							color: '#5C5C5C',
 							size: 10,
 						},
-						tickformat: '%d.%m',
+						// tickformat: '%d.%m',
 					},
 					yaxis: {
 						// visible: false,

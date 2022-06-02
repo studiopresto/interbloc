@@ -105,6 +105,11 @@
 		overflow: hidden;
 		white-space: nowrap;
 	}
+	&-attention{
+		border-radius: 7px;
+		background-color: var(--color-black-200);
+		padding: 10px 20px 8px;
+	}
 	&-10{
 		font-size: 10px;
 	}

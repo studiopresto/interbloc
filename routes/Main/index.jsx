@@ -86,11 +86,11 @@ export default function MainPage() {
 									</div>
 								</div>
 								<div className="dot-row mt-3">
-								<p className="color-grey font-bold dot-row-title">Osmosis Channel - 2:</p>
-								<div className="dot-row-item">
-									<div className="dot-row-icon bg-danger"/>
+									<p className="color-grey font-bold dot-row-title">Osmosis Channel - 2:</p>
+									<div className="dot-row-item">
+										<div className="dot-row-icon bg-danger"/>
+									</div>
 								</div>
-							</div>
 							</div>
 						</div>
 					</Box>

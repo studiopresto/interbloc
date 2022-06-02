@@ -10,8 +10,8 @@ export default function List({ data }) {
 				{
 					data.map((item, key) => (
 						<li key={key}>
-							<span className="color-grey font-16">{item[0]}</span>
-							<span className="font-16 font-secondary-bold">{item[1]}</span>
+							<span className="color-grey font-16" dangerouslySetInnerHTML={{ __html: item[0] }}/>
+							<span className="font-16 font-secondary-bold" dangerouslySetInnerHTML={{ __html: item[1] }}/>
 						</li>
 					))
 				}

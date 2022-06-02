@@ -122,7 +122,7 @@ export default function InterBlocPage() {
 											</tbody>
 										</table>
 									</TabPanel>
-									<TabPanel>
+									<TabPanel className="tabs-content pt-2">
 										<table className="table">
 											<thead>
 											<tr>
@@ -150,7 +150,7 @@ export default function InterBlocPage() {
 											</tbody>
 										</table>
 									</TabPanel>
-									<TabPanel>
+									<TabPanel className="tabs-content pt-2">
 										<table className="table">
 											<thead>
 											<tr>
@@ -178,7 +178,7 @@ export default function InterBlocPage() {
 											</tbody>
 										</table>
 									</TabPanel>
-									<TabPanel>
+									<TabPanel className="tabs-content pt-2">
 										<table className="table">
 											<thead>
 											<tr>

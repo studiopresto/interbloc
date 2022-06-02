@@ -1,3 +1,5 @@
 .tabs-content{
-
+		&:empty{
+			display: none;
+		}
 }

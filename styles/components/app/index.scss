@@ -113,6 +113,9 @@ strong{
 						&:not(:last-child){
 							border-bottom: 1px #323232 solid;
 						}
+						&:nth-child(2){
+							text-align: right;
+						}
 				}
 		}
 }
@@ -140,5 +143,20 @@ strong{
 			left: 50%;
 			transform: translate(-50%,-50%);
 			color: var(--color-black);
+		}
+}
+
+.hr{
+	height: 1px;
+	border: none;
+	margin: 24px 0;
+	background-color: var(--color-black-200);
+}
+
+.validator{
+		&-header{
+				&-mark{
+					width: 250px;
+				}
 		}
 }

@@ -1,0 +1,16 @@
+.btn{
+	&-more{
+		justify-content: center;
+			.btn{
+				&-title{
+				
+				}
+			}
+			svg{
+				&:nth-child(1){
+					margin-right: 30px;
+					margin-left: 6px;
+				}
+			}
+	}
+}

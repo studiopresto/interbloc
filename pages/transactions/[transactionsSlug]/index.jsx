@@ -1,7 +1,15 @@
+import Head from 'next/head';
+import TransactionPage from '~routes/Transaction';
+
+
+
 export default function Transaction() {
 	return (
-		<div>
-			Transaction detail page
-		</div>
+		<>
+			<Head>
+				<title>InterBloc | Transaction</title>
+			</Head>
+			<TransactionPage/>
+		</>
 	)
 }
