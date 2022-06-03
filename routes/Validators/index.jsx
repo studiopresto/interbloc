@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import NumberFormat from 'react-number-format';
 import placeholder from '~static/images/placeholder.svg';
 /*
@@ -16,7 +17,11 @@ import UserIcon from '~ui/icons/User';
 import GridIcon from '~ui/icons/Grid';
 import UnionIcon from '~ui/icons/Union';
 import RepeatIcon from '~ui/icons/Repeat';
-import SortIcon from "~ui/icons/Sort";
+import SortIcon from '~ui/icons/Sort';
+/*
+Config
+ */
+import routes from '~config/routes';
 
 
 
@@ -179,15 +184,19 @@ export default function ValidatorsPage() {
 											<span>{index + 1}</span>
 										</td>
 										<td>
-											<div className="d-inline-flex align-items-center">
-												<div className="thumb size-30 position-left">
-													<Image src={placeholder}
-																 width={30}
-																 height={30}
-																 alt="Ping"/>
-												</div>
-												<span className="font-secondary-bold">Farbole</span>
-											</div>
+											<Link href={`${routes.public.validators}/cosmos1udcdc278lsaawuznfk7g00vn9n5cl6yzzsrk0c`}>
+												<a>
+													<div className="d-inline-flex align-items-center">
+														<div className="thumb size-30 position-left">
+															<Image src={placeholder}
+																		 width={30}
+																		 height={30}
+																		 alt="Ping"/>
+														</div>
+														<span className="font-secondary-bold">Farbole</span>
+													</div>
+												</a>
+											</Link>
 										</td>
 										<td>
 											<p className="font-bold">{(14.312787 * ( index + 1 )).toFixed(6)}</p>

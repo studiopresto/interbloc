@@ -16,7 +16,7 @@ export const transactionsKey = 'Transactions';
 export const fetchTransactions = createAsyncThunk(
 	`${transactionsKey}/fetch`,
 	async ({ items_per_page = 10, page = 1 }) => {
-		return dataProvider.getList(resources.transactions, { items_per_page, page })
+		return await dataProvider.getList(resources.transactions, { items_per_page, page })
 			.then(res => {
 				let data = [];
 				Object.keys(res).forEach(el => {

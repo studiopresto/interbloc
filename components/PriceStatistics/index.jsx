@@ -1,16 +1,40 @@
+import {useSelector} from 'react-redux';
 import Plot from 'react-plotly.js';
+/*
+Store
+ */
+import {selectValidator} from '~store/slices/getValidatorSlice';
+/*
+Components
+ */
+import Preloader from '~ui/components/Preloader';
+/*
+Utils
+ */
+import {isEmptyObject} from '~utils/object/detectEmptyObject';
+/*
+Configs
+ */
 import {styles} from '~config/chart';
+import {STATUS} from '~config/constants';
 
 
 
 export default function PriceStatistics() {
+
+	const { data, status } = useSelector(selectValidator);
+
+	if (isEmptyObject(data) && status === STATUS.PENDING) {
+		return <Preloader/>;
+	}
+
 	return (
 		<div className="price-statistics-chart">
 			<Plot
 				data={[
 					{
-						x: [1, 2, 3, 4, 5, 6, 7],
-						y: [6, 7, 7, 7, 6, 7, 7],
+						x: data.historic.dates,
+						y: data.historic.rank,
 						type: 'scatter',
 						mode: 'lines',
 						name: 'Rank',
@@ -21,8 +45,8 @@ export default function PriceStatistics() {
 						},
 					},
 					{
-						x: [1, 2, 3, 4, 5, 6, 7],
-						y: [7, 10, 6, 10, 7, 11, 7],
+						x: data.historic.dates,
+						y: data.historic.voting_power,
 						type: 'scatter',
 						mode: 'lines',
 						name: 'Voting Power',

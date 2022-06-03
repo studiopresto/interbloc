@@ -14,7 +14,7 @@ export const blocksKey = 'Blocks';
 export const fetchBlocks = createAsyncThunk(
 	`${blocksKey}/fetch`,
 	async ({ items_per_page = 10, page = 1 }) => {
-		return dataProvider.getList(resources.blocks, { items_per_page, page })
+		return await dataProvider.getList(resources.blocks, { items_per_page, page })
 			.then(response => {
 				let data = [];
 				Object.keys(response).forEach(block => {

@@ -1,0 +1,43 @@
+.uptime{
+		&-chart{
+				&-legend{
+					display: flex;
+					align-items: center;
+					justify-content: flex-end;
+					margin-bottom: 35px;
+				}
+		}
+		&-row{
+			display: flex;
+			border-radius: 11px;
+			background-color: var(--color-black-200);
+			padding: 7px 6px;
+				&-item{
+					flex: 1;
+					margin: 0 3px;
+					height: 42px;
+					border-radius: 20px;
+					background-color: var(--color-black-100);
+				}
+		}
+}
+
+.chart{
+		&-legend{
+				&-item{
+					margin: 0 15px;
+						&:nth-child(1){
+							margin-left: 0;
+						}
+						&:last-child{
+							margin-right: 0;
+						}
+				}
+				&-icon{
+					display: inline-block;
+					height: 7px;
+					width: 38px;
+					border-radius: 5px;
+				}
+		}
+}

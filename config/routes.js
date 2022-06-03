@@ -3,7 +3,7 @@ export default {
 		index: '/',
 		blocks: '/blocks',
 		transactions: '/transactions',
-		validators: '/validators',
+		validators: '/validator',
 		interbloc: '/interbloc',
 		governance: '/governance',
 		proposal: '/proposal',
