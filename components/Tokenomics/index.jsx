@@ -18,8 +18,11 @@ import {isEmptyObject} from '~utils/object/detectEmptyObject';
 /*
 Config
  */
-import {STATUS} from '~config/constants';
+import { STATUS } from '~config/constants';
 import { styles } from '~config/chart';
+import { formatCoinsFromBaseDenom } from "~utils/formatting/coins";
+import coinConfig from "../../coin.config";
+
 
 
 
@@ -37,40 +40,45 @@ export default function Tokenomics() {
 	}
 
 	if (!isEmptyObject(data) && status === STATUS.FULFILLED) {
-
 		const { supply, bonded, unbonding } = data;
-		let boundedPercent = parseFloat(( ( bonded * 100 ) / supply ).toFixed(2));
-		let unBoundedPercent = parseFloat(( ( unbonding * 100 ) / supply ).toFixed(2));
-		let boundedPercentFake = ( boundedPercent / 100 ) * 50;
-		let unBoundedPercentFake = ( unBoundedPercent / 100 ) * 50;
-		const values = [boundedPercentFake, unBoundedPercentFake, 50];
+		const unbonded = supply-bonded
+		let bondedPercent = parseFloat(( ( bonded * 100 ) / supply ).toFixed(2));
 
+		let unBondingPercent = parseFloat(( ( unbonding * 100 ) / supply ).toFixed(2));
+		let unBondedPercent = parseFloat(( (unbonded * 100) / supply ).toFixed(2))
+		let bondedPercentFake = ( bondedPercent / 100 ) * 50;
+		let unBondedPercentFake = ( unBondedPercent / 100 ) * 50;
+		let unBondingPercentFake = ( unBondingPercent / 100 ) * 50;
+
+		const values = [bondedPercentFake, unBondedPercentFake, unBondingPercentFake, 50];
 		return (
 			<>
 				<div className="row">
 					<div className="col-6">
 						<p className="color-grey font-bold">Bonded:</p>
 						<NumberFormat
-							value={bonded}
+							value={formatCoinsFromBaseDenom(bonded).value}
 							displayType="text"
+							suffix={formatCoinsFromBaseDenom(bonded).suffix}
 							thousandSeparator={true}
 							renderText={(value, props) => {
 								return <p className="font-16 font-secondary-bold color-orange" {...props}>{value}</p>
 							}}/>
-						<p className="color-grey font-secondary-bold font-12">BTSG</p>
-						<p className="mt-2">{boundedPercent.toFixed(2)} %</p>
+						<p className="color-grey font-secondary-bold font-12">{coinConfig.ticker}</p>
+						<p className="mt-2">{bondedPercent.toFixed(2)} %</p>
 					</div>
 					<div className="col-6">
 						<p className="color-grey font-bold">Unbonded:</p>
 						<NumberFormat
-							value={unbonding}
+							value={formatCoinsFromBaseDenom(unbonded).value}
 							displayType="text"
+							suffix={formatCoinsFromBaseDenom(unbonded).suffix}
 							thousandSeparator={true}
 							renderText={(value, props) => {
 								return <p className="font-16 font-secondary-bold color-violet" {...props}>{value}</p>
 							}}/>
-						<p className="color-grey font-secondary-bold font-12">BTSG</p>
-						<p className="mt-2">{unBoundedPercent.toFixed(2)} %</p>
+						<p className="color-grey font-secondary-bold font-12">{coinConfig.ticker}</p>
+						<p className="mt-2">{unBondedPercent.toFixed(2)} %</p>
 					</div>
 				</div>
 				<div className="row">
@@ -80,11 +88,11 @@ export default function Tokenomics() {
 								data={[
 									{
 										values,
-										labels: ['', '', ''],
+										labels: ['', '', '', ''],
 										type: 'pie',
 										rotation: 90,
 										marker: {
-											colors: ['#D69F4D', '#9485FE', '#1E1F1F'],
+											colors: ['#D69F4D', '#9485FE', '#4FF0D7', '#1E1F1F'],
 										},
 										textinfo: 'none',
 									}
@@ -117,8 +125,12 @@ export default function Tokenomics() {
 								<span className="legend-icon bg-orange"/>
 								<span className="legend-title">Bonded</span>
 							</p>
-							<p className="font-12 color-grey legend">
+							<p className="font-12 color-grey legend mb-2">
 								<span className="legend-icon bg-violet"/>
+								<span className="legend-title">Unbonded</span>
+							</p>
+							<p className="font-12 color-grey legend">
+								<span className="legend-icon bg-turquoise"/>
 								<span className="legend-title">Unbonding</span>
 							</p>
 						</div>
@@ -126,13 +138,14 @@ export default function Tokenomics() {
 				</div>
 				<div className="row align-items-center">
 					<div className="col-8">
-						<p className="color-grey font-bold">Staking:</p>
+						<p className="color-grey font-bold">Supply:</p>
 					</div>
 					<div className="col-4">
 						<NumberFormat
-							value={supply}
+							value={formatCoinsFromBaseDenom(supply).value}
 							displayType="text"
 							thousandSeparator={true}
+							suffix={formatCoinsFromBaseDenom(supply).suffix}
 							renderText={(value, props) => {
 								return <p className="font-16 font-secondary-bold" {...props}>{value}</p>
 							}}/>

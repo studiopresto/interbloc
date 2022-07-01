@@ -40,7 +40,7 @@ export default function NodeLocations() {
 			<>
 				<div>
 					<p className="color-grey">Active Nodes:</p>
-					<p className="font-16 font-secondary-bold">500</p>
+					<p className="font-16 font-secondary-bold">{data.total}</p>
 				</div>
 				<div className="node-locations-chart">
 					<Plot
