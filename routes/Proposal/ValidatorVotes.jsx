@@ -5,10 +5,41 @@ Components
  */
 import SelectCustom from '~ui/components/Select';
 import Input from '~ui/components/Input';
-
+import {useDispatch, useSelector} from "react-redux";
+import {selectGovernanceProposal} from "~store/slices/getGovernanceProposal";
+import {fetchValidators, selectValidators} from "~store/slices/getValidatorsSlice";
+import {useEffect} from "react";
+import {STATUS} from "~config/constants";
+import Preloader from "~ui/components/Preloader";
+import ErrorBlock from "~ui/components/Error";
+import {
+	fetchValidatorsAddressConversion,
+	selectValidatorsAddressConversion
+} from "~store/slices/getValidatorsAddressConversion";
+import  converter from "convert-bech32-address";
+import coinConfig from "../../coin.config";
 
 
 export default function ValidatorVotes() {
+
+	const dispatch = useDispatch();
+	const { data, status } = useSelector(selectGovernanceProposal);
+	const { data: validatorData, status: validatorStatus } = useSelector(selectValidators);
+
+	useEffect(() => {
+		dispatch(fetchValidators({}));
+
+
+	}, [dispatch]);
+
+	const sortedValidatorData = [...validatorData];
+	sortedValidatorData.sort((a, b) => Number.parseInt(a.tokens) < Number.parseInt(b.tokens));
+	let addressToValoper = {}
+	validatorData.map((data, index) => {
+		let valoper = data.operatorAddress;
+		addressToValoper[converter.lookup(valoper, coinConfig.addrPrefix)] = valoper
+	})
+
 
 	const handleChange = (e) => {
 		console.log(e);
@@ -20,14 +51,22 @@ export default function ValidatorVotes() {
 		{ value: 'vanilla', label: 'Vanilla' }
 	];
 
+	if (validatorStatus !== STATUS.FULFILLED){
+		return <Preloader></Preloader>
+	}
+
+	console.log(validatorData)
+	if (validatorStatus === STATUS.REJECTED){
+		return <ErrorBlock></ErrorBlock>
+	}
 	return (
 		<div className="table-box mt-2">
 			<div className="table-header mb-4">
 				<div className="row">
-					<div className="col-4">
-						<p className="font-20 font-bold">Validator Votes</p>
+					<div className="col-12 col-md-4">
+						<p className="font-20 font-bold">Validator Votes (Pagination Soon)</p>
 					</div>
-					<div className="col-8">
+					<div className="search-bar col-8">
 						<div className="d-flex align-items-center justify-content-end">
 							<p className="color-grey mr-3">Select by Decision:</p>
 							<SelectCustom options={options} onChange={handleChange}/>
@@ -39,7 +78,7 @@ export default function ValidatorVotes() {
 				<Input search/>
 			</div>
 			<table className="table mt-4">
-				<thead>
+				<thead className='font-7'>
 				<tr>
 					<th>Address</th>
 					<th>Vote</th>
@@ -47,25 +86,25 @@ export default function ValidatorVotes() {
 				</thead>
 				<tbody>
 				{
-					Array.from({ length: 5 }).map((_, index) => (
+					sortedValidatorData.slice(0, 5).map((data, index) => (
 						<tr key={index}>
-							<td>
+							<td data-title= "Address" className='font-7'>
 								<div className="d-inline-flex align-items-center">
-									<div className="thumb size-30 position-left">
+									<div className="thumb size-30 position-left image">
 										<Image
 											src={placeholder}
 											width={30}
 											height={30}
 											alt="Alt"/>
 									</div>
-									<span className="font-secondary-bold">Forbele</span>
+									<span className="font-secondary-bold">{data.description.moniker}</span>
 								</div>
 							</td>
-							<td>
+							<td data-title= "Vote" className='font-7'>
 								{
-									index % 2 === 0
-										? <span style={{ color: '#4D8C2F' }}>Yes</span>
-										: <span style={{ color: '#A75145' }}>No</span>
+									converter.lookup(data.operatorAddress, coinConfig.addrPrefix) in Object.keys(data)
+										? <span style={{ color: '#4D8C2F' }}>{data[converter.lookup(data.operatorAddress, coinConfig.addrPrefix)].option}</span>
+										: <span style={{ color: '#717D89' }}>Not Voted Yet</span>
 								}
 							</td>
 						</tr>

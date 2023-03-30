@@ -7,6 +7,8 @@ import placeholder from '~static/images/placeholder.svg';
 Store
  */
 import {fetchBlocks, selectBlocks} from '~store/slices/getBlocksSlice';
+import {fetchValidatorsAddressConversion, selectValidatorsAddressConversion} from "~store/slices/getValidatorsAddressConversion";
+
 /*
 Components
  */
@@ -20,6 +22,9 @@ import {getDateDifferent} from '~utils/date/getDateDifferent';
 Config
  */
 import {STATUS} from "~config/constants";
+import routes from "~config/routes";
+import Link from "next/link";
+import {isEmptyObject} from "~utils/object/detectEmptyObject";
 
 
 
@@ -27,58 +32,90 @@ export default function BlocksMain() {
 
 	const dispatch = useDispatch();
 	const { data, status } = useSelector(selectBlocks);
+	const { data: validatorData, status: validatorStatus } = useSelector(selectValidatorsAddressConversion);
 
 	useEffect(() => {
-		dispatch(fetchBlocks({ items_per_page: 6, page: 1 }))
+		dispatch(fetchBlocks({ limit: 6, per_page: 6, page: 1 }))
+		dispatch(fetchValidatorsAddressConversion({ height: 0 }));
 	}, [dispatch]);
 
-	if (!data.length && status === STATUS.PENDING) {
+	if (isEmptyObject(data) || (isEmptyObject(data) && status === STATUS.PENDING)) {
 		return <Preloader/>;
 	}
 
-	if (data.length && status === STATUS.FULFILLED) {
+	if (!isEmptyObject(data) && status === STATUS.FULFILLED) {
+		console.log(data)
 		return (
-			<div className="table-box">
-				<table className="table">
-					<thead>
-					<tr>
-						<th>Height</th>
-						<th>Proposer</th>
-						{/*<th>Txs</th>*/}
-						<th>Time</th>
-					</tr>
-					</thead>
-					<tbody>
-					{
-						data.map((option, index) => (
-							<tr key={index}>
-								<td>
-									<NumberFormat
-										value={option.height}
-										displayType="text"
-										thousandSeparator={true}
-										renderText={(value, props) => {
-											return <span className="font-secondary-bold color-turquoise" {...props}>{value}</span>;
-										}}/>
-								</td>
-								<td>
-									<div className="d-inline-flex align-items-center">
-										<div className="thumb size-30 position-left">
-											<Image src={placeholder}
-														 width={30}
-														 height={30}
-														 alt={option.blockproposer}/>
+			<div className="table-box-wrap">
+				<div className="table-box">
+					<table className="table">
+						<thead>
+						<tr>
+							<th>Height</th>
+							<th>Proposer</th>
+							{/*<th>Txs</th>*/}
+							<th>Time</th>
+						</tr>
+						</thead>
+						<tbody>
+						{
+							data.blocks.map((option, index) => (
+								<tr key={index}>
+									<td data-title='Height'>
+										<Link href={`${routes.public.blocks}/${option.header.height}`}>
+											<a>
+												<NumberFormat
+													value={option.header.height}
+													displayType="text"
+													thousandSeparator={true}
+													renderText={(value, props) => {
+														return <span className="font-secondary-bold color-turquoise" {...props}>{value}</span>;
+													}}
+												/>
+											</a>
+										</Link>
+									</td>
+									<td data-title='Proposer'>
+										<div className="d-inline-flex align-items-center">
+											<div className="thumb size-30 position-left">
+												{ validatorData[option.header.proposerAddress.toUpperCase()] && validatorData[option.header.proposerAddress.toUpperCase()].description.identity ? (
+													<Image
+														src={process.env.API_SERVER + "validator/keybase/image/" + validatorData[option.header.proposerAddress.toUpperCase()].description.identity}
+														width={30}
+														height={30}
+														alt={validatorData[option.header.proposerAddress.toUpperCase()].description.moniker + " logo"}
+														loading={"lazy"}
+													/>
+
+												) : (
+													<Image src={placeholder}
+														   width={30}
+														   height={30}
+														   alt={option.blockproposer}
+														   loading={"lazy"}
+													/>
+
+												)}
+
+											</div>
+											<span className="font-secondary-bold">
+												{validatorStatus !== STATUS.FULFILLED || !(option.header.proposerAddress.toUpperCase() in validatorData) ?
+													option.header.proposerAddress.toUpperCase()
+													:
+													validatorData[option.header.proposerAddress.toUpperCase()].description.moniker
+												}
+
+											</span>
 										</div>
-										<span className="font-secondary-bold">{option.blockproposer}</span>
-									</div>
-								</td>
-								{/*<td><span className="font-book">0</span></td>*/}
-								<td><span className="font-book">{getDateDifferent(option.timestamp * 1000, new Date())} ago</span></td>
-							</tr>
-						))
-					}
-					</tbody>
-				</table>
+									</td>
+									{/*<td><span className="font-book">0</span></td>*/}
+									<td data-title="Time"><span className="font-book">{getDateDifferent(option.header.time * 1000, new Date())} ago</span></td>
+								</tr>
+							))
+						}
+						</tbody>
+					</table>
+				</div>
 			</div>
 		)
 	}

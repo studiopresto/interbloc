@@ -14,6 +14,19 @@
 	border: 1px var(--color-grey-100) solid;
 	margin-left: -1px;
 	transition: width var(--duration) var(--ease);
+
+		@media (max-width: 767px) {
+			width: 250px;
+			transition: all 0.4s ease;
+			margin: 0 0 0 -340px;
+			overflow-x: hidden;
+			min-height: inherit;
+			padding: 20px;
+			display: block;
+			.nav-active & {
+				margin: 0;
+			}
+		}
 		&:before{
 			content: '';
 			position: absolute;
@@ -30,6 +43,10 @@
 			top: 40px;
 			left: 58px;
 			z-index: 1;
+
+			@media (max-width: 767px) {
+				position: static;
+			}
 		}
 		&-list{
 			display: flex;
@@ -43,6 +60,11 @@
 					color: var(--color-grey);
 					transition: color var(--duration) var(--ease);
 					margin: 22px 0;
+
+						@media (max-width: 767px) {
+							overflow: hidden;
+							display: block;
+						}
 						a{
 							display: inline-flex;
 							align-items: center;
@@ -58,6 +80,12 @@
 								opacity: 0;
 								display: none;
 								transition: visibility var(--duration) var(--ease), opacity var(--duration) var(--ease);
+
+								@media (max-width: 767px) {
+									opacity: 1;
+									visibility: visible;
+									display: block;
+								}
 							}
 						}
 						&.is-active{
@@ -82,10 +110,19 @@
 			position: absolute;
 			bottom: 58px;
 			left: 57px;
+
+			@media (max-width: 767px) {
+				position: static;
+			}
 		}
+
 		@include hover($md){
 			&:hover{
-				width: 320px;
+				width: 300px;
+
+				@media (max-width: 767px)  {
+					width: 250px;
+				}
 					.link-title{
 						opacity: 1;
 						visibility: visible;
@@ -114,4 +151,9 @@
 			color: inherit;
 			opacity: 0;
 		}
+}
+.h-2{
+	@media (max-width: 767px) {
+		font-size: 24px;
+	}
 }

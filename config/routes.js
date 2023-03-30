@@ -2,9 +2,10 @@ export default {
 	public: {
 		index: '/',
 		blocks: '/blocks',
+		block: '/block',
 		transactions: '/transactions',
 		validators: '/validator',
-		interbloc: '/interbloc',
+		account: '/account',
 		governance: '/governance',
 		proposal: '/proposal',
 	}

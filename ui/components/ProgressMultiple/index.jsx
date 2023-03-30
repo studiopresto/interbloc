@@ -12,7 +12,7 @@ export default function ProgressMultiple({ data, label }) {
 			<div className="progress progress-multiple">
 				{
 					data.map((option, key) => (
-						<div key={key} className="progress-multiple-bar" style={{ width: option.value + '%' }}>
+						<div key={key} className="progress-multiple-bar" style={{ width: option.value + '%', display: option.value <= 2? "none" :  "initial"}}>
 							{ !!label ? <div className={`progress-multiple-label __${label}`}>{option.title}</div> : null }
 						</div>
 					))

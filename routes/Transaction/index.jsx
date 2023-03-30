@@ -26,10 +26,16 @@ import SendIcon from '~ui/icons/Send';
 Utils
  */
 import {isEmptyObject} from '~utils/object/detectEmptyObject';
+import {PrettyPrintJson} from '~utils/formatting/json'
 /*
 Config
  */
 import {STATUS} from '~config/constants';
+import {getDateDifferent} from "~utils/date/getDateDifferent";
+import {formatMessageToReadableArray} from "~utils/formatting/transactions";
+import {formatDenomToString, formatFromBaseDenom, formatFromDenom} from "~utils/formatting/coins";
+import coinConfig from "../../coin.config";
+import {fetchChainStats, selectChainStats} from "~store/slices/getChainStats";
 
 
 
@@ -39,23 +45,14 @@ export default function TransactionPage() {
 	const router = useRouter();
 	const { transactionSlug } = router.query;
 	const { data, status } = useSelector(selectTransaction);
+	const { data: chainData, status: chainStatus } = useSelector(selectChainStats);
 
 	useEffect(() => {
 		if (!!transactionSlug) {
 			dispatch(fetchTransaction({ transactionSlug }));
+			dispatch(fetchChainStats());
 		}
 	}, [transactionSlug, dispatch]);
-
-	const reward = [
-		['Delegator Address', 'cosmosh1fkjhdasa1fsdkalkjhlgjhdkjhglkjhj4559adjfj;lf'],
-		['Validator Address', `cosmosvaloper140lfgdfas342525lkslfgklkl52ll2k2lklgglh; <br/> (Craft Airdrop Bo..)`],
-		['Amount', '0.217814 ATOM'],
-	];
-	const send = [
-		['From Address', 'cosmoshub3113188fggdfsgtk342cvx9422cva14'],
-		['To Address', 'cosmow1wqyb45kcjvlslgjfskfgbnvbxjlqwrqlj'],
-		['Amount', '62.00453 ATOM'],
-	];
 
 	return (
 		<>
@@ -80,7 +77,7 @@ export default function TransactionPage() {
 										<div className="tabs-button">Overview</div>
 									</Tab>
 									<Tab className="tabs-buttons-item">
-										<div className="tabs-button">Logs (4)</div>
+										<div className="tabs-button">Logs</div>
 									</Tab>
 									<Tab className="tabs-buttons-item">
 										<div className="tabs-button">Comments</div>
@@ -91,7 +88,7 @@ export default function TransactionPage() {
 										<li>
 											<span className="color-grey font-16">Transaction Hash:</span>
 											<span className="font-16 font-secondary-bold">
-										{data.hash}
+										{data.txhash}
 												<span className="ml-4">
 										<Button icon>
 											<FileIcon/>
@@ -102,37 +99,51 @@ export default function TransactionPage() {
 										<li>
 											<span className="color-grey font-16">Status:</span>
 											<span className="font-16 font-secondary-bold">
-									<span className="table-status font-bold" style={{color: '#2BBF6F'}}>Success</span>
-								</span>
+												<span className="table-status font-bold" style={{color: data.code === 0 ? '#2BBF6F' : '#cc0000'}}>
+													{ data.code === 0 ? 'Success' : 'Error' }
+												</span>
+											</span>
 										</li>
+										{data.code !== 0 &&
+											<li>
+											<span className="color-grey font-16">Error:</span>
+											<span className="font-16 font-secondary-bold text-right">
+												<span className="font-bold"
+													  style={{color: '#cc0000'}}>
+													{data.rawLog}
+												</span>
+											</span>
+											</li>
+										}
 										<li>
 											<span className="color-grey font-16">Block:</span>
 											<span className="font-16 font-secondary-bold">
-									14685683
-									<span className="font-attention font-12 font-bold ml-2">1 Block Confirmation</span>
+											{data.height}
+												{/* <span className="font-attention font-12 font-bold ml-2">1 Block Confirmation</span>*/}
 								</span>
 										</li>
 										<li>
 											<span className="color-grey font-16">Timestamp:</span>
 											<span className="font-16 font-secondary-bold">
-									36 secs ago (Apr-30-2022 12:48:51 PM+UTC)
-									<span className="font-attention font-12 font-bold ml-2">Confirmed within 30 secs</span>
-								</span>
-										</li>
-										<li>
-											<span className="color-grey font-16">Value:</span>
-											<span className="font-16 font-secondary-bold">
-									($935.74)
-									<span className="font-attention font-12 font-bold ml-2">0.331 Ether</span>
+									{getDateDifferent(data.unixTimestamp * 1000, new Date())} ago ({new Date(data.unixTimestamp * 1000).toLocaleString()})
+												{/* <span className="font-attention font-12 font-bold ml-2">Confirmed within 30 secs</span> */}
 								</span>
 										</li>
 										<li>
 											<span className="color-grey font-16">Transaction Fee:</span>
-											<span className="font-16 font-secondary-bold">0.0000344342425777456335353 Ether ($13.51)</span>
+											<span className="font-16 font-secondary-bold">
+												{
+													data.authInfo.fee.amount ?
+														formatDenomToString(data.authInfo.fee.amount[0].amount , data.authInfo.fee.amount[0].denom) :
+														formatDenomToString(0, coinConfig.denom)
+												}
+												{data.authInfo.fee.amount[0].denom === coinConfig.denom ? ` (\$${Math.round(chainData.fiatPrice * formatFromBaseDenom(data.authInfo.fee.amount[0].amount) * 100) / 100})` : ''}
+												{/* <span className="font-attention font-12 font-bold ml-2">2% above average</span> */}
+											</span>
 										</li>
 									</ul>
 									<br/>
-									<div className="d-flex justify-content-center">
+									{/*<div className="d-flex justify-content-center">
 										<button className="btn btn-md btn-more">
 											<svg width="8" height="9" viewBox="0 0 8 9">
 												<path
@@ -146,10 +157,14 @@ export default function TransactionPage() {
 													fill="currentColor"/>
 											</svg>
 										</button>
-									</div>
+									</div>*/}
 								</TabPanel>
 								<TabPanel className="tabs-content pt-4">
-									#2
+									{ data.logs ?
+										(PrettyPrintJson(data.logs))
+										 :
+										("No logs to parse")
+									}
 								</TabPanel>
 								<TabPanel className="tabs-content pt-4">
 									#3
@@ -157,28 +172,29 @@ export default function TransactionPage() {
 							</Tabs>
 						</Box>
 						<Box title="Messages" adaptiveHeight>
-							<div className="row">
-								<div className="col-lg-6">
-									<div className="d-flex align-items-center mt-3">
-										<div className="box-header-thumb color-orange __30 mr-3">
-											<PercentIcon/>
-										</div>
-										<p className="font-book">Get Reward</p>
+
+
+									<div className="row">
+										{data.tx.body.messages.map( (txdata, index) => (
+											<div key={index} className="col-lg-6">
+												<div className="d-flex align-items-center mt-3">
+													<div className="box-header-thumb color-orange __30 mr-3">
+														<PercentIcon/>
+													</div>
+													<p className="font-book">{formatMessageToReadableArray(txdata)[1]}</p>
+												</div>
+												<hr className="hr"/>
+												{
+													formatMessageToReadableArray(txdata)[0] ?
+														(<List data={formatMessageToReadableArray(txdata)[2]}/>)
+														:
+														(PrettyPrintJson(txdata))
+
+												}
+											</div>
+
+										))}
 									</div>
-									<hr className="hr"/>
-									<List data={reward}/>
-								</div>
-								<div className="col-lg-6">
-									<div className="d-flex align-items-center mt-3">
-										<div className="box-header-thumb color-blue __30 mr-3">
-											<SendIcon/>
-										</div>
-										<p className="font-book">Send</p>
-									</div>
-									<hr className="hr"/>
-									<List data={send}/>
-								</div>
-							</div>
 						</Box>
 					</div>
 				) : (

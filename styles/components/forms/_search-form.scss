@@ -13,6 +13,11 @@
 			right: 0;
 			padding-left: 23px;
 			padding-right: 23px;
+
+			@media (max-width: 576px) {
+				padding-left: 15px;
+				padding-right: 15px;
+			}
 		}
 		.form{
 				&-control{

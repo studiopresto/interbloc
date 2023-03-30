@@ -1,11 +1,11 @@
 .datepicker{
 	position: relative;
-	z-index: 1;
 		&-calendar{
 			position: absolute;
 			top: 100%;
 			right: 0;
 			display: none;
+			z-index: 3;
 		}
 		&-icon{
 			position: absolute;
@@ -18,6 +18,10 @@
 		.form-control{
 			cursor: pointer;
 			padding: 0 50px 0 18px;
+
+			@media (max-width: 576px) {
+				width: 192px;
+			} 
 		}
 }
 
@@ -29,6 +33,11 @@
 			border-radius: 25px;
 			color: var(--color-grey-700);
 			font-family: var(--font-base-bold);
+
+			@media (max-width: 480px) {
+				width: 280px;
+				padding: 10px 12px;
+			}
 				&__navigation{
 					display: flex;
 					align-items: center;
@@ -39,6 +48,11 @@
 							height: 40px;
 							color: inherit;
 							font-size: 18px;
+
+							@media (max-width: 480px) {
+								width: 30px;
+								height: 30px;
+							}
 								@include hover($md){
 									&:hover{
 										color: var(--color-primary);
@@ -84,6 +98,11 @@
 					background-color: transparent;
 					padding: 0;
 					line-height: 2.8em;
+
+					@media (max-width: 480px) {
+						line-height: 1.5;
+						font-size: 16px;
+					}
 				}
 		}
 }

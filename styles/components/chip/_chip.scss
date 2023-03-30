@@ -1,0 +1,24 @@
+.chip{
+  min-height: 0;
+  flex-direction: row;
+  padding-left: 6px;
+  padding-right: 6px;
+  background-color: #464646;
+  border-bottom: 1px solid #666;
+  border-right: 1px solid #5e5e5e;
+  transition: all 0.4s ease;
+  margin-left: -20px;
+  border-radius: 10px;
+
+    &:hover {
+      background-color: darken($color: #464646, $amount: 10%);
+    }
+
+  @media (max-width: 1600px) {
+    margin-bottom: 4px;
+  } 
+
+  @media (max-width: 350px) {
+    font-size: 9px;
+  } 
+}

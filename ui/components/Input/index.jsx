@@ -1,9 +1,12 @@
 import PropTypes from 'prop-types';
 import SearchIcon from '~ui/icons/Search';
+import {useState} from "react";
 
 
 
-export default function Input({ type = 'text', placeholder, search, size = null, readonly = false, value = '', onChange }) {
+export default function Input({ type = 'text', placeholder, search, size = null, readonly = false, value = ''  }) {
+	const [stateOfInput, setStateOfInput] = useState(value);
+
 	return (
 		<label className="form-control-container">
 			{
@@ -14,8 +17,8 @@ export default function Input({ type = 'text', placeholder, search, size = null,
 				className={`form-control ${!!size ? 'form-control-' + size : ''}`}
 				placeholder={placeholder}
 				readOnly={readonly}
-				value={value}
-				onChange={(e) => onChange(e)}
+				value={stateOfInput}
+				onChange={(e)=> setStateOfInput(e.target.value)}
 			/>
 		</label>
 	)

@@ -1,3 +1,17 @@
 .prices-chart{
 	height: 238px;
+	.plotly{
+		> div {
+			@media (max-width: 767px) {
+				width: 100% !important;
+			}
+
+			svg {
+				@media (max-width: 767px) {
+					width: 100% !important
+				}
+			}
+		}
+	}
+	
 }

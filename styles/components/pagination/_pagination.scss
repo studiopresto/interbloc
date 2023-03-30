@@ -1,6 +1,10 @@
 .pagination{
 	display: inline-flex;
 	border-radius: 0;
+
+		@media (max-width: 576px) {
+			display: block;
+		}
 		&-list{
 			display: flex;
 			align-items: center;
@@ -27,6 +31,10 @@
 					background-color: var(--color-primary);
 					color: var(--color-black);
 				}
+
+				@media (max-width: 767px) {
+					width: 26px;
+				}
 		}
 		&-item{
 			margin: 0 6px;
@@ -45,4 +53,10 @@
 					}
 				}
 		}
+}
+
+.pagination-line {
+	@media (max-width: 576px) {
+		display: inline-flex !important;
+	  }
 }

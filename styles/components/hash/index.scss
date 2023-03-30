@@ -5,14 +5,31 @@
 	padding: 0 30px;
 	margin-top: -8px;
 	margin-bottom: 25px;
+
+	@media (max-width: 1023px)  {
+		flex-wrap: wrap;
+		padding: 0;
+	}
 		&-icon{
 			margin-right: 14px;
+
+			@media (max-width: 767px)  {
+				margin: 0 0 8px 5px;
+			}
 		}
 		&-title{
 			line-height: 1em;
 			display: inline-block;
+
+			@media (max-width: 767px) {
+				margin: 0 0 auto 10px;
+			}
 				& ~ .hash-value{
 					margin-left: 48px;
+
+					@media (max-width: 767px)  {
+						margin-left: 0;
+					}
 				}
 		}
 		&-value{
@@ -20,9 +37,20 @@
 			line-height: 1em;
 			display: inline-block;
 			padding-top: 2px;
+
+			@media (max-width: 767px)  {
+				width: 100%;
+				margin: 0 0 10px;
+			}
 		}
 		&-action{
 			margin-left: 25px;
+
+			@media (max-width: 1023px)  {
+				margin-left: 0;
+				margin-top: 10px;
+			}
+
 				.btn{
 					&:not(:last-child){
 						margin-right: 15px;

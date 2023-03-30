@@ -1,6 +1,10 @@
 import {useEffect,useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import Plot from 'react-plotly.js';
+import dynamic from "next/dynamic";
+
+const Plot = dynamic(import('react-plotly.js'), {
+	ssr: false
+})
 import NumberFormat from 'react-number-format';
 /*
 Store
@@ -20,6 +24,7 @@ Config
  */
 import {STATUS} from '~config/constants';
 import { styles } from '~config/chart';
+import coinConfig from "../../coin.config";
 
 
 
@@ -37,7 +42,7 @@ export default function Prices() {
 
 	useEffect(() => {
 		if (!!data?.price) {
-			setPrice(data.price[0]);
+			setPrice(data.price[data.price.length - 1]);
 		}
 	}, [data]);
 
@@ -57,13 +62,13 @@ export default function Prices() {
 		return (
 			<>
 				<div className="row">
-					<div className="col-6">
+					<div className="col-12 col-sm-6 mb-3 mb-sm-0">
 						<div className="h-100 d-flex flex-column justify-content-end">
 							<p className="color-grey font-16">Price</p>
 							<p className="h-2 color-primary">${price}</p>
 						</div>
 					</div>
-					<div className="col-6">
+					<div className="col-12 col-sm-6">
 						<ul className="table-list">
 							<li>
 								<span className="color-grey font-bold">Market Cap:</span>
@@ -85,7 +90,7 @@ export default function Prices() {
 										renderText={(value, props) => {
 											return <span {...props}>{value}</span>
 										}}/>
-									<span className="color-grey text-uppercase font-12"> token</span>
+									<span className="color-grey text-uppercase font-12"> {coinConfig.ticker}</span>
 								</span>
 							</li>
 							{/*<li>*/}

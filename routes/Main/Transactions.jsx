@@ -19,6 +19,11 @@ import {getDateDifferent} from '~utils/date/getDateDifferent';
 Config
  */
 import {STATUS} from '~config/constants';
+import routes from "~config/routes";
+import Link from "next/link";
+import {formatDenomToString} from "~utils/formatting/coins";
+import coinConfig from "../../coin.config";
+import {isEmptyObject} from "~utils/object/detectEmptyObject";
 
 
 
@@ -29,21 +34,21 @@ export default function TransactionsMain() {
 
 
 	useEffect(() => {
-		dispatch(fetchTransactions({ items_per_page: 6, page: 1 }));
+		dispatch(fetchTransactions({ limit: 6, per_page: 6, page: 1 }));
 	}, [dispatch]);
 
-	if (!data.length && status === STATUS.PENDING) {
+	if (isEmptyObject(data) && status === STATUS.PENDING) {
 		return <Preloader/>
 	}
 
-	if (data.length && status === STATUS.FULFILLED) {
+	if (!isEmptyObject(data) && status === STATUS.FULFILLED) {
 		return (
 			<div className="table-box">
 				<table className="table">
 					<thead>
 					<tr>
-						<th>Block</th>
 						<th>Hash</th>
+						<th>Block</th>
 						<th>Type</th>
 						<th>Fee</th>
 						{/*<th>Results</th>*/}
@@ -52,22 +57,37 @@ export default function TransactionsMain() {
 					</thead>
 					<tbody>
 					{
-						data.map((option, index) => (
+						data.transactions.map((option, index) => (
 							<tr key={index}>
-								<td>
-									<NumberFormat
-										value={option.height}
-										displayType="text"
-										thousandSeparator={true}
-										renderText={(value, props) => {
-											return <span className="font-secondary-bold color-turquoise" {...props}>{value}</span>;
-										}}/>
+								<td data-title='Hash'>
+									<Link href={`${routes.public.transactions}/${option.txhash}`}>
+										<a>
+											<span className="font-secondary-bold color-turquoise">{hashShortening(option.txhash)}</span>
+										</a>
+									</Link>
 								</td>
-								<td><span className="font-book">{hashShortening(option.hash)}</span></td>
-								<td><span className="font-book">{option.type}</span></td>
-								<td><span className="font-book">{option.fee.amount} {option.fee.denom}</span></td>
+								<td data-title='Block'>
+									<Link href={`${routes.public.blocks}/${option.height}`}>
+										<a>
+											<NumberFormat
+												value={option.height}
+												displayType="text"
+												thousandSeparator={true}
+												renderText={(value, props) => {
+													return <span className="font-book" {...props}>{value}</span>;
+												}}/>
+										</a>
+									</Link>
+								</td>
+								<td data-title='Type'><span className="font-book">{option.type}</span></td>
+								<td data-title='Fee'><span className="font-book">{
+									option.authInfo.fee.amount ?
+										formatDenomToString(option.authInfo.fee.amount[0].amount , option.authInfo.fee.amount[0].denom) :
+										formatDenomToString(0, coinConfig.denom)
+								}</span></td>
+
 								{/*<td><span className="font-book">0</span></td>*/}
-								<td><span className="font-book">{getDateDifferent(option.timestamp * 1000, new Date())} ago</span></td>
+								<td data-title='Time'><span className="font-book">{getDateDifferent(option.unixTimestamp * 1000, new Date())} ago</span></td>
 							</tr>
 						))
 					}

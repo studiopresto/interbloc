@@ -1,6 +1,5 @@
 import {useState} from 'react';
 import PropTypes from 'prop-types';
-import Calendar from 'react-calendar';
 import moment from 'moment';
 /*
 Components
@@ -14,7 +13,12 @@ import CalendarIcon from '~ui/icons/Calendar';
 Hooks
  */
 import UseOutsideDetector from '~hooks/useOutsideDetector';
+import dynamic from "next/dynamic";
 
+const Calendar = dynamic(
+	() => import('react-calendar'),
+	{ ssr: false }
+)
 
 
 export default function Datepicker({ defaultValue = undefined, size = null }) {
@@ -35,6 +39,7 @@ export default function Datepicker({ defaultValue = undefined, size = null }) {
 				<div className="datepicker-calendar" style={{ display: `${isDisplayCalendar ? 'block' : 'none'}` }}>
 					<Calendar onChange={handleChange}/>
 				</div>
+
 			</div>
 		</UseOutsideDetector>
 	)

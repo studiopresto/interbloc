@@ -2,7 +2,7 @@
 const path = require('path');
 
 const nextConfig = {
-  reactStrictMode: true,
+  reactStrictMode: false,
   env: {
     API_SERVER: process.env.API_SERVER,
   },
@@ -10,7 +10,7 @@ const nextConfig = {
     includePaths: [path.join(__dirname, 'styles')],
   },
   images: {
-    domains: ['via.placeholder.com'],
+    domains: ['via.placeholder.com', process.env.API_SERVER, '127.0.0.1', "assets.interbloc.org", "cosmos.explorer.interbloc.org"],
   },
 };
 

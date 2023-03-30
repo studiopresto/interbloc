@@ -6,7 +6,7 @@ import { STATUS } from '~config/constants';
 
 
 const initialState = {
-	data: [],
+	data: {},
 	status: STATUS.IDLE,
 	error: null,
 };
@@ -15,15 +15,9 @@ export const transactionsKey = 'Transactions';
 
 export const fetchTransactions = createAsyncThunk(
 	`${transactionsKey}/fetch`,
-	async ({ items_per_page = 10, page = 1 }) => {
-		return await dataProvider.getList(resources.transactions, { items_per_page, page })
-			.then(res => {
-				let data = [];
-				Object.keys(res).forEach(el => {
-					data.push(res[el]);
-				});
-				return data;
-			});
+	async ({ limit = 10, per_page = 10, page = 1 }) => {
+		return await dataProvider.getList(resources.latestTransactions, { limit, per_page, page })
+
 	}
 );
 

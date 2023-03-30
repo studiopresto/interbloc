@@ -34,6 +34,10 @@
 					background-color: var(--color-turquoise);
 					color: var(--color-turquoise);
 				}
+			&:nth-child(4){
+				background-color: var(--color-grey-100);
+				color: var(--color-grey-100);
+			}
 				@for $i from 1 through 5 {
 					&:nth-child(#{$i}){
 						z-index: 5 - $i;

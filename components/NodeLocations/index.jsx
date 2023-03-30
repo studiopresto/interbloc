@@ -1,7 +1,10 @@
 import {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import Plot from 'react-plotly.js';
-/*
+import dynamic from "next/dynamic";
+
+const Plot = dynamic(import('react-plotly.js'), {
+	ssr: false
+})/*
 Store
  */
 import {fetchNodeLocations, selectNodeLocations} from '~store/slices/getNodeLocationsSlice';
@@ -40,7 +43,7 @@ export default function NodeLocations() {
 			<>
 				<div>
 					<p className="color-grey">Active Nodes:</p>
-					<p className="font-16 font-secondary-bold">500</p>
+					<p className="font-16 font-secondary-bold">{data.nodes_count}</p>
 				</div>
 				<div className="node-locations-chart">
 					<Plot
