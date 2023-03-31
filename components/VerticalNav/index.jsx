@@ -56,11 +56,12 @@ export default function VerticalNav() {
 					<UserIcon/>
 				</VerticalNavItem>
 			</div>
+			{/* }
 			<div className="verticalNav-detail">
 				<VerticalNavItem href={routes.public.index} label="Settings">
 					<SettingsIcon/>
 				</VerticalNavItem>
-			</div>
+			</div>*/}
 		</div>
 	)
 }
