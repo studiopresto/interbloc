@@ -1,4 +1,4 @@
-export const data = [
+export const testData = [
 	{
 		title: '#68  / Community Spend Proposal',
 		subtitle: 'Make Cosmos Hub the Lead Sponsor of Cosmoverse 2022',

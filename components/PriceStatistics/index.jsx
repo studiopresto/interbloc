@@ -1,6 +1,9 @@
 import {useSelector} from 'react-redux';
-import Plot from 'react-plotly.js';
-/*
+import dynamic from "next/dynamic";
+
+const Plot = dynamic(import('react-plotly.js'), {
+	ssr: false
+})/*
 Store
  */
 import {selectValidator} from '~store/slices/getValidatorSlice';
@@ -17,6 +20,7 @@ Configs
  */
 import {styles} from '~config/chart';
 import {STATUS} from '~config/constants';
+import {da} from "plotly.js/src/traces/carpet/attributes";
 
 
 
@@ -28,22 +32,12 @@ export default function PriceStatistics() {
 		return <Preloader/>;
 	}
 
+	console.log(data)
+
 	return (
 		<div className="price-statistics-chart">
 			<Plot
 				data={[
-					{
-						x: data.historic.dates,
-						y: data.historic.rank,
-						type: 'scatter',
-						mode: 'lines',
-						name: 'Rank',
-						line: {
-							width: 4,
-							color: '#42BAE2',
-							shape: 'spline'
-						},
-					},
 					{
 						x: data.historic.dates,
 						y: data.historic.voting_power,
@@ -53,6 +47,19 @@ export default function PriceStatistics() {
 						line: {
 							width: 4,
 							color: '#FFB342',
+							shape: 'spline'
+						},
+					},
+					{
+						x: data.historic.dates,
+						y: data.historic.rank,
+						type: 'scatter',
+						mode: 'lines',
+						name: 'Rank',
+						yaxis: 'y2',
+						line: {
+							width: 4,
+							color: '#42BAE2',
 							shape: 'spline'
 						},
 					},
@@ -94,7 +101,27 @@ export default function PriceStatistics() {
 						gridcolor: '#292929',
 						linecolor: '#292929',
 						title: {
-							text: 'Price',
+							text: 'Voting Power',
+							font: {
+								color: '#A3A3A3',
+								size: 10,
+							},
+							standoff: 0,
+						},
+						tickfont: {
+							color: '#5C5C5C',
+							size: 10,
+						},
+					},
+					yaxis2: {
+						// visible: false,
+						side: 'right',
+						overlaying: 'y',
+						autorange: 'reversed',
+						gridcolor: '#292929',
+						linecolor: '#292929',
+						title: {
+							text: 'Rank',
 							font: {
 								color: '#A3A3A3',
 								size: 10,

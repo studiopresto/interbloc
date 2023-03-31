@@ -1,7 +1,10 @@
 import {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import Plot from 'react-plotly.js';
-/*
+import dynamic from "next/dynamic";
+
+const Plot = dynamic(import('react-plotly.js'), {
+	ssr: false
+})/*
 Store
  */
 import {fetchMempool, selectMempool} from '~store/slices/getMempoolSlice';
@@ -45,8 +48,9 @@ export default function Mempool() {
 					<Plot
 						data={[
 							{
-								x: data?.historyNumeric,
-								y: data?.historyValues,
+								//x: data?.feesNumeric,
+								x: ["0", "<250", "251 - 1000", "1001 - 4000", "4001 - 10000", ">10000"],
+								y: data?.feesValues,
 								type: 'bar',
 								marker: {
 									color: '#687EFF',
@@ -70,7 +74,7 @@ export default function Mempool() {
 								gridcolor: '#292929',
 								linecolor: '#292929',
 								title: {
-									text: 'Gas',
+									text: 'Fee',
 									font: {
 										color: '#A3A3A3',
 										size: 10,
@@ -87,7 +91,7 @@ export default function Mempool() {
 								gridcolor: '#292929',
 								linecolor: '#292929',
 								title: {
-									text: 'Gas LImit',
+									text: 'Count',
 									font: {
 										color: '#A3A3A3',
 										size: 10,

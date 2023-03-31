@@ -43,12 +43,6 @@ export default function VerticalNav() {
 				<VerticalNavItem href={routes.public.transactions} label="Transactions">
 					<TransactionsIcon/>
 				</VerticalNavItem>
-				<VerticalNavItem href={routes.public.interbloc} label="Interbloc">
-					<DirectoryIcon/>
-				</VerticalNavItem>
-				<VerticalNavItem href={routes.public.proposal} label="Proposal">
-					<BurgerIcon/>
-				</VerticalNavItem>
 				<VerticalNavItem href={routes.public.governance} label="Governance">
 					<EyeIcon/>
 				</VerticalNavItem>

@@ -1,12 +1,23 @@
 export default {
-	users: 'users',
-	latestBlock: 'latest',
-	blocks: 'blocks',
+	account: 'account',
+	latestBlock: 'blocks/latest',
+	blocks: 'blocks/latest',
+	block: 'blocks',
+	bondingHistory: 'chain/stats/history/bonding',
+	chainStats: 'chain/stats/general',
+	governanceProposals: 'governance/proposals',
+	governanceProposal: 'governance',
+	latestTransactions: 'transactions/latest',
 	transactions: 'transactions',
-	tokenmics: 'chain/tokenomics',
+	transactionsByAccount: 'transactions/account',
+	tokenmics: 'chain/stats/tokenomics',
 	mempool: 'chain/mempool',
 	consensus: 'chain/consensus',
 	nodes: 'chain/nodes',
 	prices: 'https://api.coingecko.com/api/v3/coins/cosmos/market_chart',
-	validator: 'validator'
+	price: 'https://api.coingecko.com/api/v3/simple/price',
+	validator: 'validator/validator',
+	validators: 'validator/list',
+	validatorsAddressConversion: 'validator/conversion',
+	params: 'params'
 }

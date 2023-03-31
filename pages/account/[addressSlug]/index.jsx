@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import InterBlocPage from '~routes/InterBloc';
+import AccountPage from '~routes/Account';
 
 
 
@@ -9,7 +9,7 @@ export default function InterBloc() {
 			<Head>
 				<title>InterBloc | Interbloc</title>
 			</Head>
-			<InterBlocPage/>
+			<AccountPage/>
 		</>
 	)
 }

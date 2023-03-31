@@ -9,7 +9,10 @@
     "lint": "next lint --dir"
   },
   "dependencies": {
+    "@cosmjs/encoding": "^0.28.11",
+    "@cosmjs/launchpad": "^0.27.1",
     "@reduxjs/toolkit": "^1.8.1",
+    "convert-bech32-address": "^1.0.4",
     "moment": "^2.29.3",
     "next": "12.1.6",
     "plotly.js": "^2.12.1",
@@ -17,12 +20,14 @@
     "react": "18.1.0",
     "react-calendar": "^3.7.0",
     "react-dom": "18.1.0",
+    "react-markdown": "^8.0.3",
     "react-number-format": "^4.9.3",
     "react-plotly.js": "^2.5.1",
     "react-redux": "^8.0.1",
     "react-select": "^5.3.2",
     "react-tabs": "^5.1.0",
-    "sass": "^1.51.0"
+    "sass": "^1.51.0",
+    "sharp": "^0.32.0"
   },
   "devDependencies": {
     "eslint": "8.14.0",

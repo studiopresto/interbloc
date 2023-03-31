@@ -1,6 +1,12 @@
 .pagination{
 	&-rounded{
 		height: 46px;
+
+		@media (max-width: 576px) {
+			text-align: center;
+			margin: 0 0 106px;
+			width: 100%;
+		  }
 			.pagination{
 				&-item{
 					margin: 0;
@@ -41,6 +47,17 @@
 												background-color: var(--color-primary);
 												color: var(--color-black);
 											}
+
+											@media (max-width: 767px) {
+												width: 80px;
+												padding:  0 6px;
+												font-size: 12px;
+												border-radius: 20px;
+											} 
+
+											@media (max-width: 576px) {
+												width: 100%;
+											}
 									}
 							}
 						}
@@ -53,6 +70,15 @@
 					background-color: var(--color-black-200);
 					position: relative;
 					margin: 0 12px;
+
+					@media (max-width: 767px)  {
+						font-size: 10px;
+						min-width: 220px;
+					}
+
+					@media (max-width: 576px) {
+						margin: 10px 0;
+					} 
 				}
 				&-link{
 					&-arrow{
@@ -65,8 +91,18 @@
 						border: 1px var(--color-primary) solid;
 						border-radius: 50%;
 						color: var(--color-primary);
+
+						@media (max-width: 767px) {
+							width: 30px;
+						} 
 					}
 				}
 			}
 	}
+}
+
+.left-text {
+	@media (max-width: 1199px) {
+		justify-content: flex-start !important;		
+	} 
 }

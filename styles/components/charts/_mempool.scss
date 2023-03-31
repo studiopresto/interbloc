@@ -1,6 +1,16 @@
 .mempool-chart{
 	height: 194px;
-		.point{
-		
+		.plotly{
+			> div {
+				@media (max-width: 767px) {
+					width: 100% !important;
+				}
+
+				svg {
+					@media (max-width: 767px) {
+						width: 100% !important
+					}
+				}
+			}
 		}
 }

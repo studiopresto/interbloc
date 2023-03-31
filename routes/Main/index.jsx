@@ -78,7 +78,7 @@ export default function MainPage() {
 						<div className="h-100">
 							<div className="d-flex flex-column justify-content-end">
 								<p className="font-16 color-grey font-bold">Packets Pending:</p>
-								<p className="h-2 mb-4">27</p>
+								<p className="h-2 mb-4">Soon</p>
 								<div className="dot-row">
 									<p className="color-grey font-bold dot-row-title">Osmosis Channel - 1:</p>
 									<div className="dot-row-item">
@@ -86,7 +86,7 @@ export default function MainPage() {
 									</div>
 								</div>
 								<div className="dot-row mt-3">
-									<p className="color-grey font-bold dot-row-title">Osmosis Channel - 2:</p>
+									<p className="color-grey font-bold dot-row-title">Juno Channel - 2:</p>
 									<div className="dot-row-item">
 										<div className="dot-row-icon bg-danger"/>
 									</div>
@@ -122,6 +122,7 @@ export default function MainPage() {
 				<div className="col-xl-6">
 					<Box title="Transactions">
 						<TransactionsMain/>
+
 					</Box>
 				</div>
 				<div className="col-xl-6">

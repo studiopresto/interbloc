@@ -1,6 +1,6 @@
 .form{
 		&-control{
-			background-color: var(--color-black-100);
+			background-color: #2C2C2C;
 			border-color: transparent;
 			height: 56px;
 			border-radius: 30px;
@@ -9,6 +9,11 @@
 			letter-spacing: .05em;
 			color: var(--color-white);
 			padding: 0 18px;
+
+			@media (max-width: 576px) {
+				margin: 0 ;
+				height: 40px;
+			}
 				&:focus{
 					background-color: var(--color-black-100);
 					box-shadow: none;

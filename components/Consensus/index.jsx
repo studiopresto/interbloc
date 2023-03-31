@@ -1,7 +1,10 @@
 import {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import Plot from 'react-plotly.js';
-/*
+import dynamic from "next/dynamic";
+
+const Plot = dynamic(import('react-plotly.js'), {
+	ssr: false
+})/*
 Store
  */
 import {fetchConsensus, selectConsensus} from '~store/slices/getConsensusSlice';

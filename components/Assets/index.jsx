@@ -1,24 +1,26 @@
 import Image from 'next/image';
 import NumberFormat from 'react-number-format';
-import placeholder from '~static/images/placeholder.svg';
+
 /*
 Components
  */
 import Input from '~ui/components/Input';
 import SelectCustom from '~ui/components/Select';
+import {CHAIN} from "~config/chain";
+import {getInfoForDenom} from "~utils/formatting/chain";
 
 
 
-export default function Assets() {
+export default function Assets({ balances }) {
 
 	const handleChange = (e) => {
 		console.log(e);
 	};
 
 	const options = [
-		{ value: 'chocolate', label: 'Chocolate' },
-		{ value: 'strawberry', label: 'Strawberry' },
-		{ value: 'vanilla', label: 'Vanilla' }
+		{ value: 'chocolate', label: 'All' },
+		{ value: 'strawberry', label: 'Native' },
+		{ value: 'vanilla', label: 'IBC' }
 	];
 
 	return (
@@ -42,46 +44,50 @@ export default function Assets() {
 			<table className="table mt-4">
 				<thead>
 					<tr>
-						<th>Validator</th>
+						<th>Asset</th>
 						<th>Amount</th>
 						<th><div className="text-right">Total Value</div></th>
 					</tr>
 				</thead>
 				<tbody>
 				{
-					Array.from({ length: 5 }).map((_, index) => (
-						<tr key={index}>
-							<td>
-								<div className="d-inline-flex align-items-center">
-									<div className="thumb size-30 position-left">
-										<Image
-											src={placeholder}
-											width={30}
-											height={30}
-											alt="Alt"/>
+					Object.entries(balances).map(([index, value]) => {
+						const assetData = getInfoForDenom(index)
+						return(
+							<tr key={index}>
+								<td>
+									<div className="d-inline-flex align-items-center">
+										<div className="thumb size-30 position-left">
+											<Image
+												src={assetData.logo}
+												width={30}
+												height={30}
+												alt="Alt"/>
+										</div>
+										<span className="font-secondary-bold">{assetData.ticker}</span>
 									</div>
-									<span className="font-secondary-bold">STARS</span>
-								</div>
-							</td>
-							<td>
-								<span>{4.3424145185 * ( index + 1 )}</span>
-							</td>
-							<td>
-								<div className="d-flex flex-column align-items-end">
+								</td>
+								<td>
+									<span>{ value / (10 ** assetData.exponent)}</span>
+								</td>
+								<td>
+									<div className="d-flex flex-column align-items-end">
 									<span className="font-bold">$
 										<NumberFormat
-											value={2431278.78 * index + 2}
+											value={value}
 											displayType="text"
 											thousandSeparator={true}
 											renderText={(value, props) => {
 												return <span {...props}>{value}</span>
 											}}/>
 									</span>
-									<span className="font-12 color-grey font-bold">${(5.56 * index + 3).toFixed(2)}</span>
-								</div>
-							</td>
-						</tr>
-					))
+										<span className="font-12 color-grey font-bold">${(5.56 * index + 3).toFixed(2)}</span>
+									</div>
+								</td>
+							</tr>
+						)
+
+					})
 				}
 				</tbody>
 			</table>

@@ -1,34 +1,38 @@
 .dropdown{
-		&-title{
-			display: flex;
-			align-items: center;
-			color: var(--color-grey);
-			cursor: pointer;
-			transition: color var(--duration) var(--ease);
-			pointer-events: none;
-				&-label{
-					font-size: 20px;
-					font-family: var(--font-title-bold);
-					white-space: nowrap;
-				}
-				&-icon{
-					width: 12px;
-					height: 12px;
-					position: relative;
-					margin-left: 8px;
-					color: inherit;
-						svg{
-							position: absolute;
-							top: 50%;
-							left: 50%;
-							transform: translate(-50%,-50%);
-							color: inherit;
-						}
-				}
-				@include hover($md){
-					&:hover{
-						color: var(--color-primary);
+	&-title{
+		display: flex;
+		align-items: center;
+		color: var(--color-grey);
+		cursor: pointer;
+		transition: color var(--duration) var(--ease);
+		pointer-events: none;
+			&-label{
+				font-size: 20px;
+				font-family: var(--font-title-bold);
+				white-space: nowrap;
+
+				@media (max-width: 991px) {
+					font-size: 16px;
+				} 
+			}
+			&-icon{
+				width: 12px;
+				height: 12px;
+				position: relative;
+				margin-left: 8px;
+				color: inherit;
+					svg{
+						position: absolute;
+						top: 50%;
+						left: 50%;
+						transform: translate(-50%,-50%);
+						color: inherit;
 					}
+			}
+			@include hover($md){
+				&:hover{
+					color: var(--color-primary);
 				}
-		}
+			}
+	}
 }

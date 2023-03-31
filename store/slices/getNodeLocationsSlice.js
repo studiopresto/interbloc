@@ -16,7 +16,7 @@ export const fetchNodeLocations = createAsyncThunk(
 	async () => {
 		return await dataProvider.getOne(resources.nodes)
 			.then(res => {
-				const location = res?.location;
+				const location = res?.countries;
 				const values = [];
 				const labels = [];
 

@@ -23,7 +23,7 @@ export default function Channels() {
 					<div className="col-4">
 						<p className="font-20 font-bold">Channels</p>
 					</div>
-					<div className="col-8">
+					<div className="search-bar col-12 col-sm-8 area-search">
 						<div className="d-flex align-items-center justify-content-end">
 							<p className="color-grey mr-3">Select by Decision:</p>
 							<SelectCustom options={options} onChange={handleChange}/>
@@ -73,7 +73,7 @@ export default function Channels() {
 				{
 					Array.from({ length: 5 }).map((_, index) => (
 						<tr key={index}>
-							<td>
+							<td data-title="coin">
 								<div className="d-inline-flex align-items-center">
 									<div className="thumb size-30 position-left">
 										<Image
@@ -85,18 +85,18 @@ export default function Channels() {
 									<span className="font-secondary-bold">KalpaTech</span>
 								</div>
 							</td>
-							<td>
+							<td data-title="Status">
 								<div>
 									<span className="table-status-icon" style={{ color: '#4D8C2F' }}/>
 								</div>
 							</td>
-							<td>
+							<td data-title="Panding">
 								<span className="font-bold">3</span>
 							</td>
-							<td>
+							<td data-title="Amount">
 								<span className="font-bold">4,0232131</span>
 							</td>
-							<td>
+							<td data-title="Total Value">
 								<p className="font-bold">$ 24,312.78</p>
 								<p className="font-bold font-12 color-grey">$ 5.78</p>
 							</td>

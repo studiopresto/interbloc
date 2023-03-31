@@ -16,14 +16,14 @@ export const fetchMempool = createAsyncThunk(
 	async () => {
 		return await dataProvider.getOne(resources.mempool)
 			.then(res => {
-				let history = res?.history;
-				let historyValues = [];
-				let historyNumeric = [];
-				Object.keys(history).forEach(el => {
-					historyValues.push(history[el]);
-					historyNumeric.push(el);
+				let fees = res?.fees;
+				let feesValues = [];
+				let feesNumeric = [];
+				Object.keys(fees).forEach(el => {
+					feesValues.push(fees[el]);
+					feesNumeric.push(el);
 				});
-				return { ...res, historyValues, historyNumeric };
+				return { ...res, feesValues, feesNumeric };
 			});
 	}
 );

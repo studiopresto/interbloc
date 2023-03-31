@@ -18,7 +18,7 @@ export default function Hash({ title = 'Hash', value }) {
 					<HashIcon/>
 				</div>
 				<span className="h-4 hash-title">{title}:</span>
-				<span className="hash-value font-base">{value}</span>
+				<span className="hash-value font-base text-break">{value}</span>
 				<div className="hash-action">
 					<Button icon>
 						<FileIcon/>

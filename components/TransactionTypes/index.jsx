@@ -1,12 +1,12 @@
-import Plot from 'react-plotly.js';
 import { styles } from '~config/chart';
 import { data } from './data';
+import dynamic from "next/dynamic";
+
+const Plot = dynamic(() => import('react-plotly.js'), { ssr: false });
 
 
+export default function TransactionTypes({types}) {
 
-export default function TransactionTypes() {
-
-	const types = data;
 	const values = [];
 	const labels = [];
 

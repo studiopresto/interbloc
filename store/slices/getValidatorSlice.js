@@ -26,7 +26,7 @@ export const fetchValidator = createAsyncThunk(
 				const uptime = res?.uptime;
 				const uptimeArray = [];
 				Object.keys(rank).forEach((el, i) => {
-					historic.dates.push(i);
+					historic.dates.push(el);
 					historic.rank.push(rank[el]);
 					historic.voting_power.push(votingPower[el]);
 				});

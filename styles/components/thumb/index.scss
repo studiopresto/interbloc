@@ -11,6 +11,21 @@
 		width: 30px;
 		height: 30px;
 		min-width: 30px;
+
+		@media(max-width: 420px){
+			width: 15px !important;
+			height: 15px !important;
+			min-width: 15px !important;
+		}
+
+	}
+}
+
+.image {
+	@media(max-width: 480px){
+		width: 15px !important;
+		height: 15px !important;
+		min-width: 15px !important;
 	}
 }
 

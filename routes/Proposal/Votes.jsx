@@ -5,11 +5,18 @@ Components
  */
 import SelectCustom from '~ui/components/Select';
 import Input from '~ui/components/Input';
+import {useDispatch, useSelector} from "react-redux";
+import {fetchGovernanceProposal, selectGovernanceProposal} from "~store/slices/getGovernanceProposal";
+import {fetchValidators, selectValidators} from "~store/slices/getValidatorsSlice";
+import {STATUS} from "~config/constants";
+import Preloader from "~ui/components/Preloader";
+import {useEffect} from "react";
 
 
 
 export default function Votes() {
 
+	const { data, status } = useSelector(selectGovernanceProposal);
 	const handleChange = (e) => {
 		console.log(e);
 	};
@@ -20,6 +27,19 @@ export default function Votes() {
 		{ value: 'vanilla', label: 'Vanilla' }
 	];
 
+	const prettifyOption = {
+		yes: "Yes",
+		no: "No",
+		abstain: "Abstain",
+		noWithBeto: "No With Veto"
+	}
+	const optionColour = {
+		yes: "#4D8C2F",
+		no: "#A75145",
+		abstain: "#717D89",
+		noWithBeto: "#D75145"
+	}
+
 	return (
 		<div className="table-box mt-2">
 			<div className="table-header mb-4">
@@ -27,7 +47,7 @@ export default function Votes() {
 					<div className="col-4">
 						<p className="font-20 font-bold">Votes</p>
 					</div>
-					<div className="col-8">
+					<div className="search-bar col-8">
 						<div className="d-flex align-items-center justify-content-end">
 							<p className="color-grey mr-3">Select by Decision:</p>
 							<SelectCustom options={options} onChange={handleChange}/>
@@ -41,32 +61,30 @@ export default function Votes() {
 			<table className="table mt-4">
 				<thead>
 				<tr>
-					<th>Address</th>
-					<th>Vote</th>
+					<th className='font-7'>Address</th>
+					<th className='font-7'>Vote</th>
 				</tr>
 				</thead>
 				<tbody>
 				{
-					Array.from({ length: 5 }).map((_, index) => (
+					Object.keys(data.votes).slice(0, 5).map((address, index) => (
 						<tr key={index}>
-							<td>
+							<td data-title= "Address" className='font-7 space-text'>
 								<div className="d-inline-flex align-items-center">
-									<div className="thumb size-30 position-left">
+									{/*<div className="thumb size-30 position-left image">
 										<Image
 											src={placeholder}
 											width={30}
 											height={30}
 											alt="Alt"/>
-									</div>
-									<span className="font-secondary-bold">0xc6fcvzc6fsdf68678z0xc6fcvzc6fsdf68678z</span>
+									</div>*/}
+									<span className="font-secondary-bold text-break">{address}</span>
 								</div>
 							</td>
-							<td>
-								{
-									index % 2 === 0
-										? <span style={{ color: '#4D8C2F' }}>Yes</span>
-										: <span style={{ color: '#A75145' }}>No</span>
-								}
+							<td data-title= "Vote" className='font-7 space-text'>
+
+									<span style={{ color: optionColour[data.votes[address].option] }}>{prettifyOption[data.votes[address].option]}</span>
+
 							</td>
 						</tr>
 					))

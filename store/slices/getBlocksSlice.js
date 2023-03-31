@@ -4,7 +4,7 @@ import resources from '~utils/requestProviders/resources';
 import {STATUS} from '~config/constants';
 
 const initialState = {
-	data: [],
+	data: {},
 	status: STATUS.IDLE,
 	error: null,
 };
@@ -13,15 +13,8 @@ export const blocksKey = 'Blocks';
 
 export const fetchBlocks = createAsyncThunk(
 	`${blocksKey}/fetch`,
-	async ({ items_per_page = 10, page = 1 }) => {
-		return await dataProvider.getList(resources.blocks, { items_per_page, page })
-			.then(response => {
-				let data = [];
-				Object.keys(response).forEach(block => {
-					data.push(response[block]);
-				});
-				return data;
-			});
+	async ({ limit = 10, per_page = 10, page = 1 }) => {
+		return await dataProvider.getList(resources.latestBlock, { limit, per_page, page });
 	}
 );
 
