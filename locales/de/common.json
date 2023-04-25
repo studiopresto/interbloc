@@ -1,0 +1,17 @@
+{
+	"page-home": "Startseite",
+	"page-blocks": "Blöcke",
+	"page-transactions": "Transaktionen",
+	"page-governance": "Verwaltung",
+	"page-validators": "Prüfer",
+	"page-proposal": "Proposal",
+	"box-blocks": "Blocks",
+	"box-tokenomics": "Tokenomics",
+	"box-relayers": "Relayers",
+	"box-mempool": "Mempool",
+	"box-price-statistics": "Price Statistics",
+	"box-consensus": "Consensus",
+	"box-node-locations": "Node Locations",
+	"box-transactions": "Transactions",
+	"placeholder-search": "Search for transactions, addresses, blocks and ambedded text data..."
+}

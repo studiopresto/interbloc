@@ -1,0 +1,33 @@
+.languages{
+	position: relative;
+	padding-top: 10px;
+		&-item{
+			position: relative;
+			padding: 5px 0;
+		}
+		&-link{
+			font-size: 20px;
+			font-family: var(--font-title-bold);
+			white-space: nowrap;
+			text-transform: uppercase;
+			display: inline-flex;
+			align-items: center;
+				&-title{
+					display: inline-block;
+					line-height: 1em;
+				}
+				&-icon{
+					width: 26px;
+					height: 26px;
+					border-radius: 50%;
+					background-color: var(--color-black);
+					margin-top: 2px;
+						& + *{
+							margin-left: 10px;
+						}
+				}
+				&:hover{
+					color: var(--color-primary);
+				}
+		}
+}

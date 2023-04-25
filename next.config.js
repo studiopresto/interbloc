@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const path = require('path');
+const nextTranslate = require('next-translate-plugin');
 
 const nextConfig = {
   reactStrictMode: false,
@@ -12,6 +13,7 @@ const nextConfig = {
   images: {
     domains: ['via.placeholder.com', process.env.API_SERVER, '127.0.0.1', "assets.interbloc.org", "cosmos.explorer.interbloc.org"],
   },
+  ...nextTranslate(),
 };
 
 module.exports = nextConfig;

@@ -12,9 +12,12 @@
     "@cosmjs/encoding": "^0.28.11",
     "@cosmjs/launchpad": "^0.27.1",
     "@reduxjs/toolkit": "^1.8.1",
+    "classnames": "^2.3.2",
     "convert-bech32-address": "^1.0.4",
+    "fs": "^0.0.1-security",
     "moment": "^2.29.3",
     "next": "12.1.6",
+    "next-translate": "^2.0.5",
     "plotly.js": "^2.12.1",
     "prop-types": "^15.8.1",
     "react": "18.1.0",
@@ -31,6 +34,7 @@
   },
   "devDependencies": {
     "eslint": "8.14.0",
-    "eslint-config-next": "12.1.6"
+    "eslint-config-next": "12.1.6",
+    "next-translate-plugin": "^2.0.5"
   }
 }

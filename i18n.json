@@ -1,0 +1,13 @@
+{
+	"locales": ["en", "de"],
+	"defaultLocale": "en",
+	"localeDetection": true,
+	"pages": {
+		"*": ["common", "labels", "actions", "texts"],
+		"/": ["home"],
+		"/blocks": ["blocks"],
+		"/governance": ["governance"],
+		"/transactions": ["transactions"],
+		"/validator": ["validators"]
+	}
+}
