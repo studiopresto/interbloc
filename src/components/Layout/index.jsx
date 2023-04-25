@@ -8,7 +8,7 @@ export default function Layout({ children }) {
 				<div className="wrapper-layout-sidebar">
 					<VerticalNav/>
 				</div>
-				<div className="wrapper-layout-body">
+				<div className="wrapper-layout-body" onTouchEnd={e => console.log('move ', e.targetTouches)}>
 					<Header/>
 					{children}
 				</div>

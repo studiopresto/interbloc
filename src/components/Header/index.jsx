@@ -15,7 +15,7 @@ export default function Header() {
 		<header className="header">
 			<strong className="mobile-logo">
 				<Link href={routes.public.index}>
-						<Image src={logo.src} alt="InterBloc" width={32} height={40}/>
+					<a><Image src={logo.src} alt="InterBloc" width={32} height={40}/></a>
 				</Link>
 			</strong>
 			<div className="header-panel">

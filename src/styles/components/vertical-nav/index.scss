@@ -15,7 +15,7 @@
 	margin-left: -1px;
 	transition: width var(--duration) var(--ease);
 
-		@media (max-width: 767px) {
+		@include d($md){
 			width: 250px;
 			transition: all 0.4s ease;
 			margin: 0 0 0 -340px;

@@ -13,8 +13,11 @@
 					font-family: var(--font-title-bold);
 					white-space: nowrap;
 					text-transform: uppercase;
-						@media (max-width: 991px) {
+						@include d($md){
 							font-size: 16px;
+						}
+						@include d($sm){
+							font-size: 20px;
 						}
 				}
 				&-icon{

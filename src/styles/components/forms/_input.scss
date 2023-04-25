@@ -10,10 +10,10 @@
 			color: var(--color-white);
 			padding: 0 18px;
 
-			@media (max-width: 576px) {
-				margin: 0 ;
-				height: 40px;
-			}
+				@include d($xs){
+					margin: 0 ;
+					height: 50px;
+				}
 				&:focus{
 					background-color: var(--color-black-100);
 					box-shadow: none;

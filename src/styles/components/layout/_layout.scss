@@ -8,9 +8,11 @@
 				position: relative;
 				z-index: 10;
 
-				@media (max-width: 767px)  {
-					position: absolute;
+				@include d($md){
+					position: fixed;
 					width: auto;
+					top: 0;
+					left: 0;
 				}
 			}
 			&-body{
@@ -20,7 +22,7 @@
 				width: 100%;
 
 				@media (max-width: 991px) {
-					padding: 32px px;
+					padding: 32px;
 				}
 
 				@media (max-width: 767px) {

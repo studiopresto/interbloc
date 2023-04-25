@@ -7,6 +7,7 @@ export const styles = {
 	},
 	config: {
 		displayModeBar: false,
+		responsive: true,
 	},
 	style: {
 		width: '100%',
