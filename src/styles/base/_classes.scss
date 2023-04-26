@@ -134,3 +134,49 @@
 		font-size: 20px;
 	}
 }
+
+.hidden{
+		&-xxl{
+			@include d(1400){
+				display: none !important;
+			}
+		}
+		&-xl{
+			@include d($xl){
+				display: none !important;
+			}
+		}
+		&-lg{
+			@include d($lg){
+				display: none !important;
+			}
+		}
+		&-md{
+			@include d($md){
+				display: none !important;
+			}
+		}
+		&-sm{
+			@include d($sm){
+				display: none !important;
+			}
+		}
+		&-xs{
+			@include d($xs){
+				display: none !important;
+			}
+		}
+		&-xxs{
+			@include d($xxs){
+				display: none !important;
+			}
+		}
+}
+
+.word{
+		&-break{
+				&-all{
+					word-break: break-all;
+				}
+		}
+}

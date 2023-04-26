@@ -8,6 +8,7 @@
 		"/blocks": ["blocks"],
 		"/governance": ["governance"],
 		"/transactions": ["transactions"],
+		"/transactions/[transactionSlug]": ["transactions"],
 		"/validator": ["validators"]
 	}
 }

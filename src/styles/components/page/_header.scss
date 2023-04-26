@@ -9,14 +9,14 @@
 	justify-content: space-between;
 	padding: 46px 78px 46px 46px;
 
-	@media (max-width: 991px) {
-		padding: 20px;
-	}
-
-	@media (max-width: 767px) {
-		background-size: cover;
-		padding: 20px 0;
-	}
+		@media (max-width: 991px) {
+			padding: 20px;
+		}
+	
+		@media (max-width: 767px) {
+			background-size: cover;
+			padding: 20px 0;
+		}
 		&-icon{
 			width: 220px;
 			height: 116px;
@@ -51,12 +51,12 @@
 			margin-right: 23px;
 			color: var(--color-black); 
 
-			@media (max-width: 576px) {
-				height: 50px;
-				width: 50px;
-				min-width: 50px;
-				margin-right: 8px;
-			}
+				@media (max-width: 576px) {
+					height: 50px;
+					width: 50px;
+					min-width: 50px;
+					margin-right: 8px;
+				}
 
 				&.__turquoise{
 					background-color: var(--color-turquoise);
@@ -108,83 +108,82 @@
 
 .nav-opener{
 	position: absolute;
-	left: 0;
+	left: 32px;
 	width: 24px;
 	height: 24px;
 	transition: all 0.4s ease;
-	top: 10px;
-	display: none;
+	top: 37px;
 	cursor: pointer;
 
-	@media (max-width: 767px) {
-		display: block;
-	}
-
-	.nav-active & {
-		left: 250px;
-	}
-
-	.nav-bars {
-		position: absolute;
-		left: 0;
-		width: 30px;
-		height: 20px;
-		border-top: 3px solid var(--color-turquoise);
-		transition:all 0.4s ease;
-		top: 0;
-		display: none;
-		z-index: 4;
-
-		@media (max-width: 767px) {
-			display: block;
+		@include m($md + 1){
+			display: none;
+		}
+	
+		@include d($sm){
+			left: 24px;
+			top: 28px;
 		}
 
 		.nav-active & {
-			border-top: none;
+			left: 250px;
 		}
-		&:after,
-		&:before {
-			background: var(--color-turquoise);
+	
+		.nav-bars {
+			position: absolute;
+			left: 0;
+			width: 30px;
+			height: 20px;
+			border-top: 3px solid var(--color-turquoise);
+			transition:all 0.4s ease;
+			top: 0;
+			z-index: 4;
+	
+				.nav-active & {
+					border-top: none;
+				}
+				&:after,
+				&:before {
+					content: '';
+					background: var(--color-turquoise);
+					left: 0;
+					right: 0;
+					top: 6px;
+					height: 3px;
+					position: absolute;
+					transition: all 0.4s ease;
+		
+						.nav-active &{
+							top: 10px;
+							transform: rotate(45deg);
+							border-top: none;
+							left: 15px;
+						}
+				}
+	
+				&:after {
+					top: 14px;
+	
+				.nav-active &{
+					transform: rotate(-45deg);
+				}
+			}
+		}
+	
+		&:after {
+			position: fixed;
 			left: 0;
 			right: 0;
-			top: 6px;
-			height: 3px;
-			content:"";
-			position: absolute;
+			top: 0;
+			bottom: 0;
+			content: '';
+			background: #000;
+			opacity: 0.8;
 			transition: all 0.4s ease;
-
-			.nav-active &{
-				top: 10px;
-				transform: rotate(45deg);
-				border-top: none;
-				left: 15px;
+			z-index: 3;
+			display: none;
+	
+			.nav-active & {
+				display: block;
 			}
 		}
-
-			&:after {
-				top: 14px;
-
-			.nav-active &{
-				transform: rotate(-45deg);
-			}
-		}
-	}
-
-	&:after {
-		position: fixed;
-		left: 0;
-		right: 0;
-		top: 0;
-		bottom: 0;
-		content: '';
-		background: #000;
-		opacity: 0.8;
-		transition: all 0.4s ease;
-		z-index: 3;
-		display: none;
-
-		.nav-active & {
-			display: block;
-		}
-	}
 }

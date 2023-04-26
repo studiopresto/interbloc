@@ -46,11 +46,11 @@
 					align-items: center;
 					justify-content: center;
 
-					@media (max-width: 576px) {
-						height: 34px;
-						width: 34px;
-						min-width: 34px;
-					}
+						@include d($sm){
+							width: 48px;
+							height: 48px;
+							min-width: 48px;
+						}
 						& ~ .box-header-title{
 							margin-left: 24px;
 						}
@@ -78,9 +78,7 @@
 						}
 				}
 				&-title{
-					@media(max-width: 576px) {
-						font-size: 14px !important;
-					}
+				
 				}
 
 		}
@@ -163,6 +161,9 @@
 				&-box{
 					padding-left: 0;
 					padding-right: 0;
+				}
+				@include d($sm){
+					margin-top: 0;
 				}
 		}
 }

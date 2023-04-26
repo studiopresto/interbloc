@@ -6,7 +6,7 @@
 			text-align: center;
 			margin: 0 0 106px;
 			width: 100%;
-		  }
+		}
 			.pagination{
 				&-item{
 					margin: 0;
@@ -71,12 +71,12 @@
 					position: relative;
 					margin: 0 12px;
 
-					@media (max-width: 767px)  {
-						font-size: 10px;
+					@include d($sm){
+						font-size: 14px;
 						min-width: 220px;
 					}
 
-					@media (max-width: 576px) {
+					@include d($xs){
 						margin: 10px 0;
 					} 
 				}

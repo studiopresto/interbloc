@@ -98,7 +98,7 @@ export default function ProposalPage() {
 					<BurgerIcon/>
 				</div>
 				<div>
-					<h1 className="h-2">{t('common:headings-proposal')}</h1>
+					<h1 className="h-2">{t('common:page-proposal')}</h1>
 				</div>
 			</div>
 			{ isEmptyObject(data) && status === STATUS.PENDING ? <Preloader/> : null }

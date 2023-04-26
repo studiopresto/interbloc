@@ -13,11 +13,8 @@
 					font-family: var(--font-title-bold);
 					white-space: nowrap;
 					text-transform: uppercase;
-						@include d($md){
-							font-size: 16px;
-						}
-						@include d($sm){
-							font-size: 20px;
+						@include d($xs){
+							font-size: 18px;
 						}
 				}
 				&-icon{

@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import SearchForm from 'components/SearchForm';
 import Button from 'ui/components/Button';
 import Dropdown from 'ui/components/Dropdown';
@@ -10,14 +11,23 @@ import CaseIcon from "ui/icons/Case";
 import LanguageSwitcher from 'components/LanguageSwitcher/LanguageSwitcher';
 
 export default function Header() {
+	
+	const { route } = useRouter();
+	
+	useEffect(() => {
+		if (document) {
+			document.body.classList.remove('nav-active')
+		}
+	}, [route])
+	
 	return (
 		<>
 		<header className="header">
-			<strong className="mobile-logo">
+			<div className="mobile-logo">
 				<Link href={routes.public.index}>
 					<a><Image src={logo.src} alt="InterBloc" width={32} height={40}/></a>
 				</Link>
-			</strong>
+			</div>
 			<div className="header-panel">
 				<div className="header-panel-search">
 					<SearchForm/>
@@ -36,7 +46,7 @@ export default function Header() {
 					</div>
 				</div>
 				<span className='nav-opener' onClick={()=>{document.body.classList.toggle('nav-active')}}>
-					<span className='nav-bars'></span>				
+					<span className='nav-bars'/>
 				</span>
 			</div>
 		</header>

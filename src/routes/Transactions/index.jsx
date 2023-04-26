@@ -93,7 +93,7 @@ export default function TransactionsPage() {
 							{
 								data.transactions.map((option, index) => (
 									<tr key={index}>
-										<td>
+										<td className="hidden-xxl">
 											<Link href={`${routes.public.transactions}/${option.txhash}`}>
 												<a>
 													<Button icon color="transparent">
@@ -136,7 +136,7 @@ export default function TransactionsPage() {
 													formatDenomToString(0, coinConfig.denom)
 											}</span>
 										</td>
-										<td>
+										<td className="hidden-xxl">
 											<div className="signal bg-primary"/>
 										</td>
 									</tr>

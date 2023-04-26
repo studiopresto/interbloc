@@ -45,7 +45,7 @@ export default function TransactionPage() {
 					<TransactionsIcon/>
 				</div>
 				<div>
-					<h1 className="h-2">Transactions</h1>
+					<h1 className="h-2">{t('transactions:page-title')}</h1>
 				</div>
 			</div>
 			{ isEmptyObject(data) && status === STATUS.PENDING ? <Preloader/> : null }
@@ -71,7 +71,7 @@ export default function TransactionPage() {
 									<ul className="list-custom">
 										<li>
 											<span className="color-grey font-16">{t('labels:transaction-hash')}:</span>
-											<span className="font-16 font-secondary-bold">{data.txhash}
+											<span className="font-16 font-secondary-bold word-break-all">{data.txhash}
 												<span className="ml-4">
 													<Button icon>
 														<FileIcon/>

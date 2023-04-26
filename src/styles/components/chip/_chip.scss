@@ -9,16 +9,17 @@
   transition: all 0.4s ease;
   margin-left: -20px;
   border-radius: 10px;
+  display: inline-block;
 
     &:hover {
       background-color: darken($color: #464646, $amount: 10%);
     }
 
-  @media (max-width: 1600px) {
-    margin-bottom: 4px;
-  } 
-
-  @media (max-width: 350px) {
-    font-size: 9px;
-  } 
+    @media (max-width: 1600px) {
+      margin-bottom: 4px;
+    }
+  
+    @media (max-width: 350px) {
+      font-size: 9px;
+    }
 }

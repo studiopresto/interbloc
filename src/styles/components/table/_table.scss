@@ -1,33 +1,32 @@
 .table{
 	margin: 0;
 	color: var(--color-grey-700);
-
-	@media (max-width: 480px)  {
-		display: block;
-	}
+		@include d($sm){
+			display: block;
+		}
 		&-box{
 			background-color: var(--color-black-100);
 			border-radius: 7px;
 			padding: 25px 32px;
 
-			@media (max-width: 991px) {
-				padding: 15px;
-			}
-			/*
-			Input
-		 */
-			.form{
-					&-control{
-						background-color: var(--color-black-200);
-					}
-			}
+				@include d($md){
+					padding: 16px;
+				}
+				/*
+				Input
+			 */
+				.form{
+						&-control{
+							background-color: var(--color-black-200);
+						}
+				}
 		}
 		&-header{
 			margin-bottom: 54px;
 
-			@media (max-width: 1200px) {
-				margin-bottom:  20px;
-			}
+				@media (max-width: 1200px) {
+					margin-bottom:  20px;
+				}
 
 			.btns-group {
 				@media (max-width: 1200px) {
@@ -59,61 +58,9 @@
 					background-color: currentColor;
 				}
 		}
-
-
 		.space-text {
 			@media (max-width: 480px) {
 				padding-left: 85px !important;
-			}
-		}	
-
-		&.table-large {
-			thead{
-				th {
-					@media(max-width: 1400px) {
-						display: none;
-					}
-
-					// @media(max-width: 420px) {
-					// 	font-size: 9px;
-					// }
-				}
-			}
-
-			tbody {
-				td{
-		
-					@media (max-width: 1400px) {
-						display: block;
-						border-radius: 10px !important;
-						width: 100%;
-						padding-left: 110px !important;
-					}
-
-					@media (max-width: 480px) {
-						padding-left: 80px !important;
-					}
-		
-					&:before {
-						@media (max-width: 1299px) {
-							border-radius: 10px !important;
-						}
-					}
-		
-					&:after {
-						@media (max-width: 1400px) {
-							display: block;
-						}
-					}
-
-					// @media(max-width: 576px) {
-					// 	font-size: 8px;
-					// }
-
-					// @media(max-width: 420px) {
-					// 	font-size: 7px;
-					// }
-				}
 			}
 		}
 		thead{
@@ -124,27 +71,22 @@
 				font-family: var(--font-base);
 				padding: 0 17px 10px;
 
-				@media (max-width: 991px) {
-					padding: 0 8px 10px;
-					font-size: 12px;
-				}
-
-				@media(max-width: 767px) {
-					display: none;
-				}
-				
+					@include d($md){
+						padding: 0 8px 10px;
+						font-size: 12px;
+					}
+	
+					@include d($sm){
+						display: none;
+					}
 			}
 		}
 		tbody{
-			@media (max-width: 480px)  {
+			@include d($sm){
 				display: block;
-				width: 100%;
 			}
+			
 			tr{
-				@media (max-width: 480px)  {
-					display: block;
-				}
-
 				&:nth-child(odd){
 					td, th{
 						&:before{
@@ -162,55 +104,82 @@
 						background-color: #202020;
 					}
 				}
+				
+				@include d($sm){
+					display: block;
+					position: relative;
+					padding: 0;
+						&:before{
+							content: '';
+							position: absolute;
+							inset: 0 -8px;
+							border-radius: 7px;
+						}
+				}
+				
+				&:nth-child(odd){
+						&:before{
+							@include d($sm){
+								background-color: #323232;
+							}
+						}
+				}
+				&:nth-child(even){
+						&:before{
+							@include d($sm){
+								background-color: #262626;
+							}
+						}
+				}
+				
 			}
 			th, td{
 				margin: 3px 0;
 				padding: 12px 18px;
 				position: relative;
 
-				@media (max-width: 991px) {
-					padding: 12px 6px;
-					font-size: 11px;
-				}
-
-				@media(max-width: 767px) {
-					font-size: 12px;
-					padding: 12px 20px;
-				}
-
-				@media(max-width: 480px) {
-					font-size: 11px !important;
-				}
-
-				// @media(max-width: 420px) {
-				// 	font-size: 7px !important;
-				// }
-					&:before{
-						content: '';
-						position: absolute;
-						top: 3px;
-						bottom: 3px;
-						left: 0;
-						right: 0;
-						pointer-events: none;
+					@include d($md){
+						padding: 12px 6px;
+						font-size: 14px;
 					}
-					&:nth-child(1){
+					@include d($sm){
+						padding: 5px 5px 5px 85px;
+						margin: 5px 0;
+						font-size: 16px;
+					}
+					@include d($xs){
+						font-size: 14px;
+					}
+					@include m($sm + 1){
 						&:before{
-							border-radius: 7px 0 0 7px;
+							content: '';
+							position: absolute;
+							top: 3px;
+							bottom: 3px;
+							left: 0;
+							right: 0;
+							pointer-events: none;
 						}
-					}
-					&:last-child{
-						&:before{
-							border-radius: 0 7px 7px 0;
+						&:nth-child(1){
+							&:before{
+								border-radius: 7px 0 0 7px;
+							}
+						}
+						&:last-child{
+							&:before{
+								border-radius: 0 7px 7px 0;
+							}
 						}
 					}
 					& > *{
 						position: relative;
 					}
 					& > span:not(.font-hash):not(.status){
-						display: inline-flex;
-						align-items: center;
-						min-height: 30px;
+							@include m($sm + 1){
+								display: inline-flex;
+								align-items: center;
+								min-height: 30px;
+							}
 					}
 			}
 		}
@@ -221,32 +190,28 @@
 			border-top: none;
 			vertical-align: middle;
 
-			@media (max-width: 767px) {
-				display: block;
-				border-radius: 10px !important;
-				width: 100%;
-				padding-left: 110px !important;
-			}
-
-			&:before {
-				@media (max-width: 767px) {
-					border-radius: 10px !important;
-				}
-			}
-
-			&:after {
-				display: none;
-				position: absolute;
-				left: 10px;
-				top: 50%;
-				transform: translate(0, -50%);
-				width: 100px;
-				content: attr(data-title);
-
-				@media (max-width: 767px) {
+				@include d($sm){
 					display: block;
+					width: 100%;
 				}
-			}
+
+				&:after {
+					content: attr(data-title);
+					position: absolute;
+					top: 50%;
+					left: 0;
+					transform: translateY(-50%);
+					color: var(--color-grey-500);
+					display: none;
+						@include d($sm){
+							display: block;
+						}
+				}
+				&:before{
+					@include d($sm){
+						display: none;
+					}
+				}
 				.btn{
 					height: 34px;
 					line-height: 34px;
@@ -267,6 +232,81 @@
 						}
 				}
 		}
+	
+		&-large {
+			
+			@include d(1400){
+				display: block;
+			}
+			
+			thead{
+				th {
+					@include d(1400){
+						display: none;
+					}
+				}
+			}
+		
+			tbody {
+				@include d(1400){
+					display: block;
+				}
+				
+				tr{
+						@include d(1400){
+							display: block;
+							width: 100%;
+							position: relative;
+								&:before{
+									content: '';
+									position: absolute;
+									inset: 0 -8px;
+									border-radius: 7px;
+								}
+						}
+					
+						&:nth-child(odd){
+							&:before{
+								@include d(1400){
+									background-color: #323232;
+								}
+							}
+						}
+						&:nth-child(even){
+							&:before{
+								@include d(1400){
+									background-color: #262626;
+								}
+							}
+						}
+				}
+				
+				td{
+					@include d(1400){
+						display: block;
+						width: 100%;
+						padding-left: 110px;
+						white-space: normal;
+					}
+					
+					@include d($xs){
+						padding-left: 80px;
+					}
+					
+					&:before{
+						@include d(1400){
+							display: none;
+						}
+					}
+					
+					&:after {
+						@media (max-width: 1400px) {
+							display: block;
+						}
+					}
+				}
+			}
+	}
 }
 
 .governance-form {
@@ -276,11 +316,11 @@
 	}
 
 	.justify-content-end {
-		@media(max-width: 1199px){
-			justify-content: flex-start !important;
-			margin-top: 10px;
-		}
-	  }
+			@media(max-width: 1199px){
+				justify-content: flex-start !important;
+				margin-top: 10px;
+			}
+	}
 }
 
 .search-bar {

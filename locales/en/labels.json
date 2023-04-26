@@ -89,5 +89,6 @@
 	"error": "Error",
 	"overview": "Overview",
 	"logs": "Logs",
-	"comments": "Comments"
+	"comments": "Comments",
+	"period": "Period"
 }

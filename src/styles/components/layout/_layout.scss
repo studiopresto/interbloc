@@ -10,9 +10,12 @@
 
 				@include d($md){
 					position: fixed;
-					width: auto;
+					width: 32px;
 					top: 0;
 					left: 0;
+				}
+				@include d($sm){
+					width: 24px;
 				}
 			}
 			&-body{
@@ -21,16 +24,12 @@
 				position: relative;
 				width: 100%;
 
-				@media (max-width: 991px) {
-					padding: 32px;
+				@include d($md){
+					padding: 95px 32px 32px;
 				}
 
-				@media (max-width: 767px) {
-					padding: 32px 24px;
-				}
-
-				@media (max-width: 480px) {
-					padding: 32px 12px;
+				@include d($sm){
+					padding: 90px 24px 32px;
 				}
 			}
 	}
