@@ -1,7 +1,7 @@
-// .modal-open      - body class for killing the scroll
-// .modal           - container to scroll within
-// .modal-dialog    - positioning shell for the actual modal
-// .modal-content   - actual modal w/ bg and corners and stuff
+// .popup-open      - body class for killing the scroll
+// .popup           - container to scroll within
+// .popup-dialog    - positioning shell for the actual popup
+// .popup-content   - actual popup w/ bg and corners and stuff
 
 
 .modal-open {
@@ -14,7 +14,7 @@
   }
 }
 
-// Container that the modal scrolls within
+// Container that the popup scrolls within
 .modal {
   position: fixed;
   top: 0;
@@ -32,15 +32,15 @@
   // See also https://github.com/twbs/bootstrap/issues/17695
 }
 
-// Shell div to position the modal with bottom padding
+// Shell div to position the popup with bottom padding
 .modal-dialog {
   position: relative;
   width: auto;
   margin: $modal-dialog-margin;
-  // allow clicks to pass through for custom click handling to close modal
+  // allow clicks to pass through for custom click handling to close popup
   pointer-events: none;
 
-  // When fading in the modal, animate it to slide down
+  // When fading in the popup, animate it to slide down
   .modal.fade & {
     @include transition($modal-transition);
     transform: $modal-fade-transform;
@@ -79,14 +79,14 @@
   align-items: center;
   min-height: subtract(100%, $modal-dialog-margin * 2);
 
-  // Ensure `modal-dialog-centered` extends the full height of the view (IE10/11)
+  // Ensure `popup-dialog-centered` extends the full height of the view (IE10/11)
   &::before {
     display: block; // IE10
     height: subtract(100vh, $modal-dialog-margin * 2);
     content: "";
   }
 
-  // Ensure `.modal-body` shows scrollbar (IE10/11)
+  // Ensure `.popup-body` shows scrollbar (IE10/11)
   &.modal-dialog-scrollable {
     flex-direction: column;
     justify-content: center;
@@ -102,13 +102,13 @@
   }
 }
 
-// Actual modal
+// Actual popup
 .modal-content {
   position: relative;
   display: flex;
   flex-direction: column;
-  width: 100%; // Ensure `.modal-content` extends the full width of the parent `.modal-dialog`
-  // counteract the pointer-events: none; in the .modal-dialog
+  width: 100%; // Ensure `.popup-content` extends the full width of the parent `.popup-dialog`
+  // counteract the pointer-events: none; in the .popup-dialog
   color: $modal-content-color;
   pointer-events: auto;
   background-color: $modal-content-bg;
@@ -116,7 +116,7 @@
   border: $modal-content-border-width solid $modal-content-border-color;
   @include border-radius($modal-content-border-radius);
   @include box-shadow($modal-content-box-shadow-xs);
-  // Remove focus outline from opened modal
+  // Remove focus outline from opened popup
   outline: 0;
 }
 
@@ -136,18 +136,18 @@
 }
 
 // Modal header
-// Top section of the modal w/ title and dismiss
+// Top section of the popup w/ title and dismiss
 .modal-header {
   display: flex;
   align-items: flex-start; // so the close btn always stays on the upper right corner
-  justify-content: space-between; // Put modal header elements (title and dismiss) on opposite ends
+  justify-content: space-between; // Put popup header elements (title and dismiss) on opposite ends
   padding: $modal-header-padding;
   border-bottom: $modal-header-border-width solid $modal-header-border-color;
   @include border-top-radius($modal-content-inner-border-radius);
 
   .close {
     padding: $modal-header-padding;
-    // auto on the left force icon to the right even when there is no .modal-title
+    // auto on the left force icon to the right even when there is no .popup-title
     margin: (-$modal-header-padding-y) (-$modal-header-padding-x) (-$modal-header-padding-y) auto;
   }
 }
@@ -159,11 +159,11 @@
 }
 
 // Modal body
-// Where all modal content resides (sibling of .modal-header and .modal-footer)
+// Where all popup content resides (sibling of .popup-header and .popup-footer)
 .modal-body {
   position: relative;
   // Enable `flex-grow: 1` so that the body take up as much space as possible
-  // when there should be a fixed height on `.modal-dialog`.
+  // when there should be a fixed height on `.popup-dialog`.
   flex: 1 1 auto;
   padding: $modal-inner-padding;
 }
@@ -187,7 +187,7 @@
   }
 }
 
-// Measure scrollbar width for padding body during modal show/hide
+// Measure scrollbar width for padding body during popup show/hide
 .modal-scrollbar-measure {
   position: absolute;
   top: -9999px;
@@ -196,9 +196,9 @@
   overflow: scroll;
 }
 
-// Scale up the modal
+// Scale up the popup
 @include media-breakpoint-up(sm) {
-  // Automatically set modal's width for larger viewports
+  // Automatically set popup's width for larger viewports
   .modal-dialog {
     max-width: $modal-md;
     margin: $modal-dialog-margin-y-sm-up auto;

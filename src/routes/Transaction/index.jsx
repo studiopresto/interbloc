@@ -21,6 +21,7 @@ import {formatMessageToReadableArray} from "utils/formatting/transactions";
 import {formatDenomToString, formatFromBaseDenom, formatFromDenom} from "utils/formatting/coins";
 import coinConfig from "../../../coin.config";
 import {fetchChainStats, selectChainStats} from "store/slices/getChainStats";
+import ModalWindow from '../../components/ModalWindow/ModalWindow';
 
 export default function TransactionPage() {
 
@@ -40,6 +41,7 @@ export default function TransactionPage() {
 
 	return (
 		<>
+			{/*<ModalWindow/>*/}
 			<div className="page-header-inner">
 				<div className="page-header-thumb __orange">
 					<TransactionsIcon/>

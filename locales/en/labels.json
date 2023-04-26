@@ -90,5 +90,8 @@
 	"overview": "Overview",
 	"logs": "Logs",
 	"comments": "Comments",
-	"period": "Period"
+	"period": "Period",
+	"asset": "Asset",
+	"asset-type": "Asset Type",
+	"reward": "Reward"
 }

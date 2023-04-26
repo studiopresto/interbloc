@@ -28,30 +28,30 @@ export default function TransactionList({transactionData, transactionStatus, per
 					(!isEmptyObject(transactionData) && transactionData.transactions.length > 0) ?
 						(
 							<>
-								<div className="table-header d-flex align-items-center justify-content-between">
-									<p className="font-16">
+								<div className="table-header d-flex">
+									<p className="font-16 mb-2 mb-md-0">
 										<span className="mr-3">
 											<SortDirectionIcon/>
 										</span>
-										Latest
-										{(transactionData.pagination.total < per_page) ? transactionData.pagination.total : per_page}
-										from a total of
+										Latest {(transactionData.pagination.total < per_page) ? transactionData.pagination.total : per_page} from a total of
 										<span className="color-turquoise"> {transactionData.pagination.total}</span> transaction(s)
-										{/* ( +1 <span
-                                                    className="color-turquoise">Pending</span>  */}
 									</p>
-									<div className="d-flex align-items-center">
-										<p className="color-grey mr-2">{t('labels:from')}:</p>
-										<Datepicker size="md"/>
-										<p className="color-grey mr-2 ml-4">{t('labels:to')}:</p>
-										<Datepicker size="md"/>
-										<div className="btns-group ml-4">
+									<div className="table-header-actions">
+										<div className="table-header-datepicker">
+											<p className="color-grey">{t('labels:from')}:</p>
+											<Datepicker size="md"/>
+										</div>
+										<div className="table-header-datepicker">
+											<p className="color-grey">{t('labels:to')}:</p>
+											<Datepicker size="md"/>
+										</div>
+										<div className="btns-group">
 											<Button size="md" color="blue">{t('actions:filter')}</Button>
 											<Button size="md">{t('actions:clear')}</Button>
 										</div>
 									</div>
 								</div>
-								<table className="table large-table">
+								<table className="table table-large">
 									<thead>
 										<tr>
 											<th/>
@@ -101,7 +101,7 @@ export default function TransactionList({transactionData, transactionStatus, per
 											const value = (type === 'Send') ? tx.tx.body.messages[0]['amount'][0] : ''
 											return (
 												<tr key={index}>
-													<td data-title="Txs Hash">
+													<td className="hidden-xxl">
 														<Link href={`${routes.public.transactions}/${tx.txhash}`}>
 															<a>
 																<Button icon color="transparent">
@@ -110,48 +110,48 @@ export default function TransactionList({transactionData, transactionStatus, per
 															</a>
 														</Link>
 													</td>
-													<td data-title="Method">
+													<td data-title={t('labels:txs-hash')}>
 														<Link href={`${routes.public.transactions}/${tx.txhash}`}>
 															<a className=" color-turquoise font-secondary-bold font-hash ">
 																{tx.txhash}
 															</a>
 														</Link>
 													</td>
-													<td data-title="Block">
+													<td data-title={t('labels:method')}>
 													  <span className="color-violet font-12 font-bold status">{type} {(tx.tx.body.messages.length > 1) ? '+' + (tx.tx.body.messages.length - 1).toString() : ''}</span>
 													</td>
-													<td data-title="Age">
+													<td data-title={t('labels:block')}>
 														<span className="font-book">{tx.height}</span>
 													</td>
-													<td data-title="from">
+													<td data-title={t('labels:age')}>
                             <span className="font-book">
                               {getDateDifferent(tx.unixTimestamp * 1000, new Date())} ago</span>
 													</td>
 													{
 														type === 'Send' ? (
 															<>
-																<td data-title="To">
+																<td data-title={t('labels:from')}>
 																	<span className="font-book font-hash">{from}</span>
 																</td>
 																<td>
                                   <span className="font-12 font-bold status status-md" style={{color: inOrOut === 'in' ? '#4D8C2F' : '#BCB96C'}}>{inOrOut === 'in' ? 'In' : (inOrOut === 'out' ? 'Out' : '')}</span>
 																</td>
-																<td data-title="Value">
+																<td data-title={t('labels:to')}>
 																	<span className="font-book font-hash">{to}</span>
 																</td>
-																<td data-title="Txn Fee">
+																<td data-title={t('labels:value')}>
 																	<span className="font-book">{formatCoinArrayToString(value)}</span>
 																</td>
 															</>
 														) : (
 															<>
-																<td colSpan={4} className="text-center">
+																<td data-title={t('labels:from')} colSpan={4} className="text-center-xxl">
 																	<span className="status font-book">Not a transfer</span>
 																</td>
 															</>
 														)
 													}
-													<td>
+													<td data-title={t('labels:txs-hash')}>
                             <span className="font-book">{tx.authInfo.fee.amount ? formatDenomToString(tx.authInfo.fee.amount[0].amount, tx.authInfo.fee.amount[0].denom) : formatDenomToString(0, coinConfig.denom)}</span>
 													</td>
 													<td/>

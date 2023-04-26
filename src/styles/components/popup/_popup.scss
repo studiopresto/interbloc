@@ -1,0 +1,33 @@
+.popup{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 11;
+	display: flex;
+	overflow-y: auto;
+	padding: 50px 0;
+	
+		&-bg{
+			position: fixed;
+			inset: 0;
+			background-color: var(--color-black);
+			opacity: .5;
+		}
+		
+		&-close{
+			position: fixed;
+			inset: 0;
+		}
+	
+		&-body{
+			position: relative;
+			background-color: var(--color-black-100);
+			border-radius: 20px;
+			border: 1px var(--color-grey-100) solid;
+			width: 500px;
+			height: 700px;
+			margin: auto;
+		}
+}

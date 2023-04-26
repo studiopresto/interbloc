@@ -1,5 +1,5 @@
 import {CHAIN} from "../../config/chain";
-import placeholder from '~static/images/placeholder.svg';
+import placeholder from '../../../public/static/images/placeholder.svg';
 export const getInfoForDenom = d => {
     if (Object.keys(CHAIN).includes(d)) {
         return CHAIN[d]

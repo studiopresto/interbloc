@@ -180,3 +180,13 @@
 				}
 		}
 }
+
+.text{
+		&-center{
+				&-xxl{
+					@include m(1401) {
+						text-align: center;
+					}
+				}
+		}
+}

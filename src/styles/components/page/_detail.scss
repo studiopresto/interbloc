@@ -10,27 +10,27 @@
 }
 
 .page-header-inner {
-	width: 30%;
+	//width: 30%;
 
-	@media (max-width: 991px) {
-		width: 100%;
-		margin: 0 0 30px;
-		padding: 40px 0 0;
-	}
-
-	&.inner-width {
-		width: 50%;
-	}
-
-	.h-2 {
-		@media (max-width: 767px) {
-			font-size: 20px !important;		
+		@media (max-width: 991px) {
+			width: 100%;
+			margin: 0 0 30px;
+			padding: 40px 0 0;
 		}
 
-		@media (max-width: 480px) {
-			font-size: 18px !important;		
+		&.inner-width {
+			width: 50%;
 		}
-	}
+	
+		.h-2 {
+			@include d($sm){
+				font-size: 20px;
+			}
+	
+			@include d($xxs){
+				font-size: 18px;
+			}
+		}
 }
 
 .detail {

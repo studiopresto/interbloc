@@ -4,6 +4,13 @@
 		border-bottom: 2px var(--color-black-200) solid;
 		display: flex;
 		align-items: flex-end;
+			
+			@include d($sm){
+				flex-direction: column;
+				align-items: flex-start;
+				border-bottom: none;
+			}
+		
 			&-item{
 				flex: 1;
 					&[class*="--selected"]{
@@ -19,6 +26,10 @@
 					}
 					&:focus{
 						outline: none;
+					}
+				
+					@include d($sm){
+						margin-bottom: 20px;
 					}
 			}
 	}
@@ -52,6 +63,10 @@
 						bottom: 1px;
 						background-color: currentColor;
 					}
+			}
+			
+			@include d($sm){
+				padding-bottom: 5px;
 			}
 	}
 }

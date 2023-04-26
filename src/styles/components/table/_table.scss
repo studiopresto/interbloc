@@ -23,16 +23,66 @@
 		}
 		&-header{
 			margin-bottom: 54px;
-
-				@media (max-width: 1200px) {
+			align-items: center;
+			justify-content: space-between;
+			
+				@include d($lg){
 					margin-bottom:  20px;
+					flex-direction: column;
+					align-items: flex-start;
 				}
-
-			.btns-group {
-				@media (max-width: 1200px) {
-					margin-bottom:  20px;
+			
+				&-actions{
+					display: flex;
+					align-items: center;
+						
+						@include d($lg){
+							width: 100%;
+						}
+						
+						@include d($sm){
+							flex-direction: column;
+							align-items: flex-start;
+						}
+					
+						.btns-group{
+							margin-left: 20px;
+								@include d($sm){
+									margin-top: 20px;
+									margin-left: 0;
+									width: 100%;
+								}
+								.btn{
+									@include d($sm){
+										max-width: 100%;
+									}
+								}
+						}
 				}
-			}
+				&-datepicker{
+					display: inline-flex;
+					align-items: center;
+						& + .table-header-datepicker{
+								@include m($sm + 1){
+									margin-left: 20px;
+								}
+						}
+					
+						@include d($sm){
+							margin-bottom: 10px;
+							width: 100%;
+						}
+						
+						& > p{
+							margin-right: 10px;
+						}
+					
+						& > div{
+							@include d($sm){
+								width: 100%;
+							}
+						}
+				}
 		}
 		&-status{
 			position: relative;
