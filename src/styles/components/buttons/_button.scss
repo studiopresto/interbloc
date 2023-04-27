@@ -13,6 +13,7 @@
 	text-transform: uppercase;
 	font-size: 14px;
 	letter-spacing: .05em;
+	transition: all var(--duration) var(--ease);
 		&-title{
 			padding: 0 6px;
 				& ~ svg{

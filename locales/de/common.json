@@ -13,5 +13,6 @@
 	"box-consensus": "Consensus",
 	"box-node-locations": "Node Locations",
 	"box-transactions": "Transactions",
-	"placeholder-search": "Search for transactions, addresses, blocks and ambedded text data..."
+	"placeholder-search": "Search for transactions, addresses, blocks and ambedded text data...",
+	"modal-qr": "Address QR Code"
 }

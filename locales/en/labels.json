@@ -93,5 +93,7 @@
 	"period": "Period",
 	"asset": "Asset",
 	"asset-type": "Asset Type",
-	"reward": "Reward"
+	"reward": "Reward",
+	"address-was-copied": "Address was copied!",
+	"this-didnt-work": "This didn't work."
 }

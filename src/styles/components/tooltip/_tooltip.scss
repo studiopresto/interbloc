@@ -6,6 +6,7 @@
 	font-weight: normal;
 	line-height: 1.3em;
 	margin: 0;
+	z-index: 5;
 		&-trigger{
 			cursor: help;
 				&:hover{
@@ -17,18 +18,14 @@
 		&-body{
 			position: absolute;
 			background-color: var(--color-black-200);
-			border: 1px var(--color-grey-300) solid;
+			border: 1px var(--color-grey-100) solid;
 			border-radius: 10px;
-			max-width: 324px;
 			width: 100vw;
-			padding: 20px;
 			color: var(--color-grey-700);
 			display: none;
 				&:before{
 					content: '';
 					position: absolute;
-					width: 30px;
-					height: 30px;
 					border-radius: 5px;
 					background-color: var(--color-black-200);
 					border: 1px var(--color-grey-300) solid;
@@ -47,6 +44,8 @@
 					position: relative;
 					z-index: 1;
 				}
+				
+				//positions
 				&-bottom{
 					top: calc(100% + 20px);
 					left: 50%;
@@ -94,6 +93,45 @@
 							border-top: none;
 							border-right: none;
 						}
+				}
+			
+				//sizes
+				&-md{
+					max-width: 324px;
+					padding: 20px;
+						&:before{
+							width: 30px;
+							height: 30px;
+						}
+				}
+				&-sm{
+					max-width: 180px;
+					padding: 15px;
+					font-size: 12px;
+						&:before{
+							width: 20px;
+							height: 20px;
+						}
+				}
+				&-xs{
+					max-width: 120px;
+					padding: 10px;
+					font-size: 12px;
+						&:before{
+							width: 15px;
+							height: 15px;
+						}
+				}
+			
+				//text align
+				&-left{
+					text-align: left;
+				}
+				&-right{
+					text-align: right;
+				}
+				&-center{
+					text-align: center;
 				}
 		}
 }

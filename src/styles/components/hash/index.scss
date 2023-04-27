@@ -51,8 +51,9 @@
 					margin-left: 0;
 					margin-top: 10px;
 				}
-
-				.btn{
+			
+				.btn,
+				& > div{
 					&:not(:last-child){
 						margin-right: 15px;
 					}
