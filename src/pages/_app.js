@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import { Provider } from 'react-redux';
+import {withModal} from 'context/modal';
 import Layout from 'components/Layout';
 import store from 'store';
 
@@ -20,4 +21,4 @@ function MyApp({ Component, pageProps }) {
   )
 }
 
-export default MyApp
+export default withModal(MyApp)

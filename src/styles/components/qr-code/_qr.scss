@@ -1,0 +1,16 @@
+.qr{
+	
+		&-header{
+			margin-bottom: 10px;
+		}
+	
+		&-body{
+			padding-top: 20px;
+			text-align: center;
+				&-value{
+					word-break: break-all;
+					color: var(--color-grey-600);
+					margin-top: 30px;
+				}
+		}
+}

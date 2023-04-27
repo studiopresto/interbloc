@@ -1,11 +1,22 @@
+import {useCallback} from 'react';
 import PropTypes from 'prop-types';
+import useTranslation from 'next-translate/useTranslation';
 import HashIcon from 'ui/icons/Hash';
 import Button from 'ui/components/Button';
 import FileIcon from 'ui/icons/File';
 import GridSolidIcon from 'ui/icons/GridSolid';
+import QRCodeModal from 'ui/modals/qr-code/qr-code';
+import {useModal} from 'hooks/useModal';
 
 export default function Hash({ title = 'Hash', value }) {
-
+	
+	const { t } = useTranslation();
+	const qrCodeModal = useModal(QRCodeModal, { size: 'xs', value, title: t('common:modal-qr') });
+	
+	const handleModal = useCallback(() => {
+		qrCodeModal();
+	}, [])
+	
 	if (!!value) {
 		return (
 			<div className="hash">
@@ -18,7 +29,7 @@ export default function Hash({ title = 'Hash', value }) {
 					<Button icon>
 						<FileIcon/>
 					</Button>
-					<Button icon>
+					<Button icon onClick={handleModal}>
 						<GridSolidIcon/>
 					</Button>
 				</div>

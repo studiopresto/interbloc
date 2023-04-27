@@ -21,7 +21,7 @@ export default function Assets({ balances }) {
 	];
 
 	return (
-		<div className="table-box mt-2 mb-2">
+		<div className="table-box mb-2">
 			<div className="table-header mb-4">
 				<div className="row">
 					<div className="col-sm-4">
