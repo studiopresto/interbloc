@@ -37,7 +37,7 @@ export default function TransactionPage() {
 			dispatch(fetchChainStats());
 		}
 	}, [transactionSlug, dispatch]);
-
+	
 	return (
 		<>
 			<div className="page-header-inner">
@@ -150,20 +150,22 @@ export default function TransactionPage() {
 								</TabPanel>
 							</Tabs>
 						</Box>
-						<Box title="Messages" adaptiveHeight>
+						<Box title={t('common:box-messages')} adaptiveHeight>
 							<div className="row">
 								{data.tx.body.messages.map( (txdata, index) => (
 									<div key={index} className="col-lg-6">
-										<div className="d-flex align-items-center mt-3">
-											<div className="box-header-thumb color-orange __30 mr-3">
-												<PercentIcon/>
+										<div className="box-overlay">
+											<div className="d-flex align-items-center mt-3">
+												<div className="box-header-thumb color-orange __30 mr-3">
+													<PercentIcon/>
+												</div>
+												<p className="font-book">{formatMessageToReadableArray(txdata)[1]}</p>
 											</div>
-											<p className="font-book">{formatMessageToReadableArray(txdata)[1]}</p>
+											<hr className="hr"/>
+											{formatMessageToReadableArray(txdata)[0]
+												? <List data={formatMessageToReadableArray(txdata)[2]}/>
+												: PrettyPrintJson(txdata)}
 										</div>
-										<hr className="hr"/>
-										{formatMessageToReadableArray(txdata)[0]
-											? <List data={formatMessageToReadableArray(txdata)[2]}/>
-											: PrettyPrintJson(txdata)}
 									</div>
 								))}
 							</div>

@@ -4,5 +4,7 @@
 	"active": "Active",
 	"inactive": "Inactive",
 	"filter": "Filter",
-	"clear": "Clear"
+	"clear": "Clear",
+	"copy-address": "Copy Address",
+	"click-view-qr": "Click to view QR Code"
 }

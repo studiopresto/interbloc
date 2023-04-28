@@ -12,5 +12,10 @@
 					color: var(--color-grey-600);
 					margin-top: 30px;
 				}
+			
+				& > svg{
+					max-width: 100%;
+					height: auto;
+				}
 		}
 }

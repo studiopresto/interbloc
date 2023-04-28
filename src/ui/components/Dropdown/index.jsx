@@ -3,7 +3,7 @@ import {useRouter} from 'next/router';
 import PropTypes from 'prop-types';
 import UseOutsideDetector from 'hooks/useOutsideDetector';
 
-export default function Dropdown({ label, prefix, children, onClose = null }) {
+export default function Dropdown({ label, prefix, children, icon = null, onClose = null }) {
 	
 	const [isOpen, setIsOpen] = useState(false);
 	const { locale } = useRouter();
@@ -16,6 +16,11 @@ export default function Dropdown({ label, prefix, children, onClose = null }) {
 		<UseOutsideDetector onClickAway={() => setIsOpen(false)}>
 			<div className={`dropdown ${isOpen ? 'is-active' : ''}`}>
 				<div className="dropdown-title" onClick={() => children ? setIsOpen(!isOpen) : null}>
+					{icon ? (
+						<div className="dropdown-title-thumb">
+							<img src={icon} alt={label}/>
+						</div>
+					) : null}
 					<div className="dropdown-title-label">{prefix} {label}</div>
 					<div className="dropdown-title-icon">
 						<svg width="8" height="9" viewBox="0 0 8 9">

@@ -9,14 +9,14 @@
 	flex-direction: column;
 	align-items: flex-start;
 
-	@media (max-width: 991px) {
-		padding: 16px;
-		min-height: 325px;
-	}
-
-	@media (max-width: 991px) {
-		min-height: 250px;
-	}
+		@media (max-width: 991px) {
+			padding: 16px;
+			min-height: 325px;
+		}
+	
+		@media (max-width: 991px) {
+			min-height: 250px;
+		}
 		&-theme{
 			&-1{
 				background: linear-gradient(54.89deg, #1E1F1F 57.82%, #102C27 123.61%);
@@ -152,6 +152,12 @@
 					min-height: 0;
 				}
 				
+		}
+		&-overlay{
+			width: 100%;
+			height: 100%;
+			overflow-x: auto;
+			max-width: 45vw;
 		}
 		/*
 		Table

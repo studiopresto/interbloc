@@ -13,6 +13,12 @@
 	"box-consensus": "Consensus",
 	"box-node-locations": "Node Locations",
 	"box-transactions": "Transactions",
+	"box-messages": "Messages",
+	"box-list-governance": "List of Governance",
+	"box-depositors": "Depositors",
+	"box-validator-history": "Validator History",
+	"box-delegators": "Delegators",
+	"box-staking-stats": "Staking Stats",
 	"placeholder-search": "Search for transactions, addresses, blocks and ambedded text data...",
 	"modal-qr": "Address QR Code"
 }

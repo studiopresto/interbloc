@@ -33,8 +33,12 @@ export default function TransactionList({transactionData, transactionStatus, per
 										<span className="mr-3">
 											<SortDirectionIcon/>
 										</span>
-										Latest {(transactionData.pagination.total < per_page) ? transactionData.pagination.total : per_page} from a total of
-										<span className="color-turquoise"> {transactionData.pagination.total}</span> transaction(s)
+										{t('labels:latest-count-of', {
+											count: (transactionData.pagination.total < per_page)
+												? transactionData.pagination.total
+												: per_page
+										})}
+										<span className="color-turquoise"> {transactionData.pagination.total}</span> {t('labels:transactions')}
 									</p>
 									<div className="table-header-actions">
 										<div className="table-header-datepicker">
@@ -60,7 +64,7 @@ export default function TransactionList({transactionData, transactionStatus, per
 												<div className="d-flex align-items-center">
 													{t('labels:method')}
 													<Tooltip
-														text="On recommend tolerably my belonging or am. Mutual has cannot beauty indeed now sussex merely you. It possible no husbands jennings ye offended packages pleasant he. Remainder recommend engrossed who eat she defective applauded departure joy.">
+														text={t('texts:method-description')}>
 														<Dot>
 															<InfoIcon/>
 														</Dot>

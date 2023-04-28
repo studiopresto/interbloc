@@ -51,12 +51,12 @@ export default function Hash({ title = 'Hash', value }) {
 					<span className="h-4 hash-title">{title}:</span>
 					<span className="hash-value font-base text-break">{value}</span>
 					<div className="hash-action">
-						<Tooltip text="Copy Address" size="xs" textAlign="center">
+						<Tooltip text={t('actions:copy-address')} size="xs" textAlign="center">
 							<Button icon onClick={handleCopyAddress}>
 								<FileIcon/>
 							</Button>
 						</Tooltip>
-						<Tooltip text="Click to view QR Code" size="sm" textAlign="center">
+						<Tooltip text={t('actions:click-view-qr')} size="sm" textAlign="center">
 							<Button icon onClick={handleQRModal}>
 								<GridSolidIcon/>
 							</Button>

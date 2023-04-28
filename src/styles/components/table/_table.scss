@@ -253,6 +253,7 @@
 					transform: translateY(-50%);
 					color: var(--color-grey-500);
 					display: none;
+					max-width: 120px;
 						@include d($sm){
 							display: block;
 						}

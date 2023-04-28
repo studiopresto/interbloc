@@ -114,13 +114,13 @@ export default function ProposalPage() {
 							<List data={infoList}/>
 						</div>
 						<div className="col-12 col-lg-6">
-							<h3 className="h-3 mb-4">Description</h3>
+							<h3 className="h-3 mb-4">{t('labels:description')}</h3>
 							<ReactMarkdown className="heading-text color-grey mb-4">{data.content.description}</ReactMarkdown>
 						</div>
 					</div>
 				</Box>
 
-				<Box title="Total:" theme={3} adaptiveHeight>
+				<Box title={`${t('labels:total')}:`} theme={3} adaptiveHeight>
 					<div className="row">
 						<div className="col-12 col-md-4">
 							<p className="color-grey font-secondary-bold box-body-subtitle">
@@ -308,7 +308,7 @@ export default function ProposalPage() {
 				</div>
 				<br/>
 				<br/>
-				<Box title="Depositors">
+				<Box title={t('common:box-depositors')}>
 					<div className="table-box">
 							<table className="table table-large">
 								<thead>

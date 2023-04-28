@@ -150,7 +150,7 @@ export default function ValidatorOpen() {
 							{data.validator.description.details}
 						</p>
 					</Box>
-					<Box title="Validator History" theme={1}>
+					<Box title={t('common:box-validator-history')} theme={1}>
 						<ValidatorHistory/>
 					</Box>
 					<div className='table-row mb-3 table-validators'>
@@ -159,7 +159,7 @@ export default function ValidatorOpen() {
 								<div className="table-header validators-header mb-4">
 									<div className="row">
 										<div className="col-4">
-											<p className="font-20 font-bold">Delegators (Soon)</p>
+											<p className="font-20 font-bold">{t('common:box-delegators')} ({t('labels:soon')})</p>
 										</div>
 									</div>
 								</div>
@@ -209,7 +209,7 @@ export default function ValidatorOpen() {
 						</div>
 						<div className="table-uptime">
 							<div className="depositor-box">
-								<Box title="Staking Stats (Historical)">
+								<Box title={`${t('common:box-staking-stats')} (${t('labels:historical')})`}>
 									{bondingHistoryStatus === STATUS.FULFILLED
 										? (
 										<div className="table-box">
@@ -278,7 +278,7 @@ export default function ValidatorOpen() {
 										: <Preloader/>}
 								</Box>
 							</div>
-							<Box title="Uptime" adaptiveHeight>
+							<Box title={t('labels:uptime')} adaptiveHeight>
 								<div className="uptime-chart">
 									<div className="uptime-chart-legend">
 										<p className="font-bold color-grey chart-legend-item">
@@ -295,7 +295,6 @@ export default function ValidatorOpen() {
 													<div key={i} className="uptime-row-item" style={{ backgroundColor: color }}/>
 												)
 										}
-
 										)}
 									</div>
 								</div>

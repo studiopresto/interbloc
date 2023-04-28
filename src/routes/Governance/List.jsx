@@ -51,7 +51,7 @@ export default function GovernanceList() {
 				<div className="table-header mb-4">
 					<div className="row">
 						<div className="col-12 col-md-4">
-							<p className="font-20 font-bold">List of Governance</p>
+							<p className="font-20 font-bold">{t('common:box-list-governance')}</p>
 						</div>
 						<div className="col-12 col-md-8 governance-form">
 							<div className="d-flex align-items-center justify-content-end">

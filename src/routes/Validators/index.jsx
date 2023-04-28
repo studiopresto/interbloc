@@ -141,7 +141,7 @@ export default function ValidatorsPage() {
 							<div className="row">
 								<div className="col-xl-3 col-md-6">
 									<Card theme={1} icon={<GridIcon/>} color="turquoise">
-										<p className="color-grey font-16 font-book">Height</p>
+										<p className="color-grey font-16 font-book">{t('labels:height')}</p>
 										<NumberFormat
 											value={currentDBHeight}
 											displayType="text"
@@ -153,13 +153,13 @@ export default function ValidatorsPage() {
 								</div>
 								<div className="col-xl-3 col-md-6">
 									<Card theme={1} icon={<UserIcon/>} color="blue">
-										<p className="color-grey font-16 font-book">Validators</p>
+										<p className="color-grey font-16 font-book">{t('labels:validators')}</p>
 										<p className="h-2 font-secondary-bold">{activeValidators.validators.length} / {data.length}</p>
 									</Card>
 								</div>
 								<div className="col-xl-3 col-md-6">
 									<Card theme={1} icon={<UnionIcon/>} color="orange">
-										<p className="color-grey font-16 font-book">Bonded Tokens</p>
+										<p className="color-grey font-16 font-book">{t('labels:bonded-tokens')}</p>
 										<NumberFormat
 											value={(parseInt(aggregated.totalVotingPower) / 10 ** coinConfig.exponent).toFixed(0)}
 											displayType="text"
@@ -171,7 +171,7 @@ export default function ValidatorsPage() {
 								</div>
 								<div className="col-xl-3 col-md-6">
 									<Card theme={1} icon={<RepeatIcon/>} color="violet">
-										<p className="color-grey font-16 font-book">Block Time</p>
+										<p className="color-grey font-16 font-book">{t('labels:block')} {t('labels:time')}</p>
 										<p className="h-2 font-secondary-bold">{avgBlockTime} s</p>
 									</Card>
 								</div>
@@ -180,8 +180,11 @@ export default function ValidatorsPage() {
 								<div className="table">
 									<div className="table-header">
 										<div className="row">
-											<div className="col-6">
-												<div className="btns-group">
+											<div className="col-lg-4 offset-lg-2 col-md-6 order-lg-1">
+												<Input search placeholder={t('labels:search-validator')}/>
+											</div>
+											<div className="col-6 order-lg-0">
+												<div className="btns-group mt-4 mt-md-0">
 													<Button
 														onClick={() => {setActive(1)}}
 														size="sm"
@@ -191,9 +194,6 @@ export default function ValidatorsPage() {
 														size="sm"
 														color={active === 0 ? "blue" : undefined}>{t('actions:inactive')}</Button>
 												</div>
-											</div>
-											<div className="col-lg-4 offset-lg-2 col-md-6">
-												<Input search placeholder={t('labels:search-validator')}/>
 											</div>
 										</div>
 									</div>
