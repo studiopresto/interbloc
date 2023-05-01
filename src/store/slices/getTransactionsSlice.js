@@ -3,8 +3,6 @@ import dataProvider from 'utils/requestProviders/dataProvider';
 import resources from 'utils/requestProviders/resources';
 import { STATUS } from 'config/constants';
 
-
-
 const initialState = {
 	data: {},
 	status: STATUS.IDLE,
@@ -17,7 +15,6 @@ export const fetchTransactions = createAsyncThunk(
 	`${transactionsKey}/fetch`,
 	async ({ limit = 10, per_page = 10, page = 1 }) => {
 		return await dataProvider.getList(resources.latestTransactions, { limit, per_page, page })
-
 	}
 );
 

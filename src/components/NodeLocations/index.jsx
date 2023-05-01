@@ -9,7 +9,7 @@ import ErrorBlock from 'ui/components/Error';
 import {STATUS} from 'config/constants';
 import { styles } from 'config/chart';
 const Plot = dynamic(import('../../../node_modules/react-plotly.js/react-plotly'), {
-	ssr: false
+	ssr: false, loading: () => <Preloader/>
 });
 
 export default function NodeLocations() {
@@ -21,7 +21,7 @@ export default function NodeLocations() {
 	useEffect(() => {
 		dispatch(fetchNodeLocations());
 	}, [dispatch]);
-
+	
 	if (isEmptyObject(data) && status === STATUS.PENDING) {
 		return <Preloader/>;
 	}
@@ -42,11 +42,11 @@ export default function NodeLocations() {
 								type: 'pie',
 								hole: .15,
 								marker: {
-									colors: ['#687EFF', '#1A70FE', '#4FF0D7', '#323232', '#D69F4D'],
-									line: {
-										color: '#FFFFFF',
-										width: [1, 1, 1, 1, 1, 1],
-									}
+									// colors: ['#687EFF', '#1A70FE', '#4FF0D7', '#323232', '#D69F4D'],
+									// line: {
+									// 	color: '#FFFFFF',
+									// 	width: [1, 1, 1, 1, 1, 1],
+									// }
 								},
 								textinfo: 'label',
 								hoverinfo: 'value',

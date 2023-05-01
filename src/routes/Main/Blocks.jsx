@@ -20,7 +20,7 @@ export default function BlocksMain() {
 	const { data, status } = useSelector(selectBlocks);
 	const { data: validatorData, status: validatorStatus } = useSelector(selectValidatorsAddressConversion);
 	const { t } = useTranslation();
-
+	
 	useEffect(() => {
 		dispatch(fetchBlocks({ limit: 6, per_page: 6, page: 1 }))
 		dispatch(fetchValidatorsAddressConversion({ height: 0 }));

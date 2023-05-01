@@ -9,7 +9,7 @@ import ErrorBlock from 'ui/components/Error';
 import {STATUS} from 'config/constants';
 import { styles } from 'config/chart';
 const Plot = dynamic(import('../../../node_modules/react-plotly.js/react-plotly'), {
-	ssr: false
+	ssr: false, loading: () => <Preloader/>
 })
 
 export default function Mempool() {

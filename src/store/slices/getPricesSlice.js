@@ -2,8 +2,7 @@ import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import dataProvider from 'utils/requestProviders/dataProvider';
 import resources from 'utils/requestProviders/resources';
 import { STATUS } from 'config/constants';
-
-
+import {getFromLocalStorageWithExpiry, setToLocalStorageWithExpiry} from 'utils/localStorage/expiryLocalStorage';
 
 const initialState = {
 	data: {},
@@ -16,24 +15,34 @@ export const pricesKey = 'Prices';
 export const fetchPrices = createAsyncThunk(
 	`${pricesKey}/fetch`,
 	async () => {
-		return await dataProvider.getList(resources.prices, { vs_currency: 'usd', days: 7 }, true)
-			.then(res => {
-				const prices = res?.prices;
-				const marketCaps = res?.market_caps;
-				const totalVolumes = res?.total_volumes;
-				const price = [];
-				const date = [];
-				const marketCapsArray = [];
-				const totalVolumesArray = [];
-				for (let i = 0; i < prices.length; i++) {
-					let priceValue = prices[i][1];
-					price.push(parseFloat(priceValue.toFixed(2)));
-					date.push(new Date(prices[i][0]));
-					marketCapsArray.push(marketCaps[i][1]);
-					totalVolumesArray.push(totalVolumes[i][1]);
-				}
-				return { price, date, market_caps: marketCapsArray, total_volumes: totalVolumesArray };
-			})
+		// check localStorage
+		const dataFromLocalStorage = getFromLocalStorageWithExpiry(pricesKey);
+		if (dataFromLocalStorage) {
+			return dataFromLocalStorage;
+		} else {
+			const data = await dataProvider.getList(resources.prices, { vs_currency: 'usd', days: 7 }, true)
+				.then(res => {
+					const prices = res?.prices;
+					const marketCaps = res?.market_caps;
+					const totalVolumes = res?.total_volumes;
+					const price = [];
+					const date = [];
+					const marketCapsArray = [];
+					const totalVolumesArray = [];
+					for (let i = 0; i < prices.length; i++) {
+						let priceValue = prices[i][1];
+						price.push(parseFloat(priceValue.toFixed(2)));
+						date.push(new Date(prices[i][0]));
+						marketCapsArray.push(marketCaps[i][1]);
+						totalVolumesArray.push(totalVolumes[i][1]);
+					}
+					return { price, date, market_caps: marketCapsArray, total_volumes: totalVolumesArray };
+				});
+			// save data to localStorage
+			await setToLocalStorageWithExpiry(pricesKey, data);
+			// return data from API
+			return data;
+		}
 	}
 );
 

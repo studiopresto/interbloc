@@ -28,7 +28,7 @@ export default function TransactionsPage() {
 
 	const [page, setPage] = useState(1)
 	let per_page = 10;
-
+	
 	const paginationChange = p => {
 		setPage(p)
 	}
@@ -37,7 +37,7 @@ export default function TransactionsPage() {
 		dispatch(fetchTransactions({ page: page, per_page: per_page }));
 		dispatch(fetchChainStats());
 	}, [dispatch, page]);
-
+	
 	if (isEmptyObject(data) && status === STATUS.REJECTED) {
 		return <ErrorBlock/>
 	}
@@ -56,7 +56,7 @@ export default function TransactionsPage() {
 					</div>
 					<div>
 						<h1 className="h-2">{t('transactions:page-title')}</h1>
-						<p className="font-16 font-secondary-bold">{coinConfig.ticker}: <span className="color-violet">${chainStatus === STATUS.FULFILLED ? chainData.fiatPrice : "Loading"}</span></p>
+						<p className="font-16 font-secondary-bold">{coinConfig.ticker}: <span className="color-violet">${chainStatus === STATUS.FULFILLED ? chainData.fiatPrice : t('labels:loading')}</span></p>
 					</div>
 				</div>
 				<div className="page-body">

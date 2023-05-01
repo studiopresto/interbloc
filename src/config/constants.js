@@ -16,4 +16,12 @@ export const LANGUAGES = [
 	{ id: 'th', iso: 'tha', name: 'Thai', icon: '/static/icons/TH.svg' },
 	{ id: 'tr', iso: 'tur', name: 'Turkish', icon: '/static/icons/TR.svg' },
 	{ id: 'fil', iso: 'fil', name: 'Filipino', icon: '/static/icons/PH.svg' }
-]
+];
+
+export const QUERY_PARAMETERS = {
+	LIMIT: 10,
+	PARE_PAGE: 10
+};
+
+const LOCALSTORAGE_HOURS = 24;
+export const LOCALSTORAGE_EXPIRY = LOCALSTORAGE_HOURS * 60 * 60 * 1000;

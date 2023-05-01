@@ -2,6 +2,7 @@ import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import dataProvider from 'utils/requestProviders/dataProvider';
 import resources from 'utils/requestProviders/resources';
 import {STATUS} from 'config/constants';
+import {getFromLocalStorageWithExpiry, setToLocalStorageWithExpiry} from 'utils/localStorage/expiryLocalStorage';
 
 const initialState = {
 	data: {},
@@ -14,19 +15,31 @@ export const nodeLocationsKey = 'NodeLocations';
 export const fetchNodeLocations = createAsyncThunk(
 	`${nodeLocationsKey}/fetch`,
 	async () => {
-		return await dataProvider.getOne(resources.nodes)
-			.then(res => {
-				const location = res?.countries;
-				const values = [];
-				const labels = [];
-
-				Object.keys(location).forEach(loc => {
-					values.push(location[loc]);
-					labels.push(loc);
+		// check localStorage
+		const dataFromLocalStorage = getFromLocalStorageWithExpiry(nodeLocationsKey);
+		if (dataFromLocalStorage) {
+			// return data from localStorage, if expiry and data exist
+			return dataFromLocalStorage;
+		} else {
+			// get data from API
+			const data = await dataProvider.getOne(resources.nodes)
+				.then(res => {
+					const location = res?.countries;
+					const values = [];
+					const labels = [];
+					
+					Object.keys(location).forEach(loc => {
+						values.push(location[loc]);
+						labels.push(loc);
+					});
+					
+					return {...res, locationLabels: labels, locationValues: values};
 				});
-
-				return {...res, locationLabels: labels, locationValues: values};
-			});
+			// save data to localStorage
+			await setToLocalStorageWithExpiry(nodeLocationsKey, data);
+			// rerun data from API
+			return data;
+		}
 	}
 );
 
