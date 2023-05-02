@@ -1,3 +1,3 @@
-export default function hashShortening(hash) {
-	return `${hash.slice(0,6)}...${hash.slice(hash.length - 6, hash.length)}`;
+export default function hashShortening(hash, size = 6) {
+	return `${hash.slice(0,size)}...${hash.slice(hash.length - size, hash.length)}`;
 }

@@ -7,7 +7,7 @@ export const transactions = {
     [MsgSendType]: ParseMsgSend,
     [MsgTransferType]: ParseMsgTransfer,
     [MsgUndelegateType]: ParseMsgUndelegate,
-    // [MsgRecvPacketType]: ParseMsgRecvPacket
+    [MsgRecvPacketType]: ParseMsgRecvPacket
 }
 
 export const labels = {
@@ -26,5 +26,12 @@ export const labels = {
     'packetSequence': 'Packet sequence',
     'packetSourcePort': 'Packet source port',
     'packetSourceChannel': 'Packet source channel',
-    'packetDestinationPort': 'Packet destination port'
+    'packetDestinationPort': 'Packet destination port',
+    'packetDestinationChannel': 'Packet destination channel',
+    'packetData': 'Packet Data',
+    'packetTimeoutHeightRevisionNumber': 'Packet timeout height, revision number',
+    'packetTimeoutHeightRevisionHeight': 'Packet timeout height, revision height',
+    'proofCommitment': 'Proof commitment',
+    'proofHeightRevisionNumber': 'Proof height, revision number',
+    'proofHeightRevisionHeight': 'Proof height, revision height'
 }
