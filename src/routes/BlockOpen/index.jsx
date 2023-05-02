@@ -23,7 +23,6 @@ import {isEmptyObject} from 'utils/object/detectEmptyObject';
 import {extractBlockData} from 'utils/formatting/block';
 import {getDateDifferent} from 'utils/date/getDateDifferent';
 import {formatCoinArrayToString, formatDenomToString} from 'utils/formatting/coins';
-import coinConfig from '../../../coin.config';
 import {
 	fetchValidatorsAddressConversion,
 	selectValidatorsAddressConversion
@@ -39,7 +38,7 @@ export default function BlockOpenPage() {
 	const {blockSlug} = router.query;
 	const {data, status} = useSelector(selectBlock);
 	const {data: addressConversion, status: addressConversionStatus} = useSelector(selectValidatorsAddressConversion);
-	const { t } = useTranslation();
+	const {t} = useTranslation();
 	
 	useEffect(() => {
 			if (!!blockSlug) {
@@ -49,16 +48,8 @@ export default function BlockOpenPage() {
 		},
 		[blockSlug, dispatch]);
 	
-	const gas = [{
-		title: 'Gas Used', value: 100,
-	}, {
-		title: 'Gas Wanted', value: 0,
-	},];
-	let sign = [{
-		title: 'Signed', value: 100,
-	}, {
-		title: 'Missed', value: 0,
-	},];
+	const gas = [{ title: t('labels:gas-used'), value: 100 }, { title: t('labels:gas-wanted'), value: 0 }];
+	let sign = [{ title: t('labels:signed'), value: 100 }, { title: t('labels:missed'), value: 0 }];
 	let info = []
 	let aggregated = {
 		'types': {},
@@ -115,167 +106,165 @@ export default function BlockOpenPage() {
 		}
 		
 		
-		info = extractBlockData(data, aggregated)
+		info = extractBlockData(data, aggregated, t)
 		if (addressConversionStatus === STATUS.FULFILLED) {
 			info[7][1] = info[7][1] in addressConversion ? addressConversion[info[7][1]].description.moniker : info[7][1];
 		}
 		
 	}
-	return (<>
-		{status === STATUS.PENDING ? <Preloader/> : (!isEmptyObject(data) && status === STATUS.FULFILLED) ? (<div>
+	return (
+		<>
 			<div className="page-header-inner">
 				<div className="page-header-thumb __turquoise">
 					<BlocksIcon/>
 				</div>
 				<div>
-					<h1 className="h-2">Block: {data.header.height}</h1>
+					<h1 className="h-2">{t('common:page-block')}: {data?.header?.height ? data.header.height : null}</h1>
 				</div>
 			</div>
-			<div className="page-body">
-				<Hash title="Hash" value={data.hash}/>
-				<div className="row">
-					<div className="col-md-6">
-						<ProgressMultiple data={gas} label="top"/>
+			{status === STATUS.PENDING || status === STATUS.IDLE ? <Preloader/> : null}
+			{isEmptyObject(data) || status === STATUS.REJECTED ? <ErrorBlock/> : null}
+			{!isEmptyObject(data) && status === STATUS.FULFILLED ? (
+				<div className="page-body">
+					<Hash title="Hash" value={data.hash}/>
+					<div className="row">
+						<div className="col-md-6">
+							<ProgressMultiple data={gas} label="top"/>
+						</div>
+						<div className="col-md-6">
+							<ProgressMultiple data={sign} label="top"/>
+						</div>
 					</div>
-					<div className="col-md-6">
-						<ProgressMultiple data={sign} label="top"/>
-					</div>
-				</div>
-				<div className="row">
-					<div className="col-lg-6">
-						<Box title="Block Info">
-							<List data={info}/>
-						</Box>
-						<Box title="Transaction Types">
-							{Object.keys(aggregated.types).length === 0 ?
-								<span>There are no transactions in this block</span>
-								:
-								<TransactionTypes types={aggregated.types}/>
-							}
-						</Box>
-					</div>
-					<div className="col-lg-6">
-						<Box title="Signatures">
-							<div className="overflow-auto" style={{maxHeight: 867}}>
-								{isEmptyObject(addressConversion) ?
-									<Preloader/>
-									: (
-										<table className="table">
-											<thead>
-											<tr>
-												<th>{t('labels:validator')}</th>
-												<th>{t('labels:period')}</th>
-											</tr>
-											</thead>
-											<tbody>
-											{data.signatures.map((signature, index) => (<tr key={index}>
-													{signature.blockIdFlag !== 'BLOCK_ID_FLAG_ABSENT' ? (<>
-															<td data-title={t('labels:validator')}>
-																<div
-																	className="d-inline-flex align-items-center">
+					<div className="row">
+						<div className="col-lg-6">
+							<Box title={t('common:box-block-info')}>
+								<List data={info}/>
+							</Box>
+							<Box title={t('common:transaction-types')}>
+								{Object.keys(aggregated.types).length === 0
+									? <span>There are no transactions in this block</span>
+									: <TransactionTypes types={aggregated.types}/>}
+							</Box>
+						</div>
+						<div className="col-lg-6">
+							<Box title={t('common:box-signatures')}>
+								<div className="overflow-auto" style={{maxHeight: 867}}>
+									{isEmptyObject(addressConversion) ? <Preloader/>
+										: (
+											<table className="table">
+												<thead>
+												<tr>
+													<th>{t('labels:validator')}</th>
+													<th>{t('labels:period')}</th>
+												</tr>
+												</thead>
+												<tbody>
+												{data.signatures.map((signature, index) => (<tr key={index}>
+														{signature.blockIdFlag !== 'BLOCK_ID_FLAG_ABSENT' ? (<>
+																<td data-title={t('labels:validator')}>
 																	<div
-																		className="thumb size-30 position-left">
-																		{signature.validatorAddress in addressConversion ?
-																			(
-																				<Image
-																					src={process.env.API_SERVER + 'validator/keybase/image/' + addressConversion[signature.validatorAddress].description.identity}
-																					width={30}
-																					height={30}
-																					alt={addressConversion[signature.validatorAddress].description.moniker + ' logo'}
-																					loading={'lazy'}
-																				/>
-																			) : (
-																				<Image
-																					src={process.env.API_SERVER + 'validator/keybase/image/nada'}
-																					width={30}
-																					height={30}
-																					alt="tmp logo"
-																					loading={'lazy'}
-																				/>
-																			
-																			)
-																		}
-																	</div>
-																	<span
-																		className="font-secondary-bold">
+																		className="d-inline-flex align-items-center">
+																		<div
+																			className="thumb size-30 position-left">
+																			{signature.validatorAddress in addressConversion ?
+																				(
+																					<Image
+																						src={process.env.API_SERVER + 'validator/keybase/image/' + addressConversion[signature.validatorAddress].description.identity}
+																						width={30}
+																						height={30}
+																						alt={addressConversion[signature.validatorAddress].description.moniker + ' logo'}
+																						loading={'lazy'}
+																					/>
+																				) : (
+																					<Image
+																						src={process.env.API_SERVER + 'validator/keybase/image/nada'}
+																						width={30}
+																						height={30}
+																						alt="tmp logo"
+																						loading={'lazy'}
+																					/>
+																				
+																				)
+																			}
+																		</div>
+																		<span
+																			className="font-secondary-bold">
                                                                 {signature.validatorAddress in addressConversion ? addressConversion[signature.validatorAddress].description.moniker : signature.validatorAddress}
                                                             </span>
-																</div>
-															</td>
-															<td data-title={t('labels:period')}>
-                                  <span className="font-book">{getDateDifferent(signature.timestamp, new Date())}</span>
-															</td>
-														</>
-													) : null}
-												</tr>
-											))}
-											</tbody>
-										</table>
-									
-									)}
-							
-							</div>
-						</Box>
+																	</div>
+																</td>
+																<td data-title={t('labels:period')}>
+																	<span className="font-book">{getDateDifferent(signature.timestamp, new Date())}</span>
+																</td>
+															</>
+														) : null}
+													</tr>
+												))}
+												</tbody>
+											</table>
+										)}
+								</div>
+							</Box>
+						</div>
 					</div>
-				</div>
-				<div className="row">
-					<div className="col-12">
-						<div className="table-box">
-							<div className="table-header">
-								<p className="font-16">
+					<div className="row">
+						<div className="col-12">
+							<div className="table-box">
+								<div className="table-header">
+									<p className="font-16">
                     <span className="mr-3">
                         <SortDirectionIcon/>
                     </span>
-									
-									<span
-										className="color-turquoise">{Object.keys(data.data).includes('txs') ? (data.data.txs.length) : (0)}</span> transaction(s)
-									( {aggregated.failed} <span
-									className="color-danger">Failed</span> )
-								</p>
-							</div>
-							<table className="table">
-								<thead>
-								<tr>
-									<th/>
-									<th>{t('labels:txs-hash')}</th>
-									<th>{t('labels:method')}</th>
-									<th>{t('labels:status')}</th>
-									<th>{t('labels:value')}</th>
-									<th>{t('labels:txn-fee')}</th>
-									<th/>
-								</tr>
-								</thead>
-								<tbody>
-								{Object.keys(data.data).includes('txs') ? (data.data.txs.map((txdata, index) => (
-									<tr key={index}>
-										<td className="hidden-sm">
-											<Link href={`${routes.public.transactions}/${txdata.txhash}`}>
-												<a>
-													<Button icon color="transparent">
-														<EyeIcon/>
-													</Button>
-												
-												</a>
-											</Link>
-										</td>
-										<td data-title={t('labels:txs-hash')}>
+										
+										<span
+											className="color-turquoise">{Object.keys(data.data).includes('txs') ? (data.data.txs.length) : (0)}</span> transaction(s)
+										( {aggregated.failed} <span
+										className="color-danger">Failed</span> )
+									</p>
+								</div>
+								<table className="table">
+									<thead>
+									<tr>
+										<th/>
+										<th>{t('labels:txs-hash')}</th>
+										<th>{t('labels:method')}</th>
+										<th>{t('labels:status')}</th>
+										<th>{t('labels:value')}</th>
+										<th>{t('labels:txn-fee')}</th>
+										<th/>
+									</tr>
+									</thead>
+									<tbody>
+									{Object.keys(data.data).includes('txs') ? (data.data.txs.map((txdata, index) => (
+										<tr key={index}>
+											<td className="hidden-sm">
+												<Link href={`${routes.public.transactions}/${txdata.txhash}`}>
+													<a>
+														<Button icon color="transparent">
+															<EyeIcon/>
+														</Button>
+													
+													</a>
+												</Link>
+											</td>
+											<td data-title={t('labels:txs-hash')}>
                         <span
 	                        className="color-turquoise font-secondary-bold font-hash">{txdata.txhash}
                         </span>
-										</td>
-										<td data-title={t('labels:method')}>
+											</td>
+											<td data-title={t('labels:method')}>
                         <span
 	                        className="color-violet font-12 font-bold status">{formatMessageToObject(txdata.tx.body.messages[0]).title}
                         </span>
-										</td>
-										<td data-title={t('labels:status')}>
-											{txdata.code === 0 ? (<span
-												className="font-book color-success">Success</span>) : (
-												<span className="font-book color-danger">Error</span>
-											
-											)}
-										</td>
-										<td data-title={t('labels:value')}>
+											</td>
+											<td data-title={t('labels:status')}>
+												{txdata.code === 0 ? (<span
+													className="font-book color-success">Success</span>) : (
+													<span className="font-book color-danger">Error</span>
+												
+												)}
+											</td>
+											<td data-title={t('labels:value')}>
                         <span
 	                        className="font-book">{Object.keys(txdata.tx.body.messages[0]).includes('amount') && typeof formatMessageToObject(txdata.tx.body.messages[0]).amount === 'string' ? (
 	                        formatMessageToObject(txdata.tx.body.messages[0]).amount
@@ -283,8 +272,8 @@ export default function BlockOpenPage() {
 	                        'Not identifiable'
                         )}
                         </span>
-										</td>
-										<td data-title={t('labels:txn-fee')}>
+											</td>
+											<td data-title={t('labels:txn-fee')}>
                         <span className="font-book">
                             {
 	                            txdata.authInfo.fee.amount ?
@@ -292,16 +281,17 @@ export default function BlockOpenPage() {
 		                            formatCoinArrayToString(0)
                             }
                         </span>
-										</td>
-										<td/>
-									</tr>))) : ('')}
-								</tbody>
-							</table>
+											</td>
+											<td/>
+										</tr>))) : ('')}
+									</tbody>
+								</table>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-		</div>) : (<ErrorBlock/>)}
-	</>)
+			) : null}
+		</>
+	)
 }
 

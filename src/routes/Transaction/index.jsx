@@ -2,7 +2,7 @@ import {useEffect} from 'react';
 import {useRouter} from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import {useDispatch, useSelector} from 'react-redux';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import {Tab, Tabs, TabList, TabPanel} from 'react-tabs';
 import {fetchTransaction, selectTransaction} from 'store/slices/getTransactionSlice';
 import Hash from 'ui/components/Hash';
 import Preloader from 'ui/components/Preloader';
@@ -16,28 +16,28 @@ import PercentIcon from 'ui/icons/Percent';
 import {isEmptyObject} from 'utils/object/detectEmptyObject';
 import {PrettyPrintJson} from 'utils/formatting/json'
 import {STATUS} from 'config/constants';
-import {getDateDifferent} from "utils/date/getDateDifferent";
-import {formatMessageToReadableArray} from "utils/formatting/transactions";
-import {formatDenomToString, formatFromBaseDenom, formatFromDenom} from "utils/formatting/coins";
-import coinConfig from "../../../coin.config";
-import {fetchChainStats, selectChainStats} from "store/slices/getChainStats";
+import {getDateDifferent} from 'utils/date/getDateDifferent';
+import {formatMessageToReadableArray} from 'utils/formatting/transactions';
+import {formatDenomToString, formatFromBaseDenom, formatFromDenom} from 'utils/formatting/coins';
+import coinConfig from '../../../coin.config';
+import {fetchChainStats, selectChainStats} from 'store/slices/getChainStats';
 
 export default function TransactionPage() {
-
+	
 	const dispatch = useDispatch();
 	const router = useRouter();
-	const { transactionSlug } = router.query;
-	const { data, status } = useSelector(selectTransaction);
-	const { data: chainData, status: chainStatus } = useSelector(selectChainStats);
-	const { t } = useTranslation();
-
+	const {transactionSlug} = router.query;
+	const {data, status} = useSelector(selectTransaction);
+	const {data: chainData, status: chainStatus} = useSelector(selectChainStats);
+	const {t} = useTranslation();
+	
 	useEffect(() => {
 		if (!!transactionSlug) {
-			dispatch(fetchTransaction({ transactionSlug }));
+			dispatch(fetchTransaction({transactionSlug}));
 			dispatch(fetchChainStats());
 		}
 	}, [transactionSlug, dispatch]);
-	
+	// console.log('data.tx.body.messages ', data?.tx?.body?.messages)
 	return (
 		<>
 			<div className="page-header-inner">
@@ -48,81 +48,83 @@ export default function TransactionPage() {
 					<h1 className="h-2">{t('transactions:page-title')}</h1>
 				</div>
 			</div>
-			{ isEmptyObject(data) && status === STATUS.PENDING ? <Preloader/> : null }
-			{
-				!isEmptyObject(data) && status === STATUS.FULFILLED ? (
-					<div className="page-body">
-						<Hash title="Hash" value={transactionSlug}/>
-						<br/>
-						<Box>
-							<Tabs className="tabs">
-								<TabList className="tabs-buttons">
-									<Tab className="tabs-buttons-item">
-										<div className="tabs-button">{t('labels:overview')}</div>
-									</Tab>
-									<Tab className="tabs-buttons-item">
-										<div className="tabs-button">{t('labels:logs')}</div>
-									</Tab>
-									<Tab className="tabs-buttons-item">
-										<div className="tabs-button">{t('labels:comments')}</div>
-									</Tab>
-								</TabList>
-								<TabPanel className="tabs-content pt-4">
-									<ul className="list-custom">
-										<li>
-											<span className="color-grey font-16">{t('labels:transaction-hash')}:</span>
-											<span className="font-16 font-secondary-bold word-break-all">{data.txhash}
-												<span className="ml-4">
+			{status === STATUS.PENDING || status === STATUS.IDLE ? <Preloader/> : null}
+			{isEmptyObject(data) || status === STATUS.REJECTED ? <ErrorBlock/> : null}
+			{!isEmptyObject(data) && status === STATUS.FULFILLED ? (
+				<div className="page-body">
+					<Hash title="Hash" value={transactionSlug}/>
+					<br/>
+					<Box>
+						<Tabs className="tabs">
+							<TabList className="tabs-buttons">
+								<Tab className="tabs-buttons-item">
+									<div className="tabs-button">{t('labels:overview')}</div>
+								</Tab>
+								<Tab className="tabs-buttons-item">
+									<div className="tabs-button">{t('labels:logs')}</div>
+								</Tab>
+								<Tab className="tabs-buttons-item">
+									<div className="tabs-button">{t('labels:comments')}</div>
+								</Tab>
+							</TabList>
+							<TabPanel className="tabs-content pt-4">
+								<ul className="list-custom">
+									<li>
+										<span className="color-grey font-16">{t('labels:transaction-hash')}:</span>
+										<span className="font-16 font-secondary-bold word-break-all">{data.txhash}
+											<span className="ml-4">
 													<Button icon>
 														<FileIcon/>
 													</Button>
 												</span>
 											</span>
-										</li>
-										<li>
-											<span className="color-grey font-16">{t('labels:status')}:</span>
-											<span className="font-16 font-secondary-bold">
-												<span className="table-status font-bold" style={{color: data.code === 0 ? '#2BBF6F' : '#cc0000'}}>
+									</li>
+									<li>
+										<span className="color-grey font-16">{t('labels:status')}:</span>
+										<span className="font-16 font-secondary-bold">
+												<span className="table-status font-bold"
+												      style={{color: data.code === 0 ? '#2BBF6F' : '#cc0000'}}>
 													{data.code === 0 ? t('labels:success') : t('labels:error')}
 												</span>
 											</span>
-										</li>
-										{data.code !== 0 &&
-											<li>
-												<span className="color-grey font-16">{t('labels:error')}:</span>
-												<span className="font-16 font-secondary-bold text-right">
+									</li>
+									{data.code !== 0 &&
+									<li>
+										<span className="color-grey font-16">{t('labels:error')}:</span>
+										<span className="font-16 font-secondary-bold text-right">
 													<span className="font-bold" style={{color: '#cc0000'}}>
 														{data.rawLog}
 													</span>
 												</span>
-											</li>
-										}
-										<li>
-											<span className="color-grey font-16">{t('labels:block')}:</span>
-											<span className="font-16 font-secondary-bold">
+									</li>
+									}
+									<li>
+										<span className="color-grey font-16">{t('labels:block')}:</span>
+										<span className="font-16 font-secondary-bold">
 											{data.height}
-												{/* <span className="font-attention font-12 font-bold ml-2">1 Block Confirmation</span>*/}
+											{/* <span className="font-attention font-12 font-bold ml-2">1 Block Confirmation</span>*/}
 											</span>
-										</li>
-										<li>
-											<span className="color-grey font-16">{t('labels:timestamp')}:</span>
-											<span className="font-16 font-secondary-bold">{getDateDifferent(data.unixTimestamp * 1000, new Date())} ago ({new Date(data.unixTimestamp * 1000).toLocaleString()})
+									</li>
+									<li>
+										<span className="color-grey font-16">{t('labels:timestamp')}:</span>
+										<span
+											className="font-16 font-secondary-bold">{getDateDifferent(data.unixTimestamp * 1000, new Date())} ago ({new Date(data.unixTimestamp * 1000).toLocaleString()})
 											</span>
-										</li>
-										<li>
-											<span className="color-grey font-16">{t('labels:transaction-fee')}:</span>
-											<span className="font-16 font-secondary-bold">
+									</li>
+									<li>
+										<span className="color-grey font-16">{t('labels:transaction-fee')}:</span>
+										<span className="font-16 font-secondary-bold">
 												{
 													data.authInfo.fee.amount ?
-														formatDenomToString(data.authInfo.fee.amount[0].amount , data.authInfo.fee.amount[0].denom) :
+														formatDenomToString(data.authInfo.fee.amount[0].amount, data.authInfo.fee.amount[0].denom) :
 														formatDenomToString(0, coinConfig.denom)
 												}
-												{data.authInfo.fee.amount[0].denom === coinConfig.denom ? ` (\$${Math.round(chainData.fiatPrice * formatFromBaseDenom(data.authInfo.fee.amount[0].amount) * 100) / 100})` : ''}
+											{data.authInfo.fee.amount[0].denom === coinConfig.denom ? ` (\$${Math.round(chainData.fiatPrice * formatFromBaseDenom(data.authInfo.fee.amount[0].amount) * 100) / 100})` : ''}
 											</span>
-										</li>
-									</ul>
-									<br/>
-									{/*<div className="d-flex justify-content-center">
+									</li>
+								</ul>
+								<br/>
+								{/*<div className="d-flex justify-content-center">
 										<button className="btn btn-md btn-more">
 											<svg width="8" height="9" viewBox="0 0 8 9">
 												<path
@@ -137,42 +139,41 @@ export default function TransactionPage() {
 											</svg>
 										</button>
 									</div>*/}
-								</TabPanel>
-								<TabPanel className="tabs-content pt-4">
-									{ data.logs ?
-										(PrettyPrintJson(data.logs))
-										 :
-										("No logs to parse")
-									}
-								</TabPanel>
-								<TabPanel className="tabs-content pt-4">
-								
-								</TabPanel>
-							</Tabs>
-						</Box>
-						<Box title={t('common:box-messages')} adaptiveHeight>
-							<div className="row">
-								{data.tx.body.messages.map( (txdata, index) => (
-									<div key={index} className="col-lg-6">
-										<div className="box-overlay">
-											<div className="d-flex align-items-center mt-3">
-												<div className="box-header-thumb color-orange __30 mr-3">
-													<PercentIcon/>
-												</div>
-												<p className="font-book">{formatMessageToReadableArray(txdata)[1]}</p>
+							</TabPanel>
+							<TabPanel className="tabs-content pt-4">
+								{data.logs ?
+									(PrettyPrintJson(data.logs))
+									:
+									('No logs to parse')
+								}
+							</TabPanel>
+							<TabPanel className="tabs-content pt-4">
+							
+							</TabPanel>
+						</Tabs>
+					</Box>
+					<Box title={t('common:box-messages')} adaptiveHeight>
+						<div className="row">
+							{data.tx.body.messages.map((txdata, index) => (
+								<div key={index} className="col-lg-6">
+									<div className="box-overlay">
+										<div className="d-flex align-items-center mt-3">
+											<div className="box-header-thumb color-orange __30 mr-3">
+												<PercentIcon/>
 											</div>
-											<hr className="hr"/>
-											{formatMessageToReadableArray(txdata)[0]
-												? <List data={formatMessageToReadableArray(txdata)[2]}/>
-												: PrettyPrintJson(txdata)}
+											<p className="font-book">{formatMessageToReadableArray(txdata)[1]}</p>
 										</div>
+										<hr className="hr"/>
+										{formatMessageToReadableArray(txdata)[0]
+											? <List data={formatMessageToReadableArray(txdata)[2]}/>
+											: PrettyPrintJson(txdata)}
 									</div>
-								))}
-							</div>
-						</Box>
-					</div>
-				) : <ErrorBlock/>
-			}
+								</div>
+							))}
+						</div>
+					</Box>
+				</div>
+			) : null}
 		</>
 	)
 }

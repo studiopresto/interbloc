@@ -1,7 +1,7 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import dataProvider from 'utils/requestProviders/dataProvider';
 import resources from 'utils/requestProviders/resources';
-import { STATUS } from 'config/constants';
+import {QUERY_PARAMETERS, STATUS} from 'config/constants';
 
 const initialState = {
 	data: {},
@@ -13,7 +13,12 @@ export const transactionsKey = 'Transactions';
 
 export const fetchTransactions = createAsyncThunk(
 	`${transactionsKey}/fetch`,
-	async ({ limit = 10, per_page = 10, page = 1 }) => {
+	async (
+		{
+			limit = QUERY_PARAMETERS.LIMIT,
+			per_page = QUERY_PARAMETERS.PARE_PAGE,
+			page = 1
+		}) => {
 		return await dataProvider.getList(resources.latestTransactions, { limit, per_page, page })
 	}
 );

@@ -1,85 +1,80 @@
-import {useEffect, useState} from 'react';
+import {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import Link from "next/link";
+import Link from 'next/link';
+import {useRouter} from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import Image from 'next/image';
 import NumberFormat from 'react-number-format';
 import placeholder from '../../../public/static/images/placeholder.svg';
 import {fetchBlocks, selectBlocks} from 'store/slices/getBlocksSlice';
-import {fetchValidatorsAddressConversion, selectValidatorsAddressConversion} from 'store/slices/getValidatorsAddressConversion';
+import {
+	fetchValidatorsAddressConversion,
+	selectValidatorsAddressConversion
+} from 'store/slices/getValidatorsAddressConversion';
 import Preloader from 'ui/components/Preloader';
 import ErrorBlock from 'ui/components/Error';
 import BlocksIcon from 'ui/icons/Blocks';
 import hashShortening from 'utils/string/hashShortening';
-import {STATUS} from 'config/constants';
-import {getDateDifferent} from "utils/date/getDateDifferent";
-import routes from "config/routes";
-import {isEmptyObject} from "utils/object/detectEmptyObject";
-import Pagination from "components/Pagination";
+import {QUERY_PARAMETERS, STATUS} from 'config/constants';
+import {getDateDifferent} from 'utils/date/getDateDifferent';
+import routes from 'config/routes';
+import {isEmptyObject} from 'utils/object/detectEmptyObject';
+import Pagination from 'components/Pagination';
 
 export default function BlocksPage() {
-
+	
 	const dispatch = useDispatch();
-	const { data, status } = useSelector(selectBlocks);
-	const { data: validatorData, status: validatorStatus } = useSelector(selectValidatorsAddressConversion);
-	const [page, setPage] = useState(1);
-	const { t } = useTranslation();
-	const per_page = 10;
+	const {query: {page = 1}} = useRouter();
+	const {data, status} = useSelector(selectBlocks);
+	const {data: validatorData, status: validatorStatus} = useSelector(selectValidatorsAddressConversion);
+	const {t} = useTranslation();
 	let height = 0;
-
-  const paginationChange = p => {
-      setPage(p)
-  }
-  
+	
 	useEffect(() => {
-		dispatch(fetchBlocks({ items_per_page: per_page, page: page }));
-		dispatch(fetchValidatorsAddressConversion({ height }));
+		dispatch(fetchBlocks({page: page}));
+		dispatch(fetchValidatorsAddressConversion({height}));
 	}, [dispatch, page]);
-
-	if (data == null && status === STATUS.REJECTED) {
-		return <ErrorBlock/>
-	}
-
-	if (isEmptyObject(data) || status === STATUS.PENDING) {
-		return <Preloader/>;
-	}
-
-	if (!isEmptyObject(data) && status === STATUS.FULFILLED) {
-		height = data.blocks[0].header.height
-		return (
-			<>
-				<div className="page-header-inner">
-					<div className="page-header-thumb __turquoise">
-						<BlocksIcon/>
-					</div>
-					<div>
-						<h1 className="h-2">{t('blocks:page-title')}</h1>
-						<p className="h-6">{t('blocks:page-subtitle')}</p>
-					</div>
+	
+	return (
+		<>
+			<div className="page-header-inner">
+				<div className="page-header-thumb __turquoise">
+					<BlocksIcon/>
 				</div>
+				<div>
+					<h1 className="h-2">{t('blocks:page-title')}</h1>
+					<p className="h-6">{t('blocks:page-subtitle')}</p>
+				</div>
+			</div>
+			{status === STATUS.PENDING || status === STATUS.IDLE ? <Preloader/> : null}
+			{isEmptyObject(data) || status === STATUS.REJECTED ? <ErrorBlock/> : null}
+			{!isEmptyObject(data) && status === STATUS.FULFILLED ? (
 				<div className="page-body">
 					<div className="table-box">
-            <div className="table-header">
-              <div className="row">
-                <div className="col-12 col-md-6 mb-3">
-                  <p className="font-16 font-book mb-1">
-	                  <span className="color-turquoise font-bold">{ data.pagination.total } </span>
-	                  {t('labels:blocks')} {t('labels:found')}
-                  </p>
-                  <p className="font-12 font-book color-grey">({t('labels:showing-records', { count: per_page })})</p>
-                </div>
-                <div className="col-12 col-md-6">
-                  <div className="d-flex justify-content-end left-text">
-                    <Pagination
-	                    onClick={paginationChange}
-	                    page={page}
-	                    pageCount={data.pagination.totalPages}
-	                    theme="rounded"/>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <table className="table">
+						<div className="table-header">
+							<div className="row">
+								<div className="col-12 col-md-6 mb-3">
+									<p className="font-16 font-book mb-1">
+										<NumberFormat
+											value={data.pagination.total}
+											displayType="text"
+											thousandSeparator={true}
+											renderText={(value, props) => {
+												return <span className="color-turquoise font-bold" {...props}>{value} </span>
+											}}/>
+										{t('labels:blocks')} {t('labels:found')}
+									</p>
+									<p
+										className="font-12 font-book color-grey">({t('labels:showing-records', {count: QUERY_PARAMETERS.PARE_PAGE})})</p>
+								</div>
+								<div className="col-12 col-md-6">
+									<div className="d-flex justify-content-end left-text">
+										<Pagination page={page} pageCount={data.pagination.totalPages} theme="rounded" url={routes.public.blocks}/>
+									</div>
+								</div>
+							</div>
+						</div>
+						<table className="table">
 							<thead>
 							<tr>
 								<th>{t('labels:height')}</th>
@@ -110,18 +105,18 @@ export default function BlocksPage() {
 												<div className="thumb size-30 position-left">
 													{validatorData[option.header.proposerAddress.toUpperCase()] && validatorData[option.header.proposerAddress.toUpperCase()].description.identity
 														? <Image
-															src={process.env.API_SERVER + "validator/keybase/image/" + validatorData[option.header.proposerAddress.toUpperCase()].description.identity}
+															src={process.env.API_SERVER + 'validator/keybase/image/' + validatorData[option.header.proposerAddress.toUpperCase()].description.identity}
 															width={30}
 															height={30}
-															alt={validatorData[option.header.proposerAddress.toUpperCase()].description.moniker + " logo"}
-															loading={"lazy"}
+															alt={validatorData[option.header.proposerAddress.toUpperCase()].description.moniker + ' logo'}
+															loading={'lazy'}
 														/>
 														: <Image
 															src={placeholder}
 															width={30}
 															height={30}
 															alt={option.blockproposer}
-															loading={"lazy"}
+															loading={'lazy'}
 														/>}
 												</div>
 												<span className="font-secondary-bold">
@@ -144,9 +139,7 @@ export default function BlocksPage() {
 						</table>
 					</div>
 				</div>
-			</>
-		)
-	}
-
-	return <ErrorBlock/>;
+			) : null}
+		</>
+	)
 }

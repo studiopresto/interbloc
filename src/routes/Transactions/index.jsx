@@ -1,5 +1,6 @@
-import {useEffect, useState} from 'react';
+import {useEffect} from 'react';
 import Link from 'next/link';
+import {useRouter} from 'next/router';
 import {useDispatch, useSelector} from 'react-redux';
 import useTranslation from 'next-translate/useTranslation';
 import NumberFormat from 'react-number-format';
@@ -9,70 +10,65 @@ import Preloader from 'ui/components/Preloader';
 import {fetchTransactions, selectTransactions} from 'store/slices/getTransactionsSlice';
 import TransactionsIcon from 'ui/icons/Transactions';
 import EyeIcon from 'ui/icons/Eye';
-import {STATUS} from 'config/constants';
+import {QUERY_PARAMETERS, STATUS} from 'config/constants';
 import routes from 'config/routes';
 import {getDateDifferent} from 'utils/date/getDateDifferent';
-import {formatDenomToString} from "utils/formatting/coins";
-import {formatMessageToReadableArray} from "utils/formatting/transactions";
-import ErrorBlock from "ui/components/Error";
-import coinConfig from "../../../coin.config";
-import {isEmptyObject} from "utils/object/detectEmptyObject";
-import {fetchChainStats, selectChainStats} from "store/slices/getChainStats";
+import {formatDenomToString} from 'utils/formatting/coins';
+import {formatMessageToReadableArray} from 'utils/formatting/transactions';
+import ErrorBlock from 'ui/components/Error';
+import coinConfig from '../../../coin.config';
+import {isEmptyObject} from 'utils/object/detectEmptyObject';
+import {fetchChainStats, selectChainStats} from 'store/slices/getChainStats';
 
 export default function TransactionsPage() {
-
-	const dispatch = useDispatch();
-	const { data, status } = useSelector(selectTransactions);
-	const { data: chainData, status: chainStatus } = useSelector(selectChainStats);
-	const { t } = useTranslation();
-
-	const [page, setPage] = useState(1)
-	let per_page = 10;
 	
-	const paginationChange = p => {
-		setPage(p)
-	}
-
+	const dispatch = useDispatch();
+	const {query: {page = 1}} = useRouter();
+	const {data, status} = useSelector(selectTransactions);
+	const {data: chainData, status: chainStatus} = useSelector(selectChainStats);
+	const {t} = useTranslation();
+	
 	useEffect(() => {
-		dispatch(fetchTransactions({ page: page, per_page: per_page }));
+		dispatch(fetchTransactions({page: page}));
 		dispatch(fetchChainStats());
 	}, [dispatch, page]);
 	
-	if (isEmptyObject(data) && status === STATUS.REJECTED) {
-		return <ErrorBlock/>
-	}
-
-	if (!isEmptyObject(data) && status === STATUS.PENDING || status === STATUS.IDLE) {
-		return <Preloader/>;
-	}
-
-	if (!isEmptyObject(data) && status === STATUS.FULFILLED) {
-		
-		return (
-			<>
-				<div className="page-header-inner">
-					<div className="page-header-thumb __orange">
-						<TransactionsIcon/>
-					</div>
-					<div>
-						<h1 className="h-2">{t('transactions:page-title')}</h1>
-						<p className="font-16 font-secondary-bold">{coinConfig.ticker}: <span className="color-violet">${chainStatus === STATUS.FULFILLED ? chainData.fiatPrice : t('labels:loading')}</span></p>
-					</div>
+	return (
+		<>
+			<div className="page-header-inner">
+				<div className="page-header-thumb __orange">
+					<TransactionsIcon/>
 				</div>
+				<div>
+					<h1 className="h-2">{t('transactions:page-title')}</h1>
+					<p className="font-16 font-secondary-bold">{coinConfig.ticker}: <span
+						className="color-violet">${chainStatus === STATUS.FULFILLED ? chainData.fiatPrice : t('labels:loading')}</span>
+					</p>
+				</div>
+			</div>
+			{status === STATUS.PENDING || status === STATUS.IDLE ? <Preloader/> : null}
+			{isEmptyObject(data) || status === STATUS.REJECTED ? <ErrorBlock/> : null}
+			{!isEmptyObject(data) && status === STATUS.FULFILLED ? (
 				<div className="page-body">
 					<div className="table-box">
 						<div className="table-header">
 							<div className="row">
 								<div className="col-12 col-md-6 mb-3">
 									<p className="font-16 font-book mb-1">
-										<span className="color-turquoise font-bold">{data.pagination.total} </span>
+										<NumberFormat
+											value={data.pagination.total}
+											displayType="text"
+											thousandSeparator={true}
+											renderText={(value, props) => {
+												return <span className="color-turquoise font-bold" {...props}>{value} </span>
+											}}/>
 										{t('labels:transactions')} {t('labels:found')}
 									</p>
-									<p className="font-12 font-book color-grey">({t('labels:showing-records', { count: per_page })})</p>
+									<p className="font-12 font-book color-grey">({t('labels:showing-records', {count: QUERY_PARAMETERS.PARE_PAGE})})</p>
 								</div>
 								<div className="col-12 col-md-6">
 									<div className="d-flex justify-content-end left-text">
-										<Pagination onClick={paginationChange} page={page} pageCount={data.pagination.totalPages} theme="rounded"/>
+										<Pagination page={page} pageCount={data.pagination.totalPages} theme="rounded" url={routes.public.transactions}/>
 									</div>
 								</div>
 							</div>
@@ -125,14 +121,14 @@ export default function TransactionsPage() {
 										</td>
 										<td data-title={t('labels:method')}>
 											{option.tx.body.messages.map((msg, msgindex) => (
-												<span key={msgindex} className="chip ml-2">{ formatMessageToReadableArray(msg)[1] }</span>
+												<span key={msgindex} className="chip ml-2">{formatMessageToReadableArray(msg)[1]}</span>
 											))
 											}
 										</td>
 										<td data-title={t('labels:txn-fee')}>
 											<span className="font-book">{
 												option.authInfo.fee.amount ?
-													formatDenomToString(option.authInfo.fee.amount[0].amount , option.authInfo.fee.amount[0].denom) :
+													formatDenomToString(option.authInfo.fee.amount[0].amount, option.authInfo.fee.amount[0].denom) :
 													formatDenomToString(0, coinConfig.denom)
 											}</span>
 										</td>
@@ -146,9 +142,7 @@ export default function TransactionsPage() {
 						</table>
 					</div>
 				</div>
-			</>
-		)
-	}
-
-	return null;
+			) : null}
+		</>
+	)
 }

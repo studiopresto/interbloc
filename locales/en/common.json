@@ -5,6 +5,7 @@
 	"page-governance": "Governance",
 	"page-validators": "Validators",
 	"page-proposal": "Proposal",
+	"page-block": "Block",
 	"box-blocks": "Blocks",
 	"box-tokenomics": "Tokenomics",
 	"box-relayers": "Relayers",
@@ -19,6 +20,9 @@
 	"box-validator-history": "Validator History",
 	"box-delegators": "Delegators",
 	"box-staking-stats": "Staking Stats",
+	"box-block-info": "Block Info",
+	"box-signatures": "Signatures",
+	"transaction-types": "Transaction Types",
 	"placeholder-search": "Search for transactions, addresses, blocks and ambedded text data...",
 	"modal-qr": "Address QR Code"
 }

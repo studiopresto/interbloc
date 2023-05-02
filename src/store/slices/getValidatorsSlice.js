@@ -28,6 +28,7 @@ export const fetchValidators = createAsyncThunk(
 			return dataFromLocalStorage;
 		} else {
 			// get data from API
+			console.log('fetch validators')
 			const data = await dataProvider.getList(`${resources.validators}`, {
 				per_page,
 				skip,

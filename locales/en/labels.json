@@ -76,9 +76,11 @@
 	"transactions": "transactions",
 	"blocks": "blocks",
 	"page-of": "Page {{current}} of {{total}}",
+	"all": "All",
 	"passed": "Passed",
 	"rejected": "Rejected",
 	"voting-period": "Voting Period",
+	"deposit-period": "Deposit Period",
 	"search-validator": "Search Validator",
 	"count-of-total": "{{count}} of {{total}} m has voted",
 	"latest-count-of": "Latest {{count}} from a total of",
@@ -99,5 +101,14 @@
 	"address-was-copied": "Address was copied!",
 	"this-didnt-work": "This didn't work.",
 	"historical": "Historical",
-	"loading": "Loading"
+	"loading": "Loading",
+	"chain-id": "Chain id",
+	"block-time": "Block Time",
+	"block-hash": "Block Hash",
+	"number-tx": "Number of Tx",
+	"gas": "Gas",
+	"consensus-time": "Consensus Time",
+	"out-of": "{{count}} out of {{total}}",
+	"gas-used": "Gas Used",
+	"gas-wanted": "Gas Wanted"
 }

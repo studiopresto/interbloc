@@ -2,14 +2,12 @@ import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-
-
 export default function VerticalNavItem({ children, href = '/', label }) {
 
-	const { asPath } = useRouter();
+	const { pathname } = useRouter();
 	
 	return (
-		<div className={`verticalNav-list-item ${asPath === href ? 'is-active' : ''}`}>
+		<div className={`verticalNav-list-item ${pathname === href ? 'is-active' : ''}`}>
 			<Link href={href}>
 				<a>
 					<span className="link-icon">

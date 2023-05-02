@@ -1,11 +1,14 @@
-import {transactions, labels} from "../../config/transactions";
+import {transactions, labels} from "config/transactions";
 import {formatFromDenom} from "./coins";
 import coinConfig from "../../../coin.config";
 
 export const formatMessageToReadableArray = (data) => {
     // Parse transaction to make it readable. Returns as [flagIfFormatted: bool, Title: str, data: Object/Array]
+    // console.log('transactions ', transactions)
+    // console.log('data ', data)
     if (Object.keys(transactions).includes(data.type)){
         const parsedData = transactions[data.type](data);
+        console.log('parsedData ', parsedData)
         const title = parsedData['title'];
         delete parsedData['title'];
         const parsedArray = Object.keys(parsedData).map( key => [labels[key], parsedData[key]])
