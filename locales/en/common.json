@@ -22,6 +22,7 @@
 	"box-staking-stats": "Staking Stats",
 	"box-block-info": "Block Info",
 	"box-signatures": "Signatures",
+	"box-assets": "Assets",
 	"transaction-types": "Transaction Types",
 	"placeholder-search": "Search for transactions, addresses, blocks and ambedded text data...",
 	"modal-qr": "Address QR Code"

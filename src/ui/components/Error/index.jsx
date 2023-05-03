@@ -1,7 +1,5 @@
 import PropTypes from 'prop-types';
 
-
-
 export default function ErrorBlock({ title = 'Some error' }) {
 	return (
 		<div className="error-block">

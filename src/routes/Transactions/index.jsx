@@ -16,6 +16,7 @@ import {getDateDifferent} from 'utils/date/getDateDifferent';
 import {formatDenomToString} from 'utils/formatting/coins';
 import {formatMessageToReadableArray} from 'utils/formatting/transactions';
 import ErrorBlock from 'ui/components/Error';
+import EmptyBlock from 'ui/components/Empty/EmptyBlock';
 import coinConfig from '../../../coin.config';
 import {isEmptyObject} from 'utils/object/detectEmptyObject';
 import {fetchChainStats, selectChainStats} from 'store/slices/getChainStats';
@@ -48,6 +49,7 @@ export default function TransactionsPage() {
 			</div>
 			{status === STATUS.PENDING || status === STATUS.IDLE ? <Preloader/> : null}
 			{isEmptyObject(data) || status === STATUS.REJECTED ? <ErrorBlock/> : null}
+			{status === STATUS.FULFILLED && !data.transactions.length ? <EmptyBlock/> : null}
 			{!isEmptyObject(data) && status === STATUS.FULFILLED ? (
 				<div className="page-body">
 					<div className="table-box">

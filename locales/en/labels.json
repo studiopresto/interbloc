@@ -36,7 +36,7 @@
 	"total-deposit": "Total Deposit",
 	"filter-by": "Filter by",
 	"id": "Id",
-	"title": "title",
+	"title": "Title",
 	"submitted": "Submitted",
 	"deposit-end-time": "Deposit End Time",
 	"votes": "Votes",
@@ -110,5 +110,9 @@
 	"consensus-time": "Consensus Time",
 	"out-of": "{{count}} out of {{total}}",
 	"gas-used": "Gas Used",
-	"gas-wanted": "Gas Wanted"
+	"gas-wanted": "Gas Wanted",
+	"delegations": "Delegations",
+	"unbondings": "Unbondings",
+	"redelegations": "Redelegations",
+	"vestings": "Vestings"
 }

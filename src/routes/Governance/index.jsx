@@ -11,6 +11,7 @@ import {PROPOSAL_STATUS, STATUS} from 'config/constants';
 import ErrorBlock from 'ui/components/Error';
 import routes from 'config/routes';
 import SelectCustom from 'ui/components/Select';
+import EmptyBlock from 'ui/components/Empty/EmptyBlock';
 import Pagination from 'components/Pagination';
 import {isEmptyObject} from 'utils/object/detectEmptyObject';
 import {fetchGovernanceProposals, selectGovernanceProposals} from 'store/slices/getGovernanceProposals';
@@ -50,6 +51,7 @@ export default function GovernancePage() {
 			</div>
 			{status === STATUS.PENDING || status === STATUS.IDLE ? <Preloader/> : null}
 			{isEmptyObject(data) || status === STATUS.REJECTED ? <ErrorBlock/> : null}
+			{status === STATUS.FULFILLED && !data.proposals.length ? <EmptyBlock/> : null}
 			{status === STATUS.FULFILLED && data.proposals.length ? (
 				<div className="page-body">
 					<div className="row">
@@ -87,8 +89,7 @@ export default function GovernancePage() {
 										pageCount={data.pagination.totalPages}
 										page={page}
 										limit={10}
-										url={routes.public.governance}
-										theme="rounded"/>
+										url={routes.public.governance}/>
 								</div>
 							</div>
 						</div>

@@ -25,7 +25,7 @@ export default function Assets({ balances }) {
 			<div className="table-header mb-4">
 				<div className="row">
 					<div className="col-sm-4">
-						<p className="font-20 font-bold">Assets</p>
+						<p className="font-20 font-bold">{t('common:box-assets')}</p>
 					</div>
 					<div className="col-sm-8">
 						<div className="d-flex align-items-center justify-content-sm-end">

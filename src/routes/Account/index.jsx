@@ -104,7 +104,7 @@ export default function AccountPage() {
 					</div>
 				</div>
 				<div className="page-body">
-					<Hash title="Address" value={addressSlug}/>
+					<Hash title={t('labels:address')} value={addressSlug}/>
 					<div className="row">
 						<div className="col-lg-6">
 							<Assets balances={data.balances}/>
@@ -115,16 +115,16 @@ export default function AccountPage() {
 									<Tabs className="tabs">
 										<TabList className="tabs-buttons">
 											<Tab className="tabs-buttons-item">
-												<div className="tabs-button">Delegations</div>
+												<div className="tabs-button">{t('labels:delegations')}</div>
 											</Tab>
 											<Tab className="tabs-buttons-item">
-												<div className="tabs-button">Unbondings</div>
+												<div className="tabs-button">{t('labels:unbondings')}</div>
 											</Tab>
 											<Tab className="tabs-buttons-item">
-												<div className="tabs-button">Redelegations</div>
+												<div className="tabs-button">{t('labels:redelegations')}</div>
 											</Tab>
 											<Tab className="tabs-buttons-item">
-												<div className="tabs-button">Vestings</div>
+												<div className="tabs-button">{t('labels:vestings')}</div>
 											</Tab>
 										</TabList>
 										<TabPanel className="tabs-content pt-2">

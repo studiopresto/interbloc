@@ -1,11 +1,14 @@
 import PropTypes from 'prop-types';
 import Link from 'next/link';
+import ReactPaginate from 'react-paginate';
 import useTranslation from 'next-translate/useTranslation';
 import ArrowShortIcon from 'ui/icons/ArrowShort';
+import {useRouter} from 'next/router';
 
 export default function Pagination({ theme = 'default', page = 1, pageCount, url = '/' }) {
 
 	const { t } = useTranslation();
+	const router = useRouter();
 	
 	if (theme === 'rounded') {
 		return (
@@ -44,21 +47,25 @@ export default function Pagination({ theme = 'default', page = 1, pageCount, url
 	}
 
 	return (
-		<div className="pagination pagination-line">
-			<div className="pagination-item __prev">
-				<a className="pagination-link pagination-link-arrow" href="#">
-					<ArrowShortIcon/>
-				</a>
-			</div>
-			<div className="pagination-list">
-				{/*{items}*/}
-			</div>
-			<div className="pagination-item __next">
-				<a className="pagination-link pagination-link-arrow" href="#">
-					<ArrowShortIcon/>
-				</a>
-			</div>
-		</div>
+		<ReactPaginate
+			pageCount={pageCount}
+			pageRangeDisplayed={2}
+			marginPagesDisplayed={2}
+			initialPage={Math.max(0, (Number(page) - 1))}
+			containerClassName="pagination pagination-line"
+			pageClassName="pagination-item"
+			pageLinkClassName="pagination-link"
+			activeClassName="is-active"
+			nextClassName="pagination-item __next"
+			previousClassName="pagination-item __prev"
+			nextLinkClassName="pagination-link pagination-link-arrow"
+			previousLinkClassName="pagination-link pagination-link-arrow"
+			breakClassName="pagination-item"
+			breakLinkClassName="pagination-link"
+			previousLabel=""
+			nextLabel=""
+			onPageChange={({ selected }) => router.push(`${url}/?page=${selected + 1}`)}
+		/>
 	)
 }
 

@@ -23,6 +23,7 @@
 			border-radius: 6px;
 			font-family: var(--font-title-bold);
 			transition: background-color var(--duration) var(--ease), color var(--duration) var(--ease);
+			cursor: pointer;
 				&:hover{
 					text-decoration: none;
 					color: var(--color-primary);
@@ -38,21 +39,34 @@
 		}
 		&-item{
 			margin: 0 6px;
+			
+				@include d($xs){
+					margin: 0 2px;
+				}
+			
 				&.__prev{
 					transform: scaleX(-1);
 				}
 				&.__prev,
 				&.__next{
-					.pagination{
-						&-link{
-							color: var(--color-primary);
-								&:hover{
-									color: var(--color-white);
-								}
+						.pagination{
+							&-link{
+								color: var(--color-primary);
+									&:hover{
+										color: var(--color-white);
+									}
+							}
 						}
-					}
 				}
 			
+				&:hover{
+					text-decoration: none;
+					color: var(--color-primary);
+				}
+				&.disabled{
+					opacity: .5;
+					pointer-events: none;
+				}
 				&.is-active{
 					.pagination-link{
 						background-color: var(--color-primary);
@@ -63,7 +77,23 @@
 }
 
 .pagination-line {
-	@media (max-width: 576px) {
-		display: inline-flex !important;
+		.pagination{
+			&-item{
+				&.__prev,
+				&.__next{
+					.pagination{
+						&-link{
+							color: var(--color-primary);
+							background-image: url(./assets/icons/arrow-right.svg);
+							background-repeat: no-repeat;
+							background-size: 60%;
+							background-position: center;
+						}
+					}
+				}
+			}
+		}
+		@media (max-width: 576px) {
+			display: inline-flex !important;
 	  }
 }

@@ -14,12 +14,13 @@ import {
 import Preloader from 'ui/components/Preloader';
 import ErrorBlock from 'ui/components/Error';
 import BlocksIcon from 'ui/icons/Blocks';
+import EmptyBlock from 'ui/components/Empty/EmptyBlock';
 import hashShortening from 'utils/string/hashShortening';
-import {QUERY_PARAMETERS, STATUS} from 'config/constants';
 import {getDateDifferent} from 'utils/date/getDateDifferent';
 import routes from 'config/routes';
 import {isEmptyObject} from 'utils/object/detectEmptyObject';
 import Pagination from 'components/Pagination';
+import {QUERY_PARAMETERS, STATUS} from 'config/constants';
 
 export default function BlocksPage() {
 	
@@ -48,6 +49,7 @@ export default function BlocksPage() {
 			</div>
 			{status === STATUS.PENDING || status === STATUS.IDLE ? <Preloader/> : null}
 			{isEmptyObject(data) || status === STATUS.REJECTED ? <ErrorBlock/> : null}
+			{status === STATUS.FULFILLED && !data.blocks.length ? <EmptyBlock/> : null}
 			{!isEmptyObject(data) && status === STATUS.FULFILLED ? (
 				<div className="page-body">
 					<div className="table-box">

@@ -106,9 +106,17 @@ strong{
 		}
 }
 
-.error-block{
+.error-block,
+.empty-block{
 	@extend .preloader;
 }
+
+.empty-block{
+		img{
+			filter: grayscale(1);
+		}
+}
+
 
 .list{
 		&-custom{

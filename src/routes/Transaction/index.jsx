@@ -37,7 +37,7 @@ export default function TransactionPage() {
 			dispatch(fetchChainStats());
 		}
 	}, [transactionSlug, dispatch]);
-	// console.log('data.tx.body.messages ', data?.tx?.body?.messages)
+	console.log('data.tx.body.messages ', data?.tx?.body?.messages)
 	return (
 		<>
 			<div className="page-header-inner">
