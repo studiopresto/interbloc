@@ -1,4 +1,5 @@
-import {formatFromDenom} from "utils/formatting/coins";
+import {formatFromDenom} from 'utils/formatting/coins';
+import routes from 'config/routes';
 
 export const MsgSendType = "/cosmos.bank.v1beta1.MsgSend";
 
@@ -7,8 +8,18 @@ export const ParseMsgSend = (data) => {
     
     return {
         'title': 'Send',
-        'from': data.fromAddress,
-        'to': data.toAddress,
-        'amount': amount + ' ' + denom
+        'from': {
+            title: data.fromAddress,
+            href: `${routes.public.account}/${data.fromAddress}`,
+            newTab: false
+        },
+        'to': {
+            title: data.toAddress,
+            href: `${routes.public.account}/${data.toAddress}`,
+            newTab: false
+        },
+        'amount': {
+            title: `${amount} ${denom}`
+        }
     }
 }

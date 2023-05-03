@@ -22,7 +22,7 @@ export const fetchChainStats = createAsyncThunk(
 			return dataFromLocalStorage;
 		} else {
 			// get data from API
-			const data = await dataProvider.getOne(resources.chainStats);
+			const data = await dataProvider.getOne(resources.chainStats, { currency: 'btc' });
 			// save data to localStorage
 			await setToLocalStorageWithExpiry(chainStatsKey, data);
 			return data;

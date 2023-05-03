@@ -9,9 +9,10 @@ import {styles} from 'config/chart';
 import {formatProposalStatus} from "utils/formatting/governanceProposals";
 import {getDateFromTimestamp} from "utils/date/getDateFromTimestamp";
 import {getDateDifferent} from "utils/date/getDateDifferent";
+import Preloader from 'ui/components/Preloader';
 
 const Plot = dynamic(import('../../../node_modules/react-plotly.js/react-plotly'), {
-	ssr: false
+	ssr: false, loading: () => <Preloader/>
 })
 
 export default function GovernanceChart({ data = {} }) {

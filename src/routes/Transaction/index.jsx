@@ -6,7 +6,7 @@ import {Tab, Tabs, TabList, TabPanel} from 'react-tabs';
 import {fetchTransaction, selectTransaction} from 'store/slices/getTransactionSlice';
 import Hash from 'ui/components/Hash';
 import Preloader from 'ui/components/Preloader';
-import List from 'ui/components/List';
+import List from 'ui/components/List2';
 import ErrorBlock from 'ui/components/Error';
 import Box from 'ui/components/Box';
 import Button from 'ui/components/Button';
@@ -37,7 +37,7 @@ export default function TransactionPage() {
 			dispatch(fetchChainStats());
 		}
 	}, [transactionSlug, dispatch]);
-	console.log('data.tx.body.messages ', data?.tx?.body?.messages)
+	
 	return (
 		<>
 			<div className="page-header-inner">

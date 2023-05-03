@@ -4,15 +4,17 @@ import coinConfig from "../../../coin.config";
 
 export const formatMessageToReadableArray = (data) => {
     // Parse transaction to make it readable. Returns as [flagIfFormatted: bool, Title: str, data: Object/Array]
-    // console.log('transactions ', transactions)
-    // console.log('data ', data)
     if (Object.keys(transactions).includes(data.type)){
         const parsedData = transactions[data.type](data);
-        console.log('parsedData ', parsedData)
         const title = parsedData['title'];
         delete parsedData['title'];
-        const parsedArray = Object.keys(parsedData).map( key => [labels[key], parsedData[key]])
-
+        const parsedArray = Object.keys(parsedData).map(key => {
+            return {
+                label: labels[key],
+                value: parsedData[key]
+            }
+        })
+        
         return [true, title, parsedArray];
     }
     const type = data.type.split('.');
@@ -26,7 +28,7 @@ export const formatMessageToObject = (data) => {
     } else {
         parsedData = structuredClone(data);
         const type = data.type.split('.');
-        parsedData.title = type.slice(-1)[0]
+        parsedData.title = type.slice(-1)[0];
         if (Object.keys(parsedData).includes('amount')) {
             const [amount, denom] = [0, coinConfig.denom]
             if (typeof data.amount === 'array' ){
@@ -35,7 +37,7 @@ export const formatMessageToObject = (data) => {
                 [amount, denom] = formatFromDenom(data.amount.amount, data.amount.denom)
             }
 
-            parsedData.amount = amount + ' ' + denom
+            parsedData.amount.title = amount + ' ' + denom
 
         }
     }

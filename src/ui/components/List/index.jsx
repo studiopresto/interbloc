@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 
 export default function List({ data }) {
-	console.log('List, data ', data)
 	if (!!data.length) {
 		return (
 			<ul className="list-custom">

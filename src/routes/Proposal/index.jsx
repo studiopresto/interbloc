@@ -4,7 +4,7 @@ import {useRouter} from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import ReactMarkdown from 'react-markdown'
 import Box from 'ui/components/Box';
-import List from 'ui/components/List';
+import List from 'ui/components/List2';
 import Preloader from 'ui/components/Preloader';
 import Dot from 'ui/components/Dot';
 import ProgressMultiple from 'ui/components/ProgressMultiple';
@@ -17,15 +17,10 @@ import {STATUS} from 'config/constants';
 import ErrorBlock from 'ui/components/Error';
 import {formatProposalStatus} from 'utils/formatting/governanceProposals';
 import {getDateFromTimestamp} from 'utils/date/getDateFromTimestamp';
-import {
-	formatCoinArrayToString,
-	formatCoinsFromBaseDenom,
-	formatFromBaseDenom,
-	formatFromDenom
-} from 'utils/formatting/coins';
+import {formatCoinsFromBaseDenom, formatFromBaseDenom} from 'utils/formatting/coins';
 import NumberFormat from 'react-number-format';
 import coinConfig from '../../../coin.config';
-import {getDateDifferent} from 'utils/date/getDateDifferent';
+import {extractProposalData} from 'utils/formatting/proposal';
 
 const Votes = dynamic(async () => {
 	return await import('./Votes');
@@ -70,17 +65,7 @@ export default function ProposalPage() {
 		// Target order: yes, no, nwv, abstain
 		total = [total[0], total[2], total[3], total[1]];
 		
-		infoList = [
-			[t('labels:proposer'), data.proposer],
-			[t('labels:type'), data.content.type],
-			[t('labels:submitted'), getDateFromTimestamp(data.submitTime * 1000)],
-			[t('labels:deposit-end-time'), getDateFromTimestamp(data.depositEndTime * 1000)],
-			[t('labels:voting-start'), getDateFromTimestamp(data.votingStartTime * 1000)],
-			[t('labels:voting-end'), getDateFromTimestamp(data.votingEndTime * 1000)],
-			// ["Initial Deposit", getDateFromTimestamp(data.votingEndTime * 1000)],
-			[t('labels:total-deposit'), formatCoinArrayToString(data.totalDeposit)],
-			[t('labels:votes'), formatCoinsFromBaseDenom(totalVote).value + ' ' + formatCoinsFromBaseDenom(totalVote).suffix],
-		];
+		infoList = extractProposalData(data, totalVote, t);
 	}
 	
 	return (

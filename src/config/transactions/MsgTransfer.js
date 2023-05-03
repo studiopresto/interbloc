@@ -1,4 +1,5 @@
 import {formatFromDenom} from 'utils/formatting/coins';
+import routes from 'config/routes';
 
 export const MsgTransferType = '/ibc.applications.transfer.v1.MsgTransfer';
 
@@ -7,11 +8,25 @@ export const ParseMsgTransfer = (data) => {
 	
 	return {
 		'title': 'Transfer',
-		'sender': data.sender,
-		'receiver': data.receiver,
-		'token': `${amount} ${denom}`,
-		'sourcePort': data.sourcePort,
-		'sourceChannel': data.sourceChannel,
-		'timeout': new Date(data.timeoutTimestamp / 1000000).toLocaleDateString()
+		'sender': {
+			title: data.sender,
+			href: `${routes.public.account}/${data.sender}`,
+			newTab: false
+		},
+		'receiver': {
+			title: data.receiver,
+		},
+		'token': {
+			title: `${amount} ${denom}`
+		},
+		'sourcePort': {
+			title: data.sourcePort
+		},
+		'sourceChannel': {
+			title: data.sourceChannel
+		},
+		'timeout': {
+			title: new Date(data.timeoutTimestamp / 1000000).toLocaleDateString()
+		}
 	}
 }

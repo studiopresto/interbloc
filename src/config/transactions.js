@@ -1,3 +1,4 @@
+import getT from 'next-translate/getT';
 import {MsgSendType, ParseMsgSend} from './transactions/MsgSend';
 import {MsgTransferType, ParseMsgTransfer} from './transactions/MsgTransfer';
 import {MsgUndelegateType, ParseMsgUndelegate} from './transactions/MsgUndelegate';

@@ -13,7 +13,7 @@ import SortDirectionIcon from 'ui/icons/SortDirection';
 import Hash from 'ui/components/Hash';
 import ProgressMultiple from 'ui/components/ProgressMultiple';
 import Box from 'ui/components/Box';
-import List from 'ui/components/List';
+import List from 'ui/components/List2';
 import Preloader from 'ui/components/Preloader';
 import Button from 'ui/components/Button';
 import {STATUS} from 'config/constants';
@@ -108,7 +108,7 @@ export default function BlockOpenPage() {
 		
 		info = extractBlockData(data, aggregated, t)
 		if (addressConversionStatus === STATUS.FULFILLED) {
-			info[7][1] = info[7][1] in addressConversion ? addressConversion[info[7][1]].description.moniker : info[7][1];
+			info[7].value.title = info[7].value.title in addressConversion ? addressConversion[info[7].value.title].description.moniker : info[7].value.title;
 		}
 		
 	}
@@ -265,12 +265,13 @@ export default function BlockOpenPage() {
 												)}
 											</td>
 											<td data-title={t('labels:value')}>
-                        <span
-	                        className="font-book">{Object.keys(txdata.tx.body.messages[0]).includes('amount') && typeof formatMessageToObject(txdata.tx.body.messages[0]).amount === 'string' ? (
-	                        formatMessageToObject(txdata.tx.body.messages[0]).amount
-                        ) : (
-	                        'Not identifiable'
-                        )}
+                        <span className="font-book">
+	                        {
+	                        	Object.keys(txdata.tx.body.messages[0]).includes('amount') &&
+		                        formatMessageToObject(txdata.tx.body.messages[0]).amount
+		                          ? (formatMessageToObject(txdata.tx.body.messages[0]).amount.title)
+			                        :'Not identifiable'
+	                        }
                         </span>
 											</td>
 											<td data-title={t('labels:txn-fee')}>
