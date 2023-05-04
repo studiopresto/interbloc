@@ -21,6 +21,7 @@ import {formatMessageToReadableArray} from 'utils/formatting/transactions';
 import {formatDenomToString, formatFromBaseDenom, formatFromDenom} from 'utils/formatting/coins';
 import coinConfig from '../../../coin.config';
 import {fetchChainStats, selectChainStats} from 'store/slices/getChainStats';
+import CopyValueButton from '../../components/CopyValueButton/CopyValueButton';
 
 export default function TransactionPage() {
 	
@@ -63,9 +64,9 @@ export default function TransactionPage() {
 								<Tab className="tabs-buttons-item">
 									<div className="tabs-button">{t('labels:logs')}</div>
 								</Tab>
-								<Tab className="tabs-buttons-item">
-									<div className="tabs-button">{t('labels:comments')}</div>
-								</Tab>
+								{/*<Tab className="tabs-buttons-item">*/}
+								{/*	<div className="tabs-button">{t('labels:comments')}</div>*/}
+								{/*</Tab>*/}
 							</TabList>
 							<TabPanel className="tabs-content pt-4">
 								<ul className="list-custom">
@@ -73,11 +74,9 @@ export default function TransactionPage() {
 										<span className="color-grey font-16">{t('labels:transaction-hash')}:</span>
 										<span className="font-16 font-secondary-bold word-break-all">{data.txhash}
 											<span className="ml-4">
-													<Button icon>
-														<FileIcon/>
-													</Button>
-												</span>
+												<CopyValueButton value={data.txhash}/>
 											</span>
+										</span>
 									</li>
 									<li>
 										<span className="color-grey font-16">{t('labels:status')}:</span>
@@ -141,15 +140,13 @@ export default function TransactionPage() {
 									</div>*/}
 							</TabPanel>
 							<TabPanel className="tabs-content pt-4">
-								{data.logs ?
-									(PrettyPrintJson(data.logs))
-									:
-									('No logs to parse')
-								}
+								<div className="box-overlay">
+									{data.logs ? PrettyPrintJson(data.logs) : 'No logs to parse'}
+								</div>
 							</TabPanel>
-							<TabPanel className="tabs-content pt-4">
+							{/*<TabPanel className="tabs-content pt-4">*/}
 							
-							</TabPanel>
+							{/*</TabPanel>*/}
 						</Tabs>
 					</Box>
 					<Box title={t('common:box-messages')} adaptiveHeight>

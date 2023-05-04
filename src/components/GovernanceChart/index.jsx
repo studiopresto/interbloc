@@ -81,7 +81,7 @@ export default function GovernanceChart({ data = {} }) {
 								autosize: true,
 								showlegend: true,
 								legend: {
-									x: 0.33,
+									x: 0.4,
 									y: 0.5,
 								},
 								margin: {t: 0, r: 0, b: 0, l: 0},

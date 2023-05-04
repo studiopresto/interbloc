@@ -9,10 +9,13 @@ export const formatMessageToReadableArray = (data) => {
         const title = parsedData['title'];
         delete parsedData['title'];
         const parsedArray = Object.keys(parsedData).map(key => {
-            return {
-                label: labels[key],
-                value: parsedData[key]
+            if (parsedData[key].title !== undefined) {
+                return {
+                    label: labels[key],
+                    value: parsedData[key]
+                }
             }
+            return null
         })
         
         return [true, title, parsedArray];

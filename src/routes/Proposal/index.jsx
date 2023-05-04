@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic';
 import {useDispatch, useSelector} from 'react-redux';
 import {useRouter} from 'next/router';
+import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
 import ReactMarkdown from 'react-markdown'
 import Box from 'ui/components/Box';
@@ -21,6 +22,7 @@ import {formatCoinsFromBaseDenom, formatFromBaseDenom} from 'utils/formatting/co
 import NumberFormat from 'react-number-format';
 import coinConfig from '../../../coin.config';
 import {extractProposalData} from 'utils/formatting/proposal';
+import routes from '../../config/routes';
 
 const Votes = dynamic(async () => {
 	return await import('./Votes');
@@ -317,30 +319,30 @@ export default function ProposalPage() {
 								</tr>
 								</thead>
 								<tbody>
-								{
-									data.depositors.map((depositor, index) => (
-										<tr key={index}>
-											<td data-title={t('labels:depositor')}>
-												<span className="font-secondary-bold color-turquoise">{depositor.address}</span>
-											</td>
-											<td data-title={t('labels:txs-hash')}>
-												<span className="font-book text-break">{depositor.hash}</span>
-											</td>
-											<td data-title={t('labels:amount')}>
-												<NumberFormat
-													value={formatFromBaseDenom(depositor.amount)}
-													displayType="text"
-													thousandSeparator={true}
-													renderText={(value, props) => {
-														return <span className="font-book" {...props}>{value} {coinConfig.ticker}</span>;
-													}}/>
-											</td>
-											<td data-title={t('labels:time')}>
-												<span className="font-book">{getDateFromTimestamp(depositor.timestamp)}</span>
-											</td>
-										</tr>
-									))
-								}
+								{data.depositors.map((depositor, index) => (
+									<tr key={index}>
+										<td data-title={t('labels:depositor')}>
+											<Link href={`${routes.public.account}/${depositor.address}`}>
+												<a className="font-secondary-bold color-turquoise">{depositor.address}</a>
+											</Link>
+										</td>
+										<td data-title={t('labels:txs-hash')}>
+											<span className="font-book text-break">{depositor.hash}</span>
+										</td>
+										<td data-title={t('labels:amount')}>
+											<NumberFormat
+												value={formatFromBaseDenom(depositor.amount)}
+												displayType="text"
+												thousandSeparator={true}
+												renderText={(value, props) => {
+													return <span className="font-book" {...props}>{value} {coinConfig.ticker}</span>;
+												}}/>
+										</td>
+										<td data-title={t('labels:time')}>
+											<span className="font-book">{getDateFromTimestamp(depositor.timestamp)}</span>
+										</td>
+									</tr>
+								))}
 								</tbody>
 							</table>
 						</div>
