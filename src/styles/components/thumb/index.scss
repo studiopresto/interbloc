@@ -1,6 +1,11 @@
 .thumb{
 	overflow: hidden;
 	border-radius: 50%;
+	background-color: var(--color-grey-200);
+	background-image: url(./assets/images/placeholder.svg);
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
 		img{
 			@include imageCover(center);
 		}

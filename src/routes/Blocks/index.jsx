@@ -105,20 +105,22 @@ export default function BlocksPage() {
 										<td data-title={t('labels:proposer')}>
 											<div className="d-inline-flex align-items-center">
 												<div className="thumb size-30 position-left">
-													{validatorData[option.header.proposerAddress.toUpperCase()] && validatorData[option.header.proposerAddress.toUpperCase()].description.identity
+													{validatorData[option.header.proposerAddress.toUpperCase()] && validatorData[option.header.proposerAddress.toUpperCase()].description.identity && validatorData[option.header.proposerAddress.toUpperCase()].description.identity !== ''
 														? <Image
 															src={process.env.API_SERVER + 'validator/keybase/image/' + validatorData[option.header.proposerAddress.toUpperCase()].description.identity}
 															width={30}
 															height={30}
 															alt={validatorData[option.header.proposerAddress.toUpperCase()].description.moniker + ' logo'}
-															loading={'lazy'}
+															loading="lazy"
+															blurDataURL="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mN8/Pr9fwAJNAO+ieK6PgAAAABJRU5ErkJggg=="
 														/>
 														: <Image
 															src={placeholder}
 															width={30}
 															height={30}
 															alt={option.blockproposer}
-															loading={'lazy'}
+															loading="lazy"
+															blurDataURL="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mN8/Pr9fwAJNAO+ieK6PgAAAABJRU5ErkJggg=="
 														/>}
 												</div>
 												<span className="font-secondary-bold">

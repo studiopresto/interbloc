@@ -280,7 +280,8 @@ export default function ValidatorsPage() {
 																	width={30}
 																	height={30}
 																	alt={validator.description.moniker + ' logo'}
-																	loading={'lazy'}
+																	loading="lazy"
+																	blurDataURL="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mN8/Pr9fwAJNAO"
 																/>
 															</div>
 															<span className="font-14 font-secondary-bold">{validator.description.moniker}</span>
