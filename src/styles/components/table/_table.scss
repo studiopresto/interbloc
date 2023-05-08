@@ -341,7 +341,7 @@
 					}
 					
 					@include d($xs){
-						padding-left: 95px;
+						padding-left: 100px;
 					}
 					
 					&:before{
@@ -400,9 +400,9 @@
 	}
 }	
 
-.no-space {
-    padding-left: 20px;
-}
+//.no-space {
+//    padding-left: 20px;
+//}
 
 .table-row {
 	display: flex;

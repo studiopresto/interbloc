@@ -2,7 +2,6 @@ import {useEffect} from 'react';
 import dynamic from 'next/dynamic';
 import {useRouter} from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
-import Image from 'next/image';
 import {useDispatch, useSelector} from 'react-redux';
 import Link from 'next/link';
 import routes from 'config/routes';
@@ -27,6 +26,7 @@ import {
 	fetchValidatorsAddressConversion,
 	selectValidatorsAddressConversion
 } from 'store/slices/getValidatorsAddressConversion';
+import Thumbnail from 'ui/components/Thumbnail/Thumbnail';
 
 const TransactionTypes = dynamic(async () => {
 	return await import('components/TransactionTypes');
@@ -48,8 +48,8 @@ export default function BlockOpenPage() {
 		},
 		[blockSlug, dispatch]);
 	
-	const gas = [{ title: t('labels:gas-used'), value: 100 }, { title: t('labels:gas-wanted'), value: 0 }];
-	let sign = [{ title: t('labels:signed'), value: 100 }, { title: t('labels:missed'), value: 0 }];
+	const gas = [{title: t('labels:gas-used'), value: 100}, {title: t('labels:gas-wanted'), value: 0}];
+	let sign = [{title: t('labels:signed'), value: 100}, {title: t('labels:missed'), value: 0}];
 	let info = []
 	let aggregated = {
 		'types': {},
@@ -162,35 +162,17 @@ export default function BlockOpenPage() {
 												{data.signatures.map((signature, index) => (<tr key={index}>
 														{signature.blockIdFlag !== 'BLOCK_ID_FLAG_ABSENT' ? (<>
 																<td data-title={t('labels:validator')}>
-																	<div
-																		className="d-inline-flex align-items-center">
-																		<div
-																			className="thumb size-30 position-left">
-																			{signature.validatorAddress in addressConversion ?
-																				(
-																					<Image
-																						src={process.env.API_SERVER + 'validator/keybase/image/' + addressConversion[signature.validatorAddress].description.identity}
-																						width={30}
-																						height={30}
-																						alt={addressConversion[signature.validatorAddress].description.moniker + ' logo'}
-																						loading={'lazy'}
-																					/>
-																				) : (
-																					<Image
-																						src={process.env.API_SERVER + 'validator/keybase/image/nada'}
-																						width={30}
-																						height={30}
-																						alt="tmp logo"
-																						loading={'lazy'}
-																					/>
-																				
-																				)
-																			}
+																	<div className="d-inline-flex align-items-center">
+																		<div className="thumb size-30 position-left">
+																			{signature.validatorAddress in addressConversion
+																				? <Thumbnail src={`validator/keybase/image/${addressConversion[signature.validatorAddress].description.identity}`} alt={addressConversion[signature.validatorAddress].description.moniker + ' logo'} id={addressConversion[signature.validatorAddress].description.identity}/>
+																				: null}
 																		</div>
-																		<span
-																			className="font-secondary-bold">
-                                                                {signature.validatorAddress in addressConversion ? addressConversion[signature.validatorAddress].description.moniker : signature.validatorAddress}
-                                                            </span>
+																		<span className="font-secondary-bold">
+																		{signature.validatorAddress in addressConversion
+																			? addressConversion[signature.validatorAddress].description.moniker
+																			: signature.validatorAddress}
+																	</span>
 																	</div>
 																</td>
 																<td data-title={t('labels:period')}>
@@ -267,10 +249,10 @@ export default function BlockOpenPage() {
 											<td data-title={t('labels:value')}>
                         <span className="font-book">
 	                        {
-	                        	Object.keys(txdata.tx.body.messages[0]).includes('amount') &&
+		                        Object.keys(txdata.tx.body.messages[0]).includes('amount') &&
 		                        formatMessageToObject(txdata.tx.body.messages[0]).amount
-		                          ? (formatMessageToObject(txdata.tx.body.messages[0]).amount.title)
-			                        :'Not identifiable'
+			                        ? (formatMessageToObject(txdata.tx.body.messages[0]).amount.title)
+			                        : 'Not identifiable'
 	                        }
                         </span>
 											</td>

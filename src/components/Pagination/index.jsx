@@ -51,7 +51,7 @@ export default function Pagination({ theme = 'default', page = 1, pageCount, url
 			pageCount={pageCount}
 			pageRangeDisplayed={2}
 			marginPagesDisplayed={2}
-			initialPage={Math.max(0, (Number(page) - 1))}
+			forcePage={Math.max(0, (Number(page) - 1))}
 			containerClassName="pagination pagination-line"
 			pageClassName="pagination-item"
 			pageLinkClassName="pagination-link"

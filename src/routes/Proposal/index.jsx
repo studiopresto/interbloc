@@ -33,14 +33,14 @@ const ValidatorVotes = dynamic(async () => {
 
 export default function ProposalPage() {
 	const dispatch = useDispatch();
-	const router = useRouter();
-	const {proposalSlug} = router.query;
+	const { query, locale } = useRouter();
+	const {proposalSlug} = query;
 	const {data, status} = useSelector(selectGovernanceProposal);
 	const {t} = useTranslation();
 	
 	useEffect(() => {
 		if (!!proposalSlug) {
-			dispatch(fetchGovernanceProposal({proposalSlug}));
+			dispatch(fetchGovernanceProposal({proposalSlug, target_language: locale }));
 		}
 	}, [proposalSlug, dispatch]);
 	

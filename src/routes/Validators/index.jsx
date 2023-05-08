@@ -1,5 +1,4 @@
 import {useEffect, useState} from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 import NumberFormat from 'react-number-format';
 import useTranslation from 'next-translate/useTranslation';
@@ -21,6 +20,7 @@ import {fetchChainStats, selectChainStats} from 'store/slices/getChainStats';
 import {STATUS} from 'config/constants';
 import Preloader from 'ui/components/Preloader';
 import ErrorBlock from 'ui/components/Error';
+import Thumbnail from 'ui/components/Thumbnail/Thumbnail';
 import coinConfig from '../../../coin.config';
 
 export default function ValidatorsPage() {
@@ -275,14 +275,7 @@ export default function ValidatorsPage() {
 													<a>
 														<div className="d-inline-flex align-items-center">
 															<div className="thumb size-30 position-left">
-																<Image
-																	src={process.env.API_SERVER + 'validator/keybase/image/' + validator.description.identity}
-																	width={30}
-																	height={30}
-																	alt={validator.description.moniker + ' logo'}
-																	loading="lazy"
-																	blurDataURL="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mN8/Pr9fwAJNAO"
-																/>
+																<Thumbnail src={`validator/keybase/image/${validator.description.identity}`} alt={validator.description.moniker + ' logo'} id={validator.description.identity}/>
 															</div>
 															<span className="font-14 font-secondary-bold">{validator.description.moniker}</span>
 														</div>

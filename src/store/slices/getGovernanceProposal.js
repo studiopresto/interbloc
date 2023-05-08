@@ -13,8 +13,10 @@ export const governanceProposalKey = 'GovernanceProposal';
 
 export const fetchGovernanceProposal = createAsyncThunk(
     `${governanceProposalKey}/fetch`,
-    async ({ proposalSlug }) => {
-        return await dataProvider.getList(`${resources.governanceProposal}/${proposalSlug}`)
+    async ({ proposalSlug, target_language }) => {
+        return await dataProvider.getList(`${resources.governanceProposal}/${proposalSlug}`, {
+            target_language
+        })
     }
 );
 

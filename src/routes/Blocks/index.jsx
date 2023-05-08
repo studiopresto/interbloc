@@ -3,9 +3,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import Link from 'next/link';
 import {useRouter} from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
-import Image from 'next/image';
 import NumberFormat from 'react-number-format';
-import placeholder from '../../../public/static/images/placeholder.svg';
 import {fetchBlocks, selectBlocks} from 'store/slices/getBlocksSlice';
 import {
 	fetchValidatorsAddressConversion,
@@ -15,6 +13,7 @@ import Preloader from 'ui/components/Preloader';
 import ErrorBlock from 'ui/components/Error';
 import BlocksIcon from 'ui/icons/Blocks';
 import EmptyBlock from 'ui/components/Empty/EmptyBlock';
+import Thumbnail from 'ui/components/Thumbnail/Thumbnail';
 import hashShortening from 'utils/string/hashShortening';
 import {getDateDifferent} from 'utils/date/getDateDifferent';
 import routes from 'config/routes';
@@ -105,23 +104,7 @@ export default function BlocksPage() {
 										<td data-title={t('labels:proposer')}>
 											<div className="d-inline-flex align-items-center">
 												<div className="thumb size-30 position-left">
-													{validatorData[option.header.proposerAddress.toUpperCase()] && validatorData[option.header.proposerAddress.toUpperCase()].description.identity && validatorData[option.header.proposerAddress.toUpperCase()].description.identity !== ''
-														? <Image
-															src={process.env.API_SERVER + 'validator/keybase/image/' + validatorData[option.header.proposerAddress.toUpperCase()].description.identity}
-															width={30}
-															height={30}
-															alt={validatorData[option.header.proposerAddress.toUpperCase()].description.moniker + ' logo'}
-															loading="lazy"
-															blurDataURL="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mN8/Pr9fwAJNAO+ieK6PgAAAABJRU5ErkJggg=="
-														/>
-														: <Image
-															src={placeholder}
-															width={30}
-															height={30}
-															alt={option.blockproposer}
-															loading="lazy"
-															blurDataURL="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mN8/Pr9fwAJNAO+ieK6PgAAAABJRU5ErkJggg=="
-														/>}
+													<Thumbnail src={`validator/keybase/image/${validatorData[option.header.proposerAddress.toUpperCase()].description.identity}`} id={validatorData[option.header.proposerAddress.toUpperCase()].description.identity} alt={validatorData[option.header.proposerAddress.toUpperCase()].description.moniker + ' logo'}/>
 												</div>
 												<span className="font-secondary-bold">
 													{validatorStatus !== STATUS.FULFILLED || !(option.header.proposerAddress.toUpperCase() in validatorData)

@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import Spinner from './assets/images/Spinner.svg';
+import Spinner from '../../../../public/static/images/Spinner.svg';
 
 export default function Preloader() {
 	return (
