@@ -3,6 +3,7 @@ import NumberFormat from 'react-number-format';
 import useTranslation from 'next-translate/useTranslation';
 import Link from 'next/link';
 import Box from 'ui/components/Box';
+import SelectCustom from 'ui/components/Select';
 import SortButton from 'components/SortButton';
 import {formatFromBaseDenom} from 'utils/formatting/coins';
 import {getDateFromTimestamp} from 'utils/date/getDateFromTimestamp';
@@ -18,9 +19,20 @@ const Depositors = ({ depositors = [] }) => {
 		order_direction: 'asc',
 	});
 	
+	const sortOptions = [
+		{ value: 'amount', label: t('labels:amount') },
+		{ value: 'time', label: t('labels:time') }
+	]
+	
 	const handleSort = useCallback((newSort) => {
 		setSort(newSort);
 	}, [setSort, sort])
+	
+	const handleSortSelect = useCallback((e) =>{
+		setSort(prevState => {
+			return {...prevState, order_by: e.value}
+		})
+	}, [setSort])
 	
 	const sortedData = useMemo(() => {
 		if (sort.order_by !== '') {
@@ -31,6 +43,16 @@ const Depositors = ({ depositors = [] }) => {
 	
 	return (
 		<Box title={t('common:box-depositors')}>
+			<div className="proposal-table-filters">
+				<p className="color-grey mr-3">{t('labels:sort-by')}:</p>
+				<SelectCustom
+					options={sortOptions}
+					defaultValue={sortOptions.filter(option => option.value === sort.order_by)[0]}
+					onChange={handleSortSelect}/>
+				<div className="ml-3">
+					<SortButton onSort={handleSort} sort={sort} value={sort.order_by}/>
+				</div>
+			</div>
 			<div className="table-box">
 				<table className="table table-large">
 					<thead>
