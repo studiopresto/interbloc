@@ -6,9 +6,10 @@ import SortIcon from 'ui/icons/Sort';
 import {formatFromBaseDenom} from 'utils/formatting/coins';
 import {formatProposalStatus} from 'utils/formatting/governanceProposals';
 import {getDateFromTimestamp} from 'utils/date/getDateFromTimestamp';
+import SortButton from 'components/SortButton';
 import routes from 'config/routes';
 
-export default function GovernanceList({data = {}}) {
+export default function GovernanceList({ data = {}, onSort = null, sort = {} }) {
 	
 	const {t} = useTranslation();
 	
@@ -16,38 +17,35 @@ export default function GovernanceList({data = {}}) {
 		<table className="table table-large">
 			<thead>
 			<tr>
-				<th>#{t('labels:id')}</th>
+				<th>
+					<SortButton label={`#${t('labels:id')}`} value="proposalId" sort={sort} onSort={onSort}/>
+				</th>
 				<th>{t('labels:title')}</th>
 				<th>
 					<div className="d-flex align-items-center">
 						{t('labels:status')}
-						<Dot>
-							<SortIcon/>
-						</Dot>
+						{/*<Dot>*/}
+						{/*	<SortIcon/>*/}
+						{/*</Dot>*/}
 					</div>
 				</th>
 				<th>
-					<div className="d-flex align-items-center">
-						{t('labels:voting-start')}
-						<Dot>
-							<SortIcon/>
-						</Dot>
-					</div>
+					<SortButton label={t('labels:voting-start')} value="votingStartTime" sort={sort} onSort={onSort}/>
 				</th>
 				<th>
 					<div className="d-flex align-items-center">
 						{t('labels:submit-time')}
-						<Dot>
-							<SortIcon/>
-						</Dot>
+						{/*<Dot>*/}
+						{/*	<SortIcon/>*/}
+						{/*</Dot>*/}
 					</div>
 				</th>
 				<th>
 					<div className="d-flex align-items-center">
 						{t('labels:total-deposit')}
-						<Dot>
-							<SortIcon/>
-						</Dot>
+						{/*<Dot>*/}
+						{/*	<SortIcon/>*/}
+						{/*</Dot>*/}
 					</div>
 				</th>
 			</tr>

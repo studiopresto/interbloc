@@ -114,5 +114,6 @@
 	"delegations": "Delegations",
 	"unbondings": "Unbondings",
 	"redelegations": "Redelegations",
-	"vestings": "Vestings"
+	"vestings": "Vestings",
+	"sort-by": "Sort by"
 }

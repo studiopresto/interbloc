@@ -183,6 +183,7 @@
 .heading-text {
 	@media(max-width: 767px) {
 		font-size: 12px;
+		overflow: hidden;
 	}
 
 	h1 {

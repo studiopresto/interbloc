@@ -1,0 +1,7 @@
+.governance{
+		&-sort{
+				@include m(1401){
+					display: none !important;
+				}
+		}
+}

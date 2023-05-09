@@ -224,6 +224,16 @@
 					& > *{
 						position: relative;
 					}
+					
+					& > .color-turquoise{
+						display: inline-block;
+							@include d($xs){
+								overflow: hidden;
+								text-overflow: ellipsis;
+								max-width: 100%;
+							}
+					}
+				
 					& > span:not(.font-hash):not(.status){
 							@include m($sm + 1){
 								display: inline-flex;

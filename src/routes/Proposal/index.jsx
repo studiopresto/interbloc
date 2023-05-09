@@ -1,32 +1,28 @@
 import dynamic from 'next/dynamic';
 import {useDispatch, useSelector} from 'react-redux';
 import {useRouter} from 'next/router';
-import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
 import ReactMarkdown from 'react-markdown'
 import Box from 'ui/components/Box';
 import List from 'ui/components/List2';
 import Preloader from 'ui/components/Preloader';
-import Dot from 'ui/components/Dot';
 import ProgressMultiple from 'ui/components/ProgressMultiple';
 import BurgerIcon from 'ui/icons/Burger';
-import SortIcon from 'ui/icons/Sort';
 import {useEffect} from 'react';
 import {fetchGovernanceProposal, selectGovernanceProposal} from 'store/slices/getGovernanceProposal';
 import {isEmptyObject} from 'utils/object/detectEmptyObject';
 import {STATUS} from 'config/constants';
 import ErrorBlock from 'ui/components/Error';
 import {formatProposalStatus} from 'utils/formatting/governanceProposals';
-import {getDateFromTimestamp} from 'utils/date/getDateFromTimestamp';
 import {formatCoinsFromBaseDenom, formatFromBaseDenom} from 'utils/formatting/coins';
 import NumberFormat from 'react-number-format';
 import coinConfig from '../../../coin.config';
 import {extractProposalData} from 'utils/formatting/proposal';
-import routes from '../../config/routes';
+import Depositors from './Depositors';
 
-const Votes = dynamic(async () => {
-	return await import('./Votes');
-}, {ssr: false, loading: () => <Preloader/>});
+// const Votes = dynamic(async () => {
+// 	return await import('./Votes');
+// }, {ssr: false, loading: () => <Preloader/>});
 const ValidatorVotes = dynamic(async () => {
 	return await import('./ValidatorVotes');
 }, {ssr: false, loading: () => <Preloader/>});
@@ -293,60 +289,7 @@ export default function ProposalPage() {
 					</div>
 					<br/>
 					<br/>
-					<Box title={t('common:box-depositors')}>
-						<div className="table-box">
-							<table className="table table-large">
-								<thead>
-								<tr>
-									<th>{t('labels:depositor')}</th>
-									<th>{t('labels:txs-hash')}</th>
-									<th>
-										<div className="d-flex align-items-center">
-											{t('labels:amount')}
-											<Dot>
-												<SortIcon/>
-											</Dot>
-										</div>
-									</th>
-									<th>
-										<div className="d-flex align-items-center">
-											{t('labels:time')}
-											<Dot>
-												<SortIcon/>
-											</Dot>
-										</div>
-									</th>
-								</tr>
-								</thead>
-								<tbody>
-								{data.depositors.map((depositor, index) => (
-									<tr key={index}>
-										<td data-title={t('labels:depositor')}>
-											<Link href={`${routes.public.account}/${depositor.address}`}>
-												<a className="font-secondary-bold color-turquoise">{depositor.address}</a>
-											</Link>
-										</td>
-										<td data-title={t('labels:txs-hash')}>
-											<span className="font-book text-break">{depositor.hash}</span>
-										</td>
-										<td data-title={t('labels:amount')}>
-											<NumberFormat
-												value={formatFromBaseDenom(depositor.amount)}
-												displayType="text"
-												thousandSeparator={true}
-												renderText={(value, props) => {
-													return <span className="font-book" {...props}>{value} {coinConfig.ticker}</span>;
-												}}/>
-										</td>
-										<td data-title={t('labels:time')}>
-											<span className="font-book">{getDateFromTimestamp(depositor.timestamp)}</span>
-										</td>
-									</tr>
-								))}
-								</tbody>
-							</table>
-						</div>
-					</Box>
+					<Depositors depositors={data.depositors}/>
 				</div>
 			) : null}
 		</>

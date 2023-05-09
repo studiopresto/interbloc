@@ -1,0 +1,36 @@
+.governance-table-header{
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	
+		& > div{
+			width: 100%;
+			justify-content: flex-end;
+				&:not(:last-child){
+						@include m(1401){
+							margin-right: 15px;
+						}
+						@include d(1400){
+							margin-bottom: 15px;
+						}
+				}
+			
+				.table-sort{
+					margin-left: 15px;
+				}
+			
+				@include d($lg){
+					justify-content: flex-start;
+				}
+		}
+	
+		@include d(1400){
+			flex-direction: column;
+			align-items: flex-end;
+		}
+		@include d($lg){
+			padding-top: 15px;
+			align-items: flex-start;
+			justify-content: flex-start;
+		}
+}

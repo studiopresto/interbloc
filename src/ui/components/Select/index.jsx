@@ -100,6 +100,8 @@ export default function SelectCustom({ options, onChange, defaultValue, placehol
 			onChange={onChange}
 			defaultValue={defaultValue}
 			placeholder={placeholder}
+			isSearchable={false}
+			width="100%"
 		/>
 	);
 }

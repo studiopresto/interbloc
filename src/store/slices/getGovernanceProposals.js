@@ -5,6 +5,10 @@ import {QUERY_PARAMETERS, STATUS} from 'config/constants';
 
 const initialState = {
 	data: [],
+	order: {
+		direction: 'proposalId',
+		by: 'asc'
+	},
 	status: STATUS.IDLE,
 	error: null,
 };
@@ -17,19 +21,26 @@ export const fetchGovernanceProposals = createAsyncThunk(
 		{
 			limit = QUERY_PARAMETERS.LIMIT,
 			per_page = QUERY_PARAMETERS.PARE_PAGE,
-			page = 1
+			page = 1,
+			order_by,
+			order_direction
 		}) => {
-		return await dataProvider.getOne(resources.governanceProposals, {limit, per_page, page, status: 'PROPOSAL_STATUS_PASSED'})
-			.then(response => {
-				let proposals = [];
-				Object.keys(response.proposals).forEach(proposal => {
-					proposals.push(response.proposals[proposal]);
-				});
-				return {
-					proposals,
-					pagination: response.pagination
-				};
+		return await dataProvider.getOne(resources.governanceProposals, {
+			limit,
+			per_page,
+			page,
+			order_by,
+			order_direction
+		}).then(response => {
+			let proposals = [];
+			Object.keys(response.proposals).forEach(proposal => {
+				proposals.push(response.proposals[proposal]);
 			});
+			return {
+				proposals,
+				pagination: response.pagination
+			};
+		});
 	}
 );
 
@@ -44,6 +55,8 @@ export const getGovernanceProposalsSlice = createSlice({
 		[fetchGovernanceProposals.fulfilled]: (state, action) => {
 			state.data = action.payload;
 			state.status = STATUS.FULFILLED;
+			state.order.direction = action.meta.arg.order_direction;
+			state.order.by = action.meta.arg.order_by;
 		},
 		[fetchGovernanceProposals.rejected]: (state, action) => {
 			state.data = null;
