@@ -1,15 +1,19 @@
 .progress-multiple{
-	height: 29px;
+	height: 50px;
 	display: flex;
 	justify-content: flex-start;
-	padding: 0;
 	margin: 40px 8px;
 	position: relative;
+	border-radius: 40px;
+	background-color: var(--color-black-200);
+	padding: 10px;
 	overflow: initial;
 		&-bar{
 			position: relative;
 			inset: 0;
-			border-radius: 20px;
+			border-top-right-radius: 20px;
+			border-bottom-right-radius: 20px;
+			min-width: 15px;
 				&:not(:first-child){
 					&:before{
 						content: '';
@@ -17,8 +21,8 @@
 						pointer-events: none;
 						background-color: currentColor;
 						top: 0;
-						right: calc(100% - 25px);
-						width: 30px;
+						right: 100%;
+						width: 10px;
 						bottom: 0;
 							@include d($sm){
 								right: calc(100% - 30px);
@@ -28,6 +32,8 @@
 				&:nth-child(1){
 					background-color: var(--color-primary);
 					color: var(--color-primary);
+					border-top-left-radius: 20px;
+					border-bottom-left-radius: 20px;
 				}
 				&:nth-child(2){
 					background-color: var(--color-blue);
