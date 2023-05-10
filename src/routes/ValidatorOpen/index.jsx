@@ -53,11 +53,12 @@ export default function ValidatorOpen() {
 				<div className="page-header-inner justify-content-between inner-width">
 					<div className="d-inline-flex align-items-center">
 						<div className="page-header-thumb __violet">
-							<Image src={process.env.API_SERVER + 'validator/keybase/image/' + data.validator.description.identity}
-							       width={64}
-							       height={64}
-							       alt={data.validator.description.moniker + ' logo'}
-							       loading={'lazy'}
+							<Image
+								src={process.env.API_SERVER + 'validator/keybase/image/' + data.validator.description.identity}
+								width={64}
+								height={64}
+								alt={data.validator.description.moniker + ' logo'}
+								loading={'lazy'}
 							/>
 						</div>
 						<div>
@@ -83,24 +84,19 @@ export default function ValidatorOpen() {
 					</div>
 				</div>
 				<div className="page-body">
-					<Hash title={t('labels:address')} value={data.validator.operatorAddress}/>
+					<Hash title={t('labels:address')} value={data.validator.address}/>
 					<Box theme={3} adaptiveHeight>
 						<div className="row">
 							<div className="col-lg-3">
 								<ul className="table-list mt-4 font-resize">
-									{
-										!!data?.validator.description?.website
-											? (
-												<li className="mb-4">
-													<span className="color-grey font-bold">{t('labels:website')}:</span>
-													<Link href={'https://' + data.validator.description.website} target="_blank">
-														<a href={data.validator.description.website} target="_blank" rel="noreferrer"
-														   className="font-16 font-secondary-bold">{data.validator.description.website}</a>
-													</Link>
-												</li>
-											)
-											: null
-									}
+									{!!data?.validator.description?.website
+										? (
+											<li className="mb-4">
+												<span className="color-grey font-bold">{t('labels:website')}:</span>
+												<a href={data.validator.description.website} target="_blank" className="font-16 font-secondary-bold">{data.validator.description.website}</a>
+											</li>
+										)
+										: null}
 									<li className="mb-4">
 										<span className="color-grey font-bold">{t('labels:last-update')}:</span>
 										<span
@@ -340,7 +336,7 @@ export default function ValidatorOpen() {
 
 					*/}
 					<div className="row">
-						<TransactionList transactionData={data.transaction} transactionStatus={status}/>
+						<TransactionList data={data.transactions}/>
 					</div>
 				</div>
 			</>

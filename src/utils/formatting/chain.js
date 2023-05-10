@@ -1,5 +1,6 @@
-import {CHAIN} from "../../config/chain";
+import {CHAIN} from "config/chain";
 import placeholder from '../../../public/static/images/placeholder.svg';
+
 export const getInfoForDenom = d => {
     if (Object.keys(CHAIN).includes(d)) {
         return CHAIN[d]
@@ -7,6 +8,7 @@ export const getInfoForDenom = d => {
         if (d.length > 20){
             return {
                 ticker: d.substring(0, 20) + "...",
+                origin: d,
                 exponent: 6,
                 logo: placeholder
 
@@ -14,6 +16,7 @@ export const getInfoForDenom = d => {
         }
         return {
             ticker: d,
+            origin: d,
             exponent: 6,
             logo: placeholder
 

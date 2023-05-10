@@ -27,8 +27,9 @@ export default function ValidatorVotes() {
 	const sortedValidatorData = [...validatorData];
 	sortedValidatorData.sort((a, b) => Number.parseInt(a.tokens) < Number.parseInt(b.tokens));
 	let addressToValoper = {}
+	
 	validatorData.map((data, index) => {
-		let valoper = data.operatorAddress;
+		let valoper = data.address;
 		addressToValoper[converter.lookup(valoper, coinConfig.addrPrefix)] = valoper
 	})
 
@@ -93,8 +94,8 @@ export default function ValidatorVotes() {
 							</td>
 							<td data-title={t('labels:vote')} className='font-7'>
 								{
-									converter.lookup(data.operatorAddress, coinConfig.addrPrefix) in Object.keys(data)
-										? <span style={{ color: '#4D8C2F' }}>{data[converter.lookup(data.operatorAddress, coinConfig.addrPrefix)].option}</span>
+									converter.lookup(data.address, coinConfig.addrPrefix) in Object.keys(data)
+										? <span style={{ color: '#4D8C2F' }}>{data[converter.lookup(data.address, coinConfig.addrPrefix)].option}</span>
 										: <span style={{ color: '#717D89' }}>Not Voted Yet</span>
 								}
 							</td>

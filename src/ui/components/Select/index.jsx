@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import Select from 'react-select';
 import arrow from '../../../../public/static/images/arrow.svg';
 
-export default function SelectCustom({ options, onChange, defaultValue, placeholder = 'Select...' }) {
+export default function SelectCustom({ options, onChange, defaultValue, placeholder = 'Select...', value }) {
 	const customStyles = {
 		container: (provided) => ({
 			...provided,
@@ -102,6 +102,7 @@ export default function SelectCustom({ options, onChange, defaultValue, placehol
 			placeholder={placeholder}
 			isSearchable={false}
 			width="100%"
+			value={value}
 		/>
 	);
 }

@@ -1,8 +1,7 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import dataProvider from 'utils/requestProviders/dataProvider';
 import resources from 'utils/requestProviders/resources';
-import {STATUS} from 'config/constants';
-import {getFromLocalStorageWithExpiry, setToLocalStorageWithExpiry} from 'utils/localStorage/expiryLocalStorage';
+import {QUERY_PARAMETERS, STATUS} from 'config/constants';
 
 const initialState = {
 	data: [],
@@ -16,36 +15,23 @@ export const fetchValidators = createAsyncThunk(
 	`${validatorsKey}/fetch`,
 	async (
 		{
-			per_page = 0,
-			skip = 0,
+			page = 1,
+			per_page = QUERY_PARAMETERS.PARE_PAGE,
 			include_jailed = true,
-			status = 'BOND_STATUS_BONDED'
+			status = ''
 		}) => {
-		// check localStorage
-		const dataFromLocalStorage = getFromLocalStorageWithExpiry(validatorsKey);
-		if (dataFromLocalStorage) {
-			// return data from localStorage, if expiry and data exist
-			return dataFromLocalStorage;
-		} else {
-			// get data from API
-			console.log('fetch validators')
-			const data = await dataProvider.getList(`${resources.validators}`, {
-				per_page,
-				skip,
-				include_jailed,
-				status
-			}).then(response => {
-				let data = [];
-				Object.keys(response).forEach(block => {
-					data.push(response[block]);
-				});
-				return data;
+		return await dataProvider.getList(`${resources.validators}`, {
+			page,
+			per_page,
+			include_jailed,
+			status
+		}).then(response => {
+			let data = [];
+			Object.keys(response).forEach(block => {
+				data.push(response[block]);
 			});
-			// save data to localStorage
-			await setToLocalStorageWithExpiry(validatorsKey, data);
-			// return data from API
-			return data
-		}
+			return data;
+		});
 	}
 );
 

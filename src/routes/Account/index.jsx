@@ -11,12 +11,11 @@ import DirectoryIcon from 'ui/icons/Directory';
 import coinConfig from '../../../coin.config';
 import {useDispatch, useSelector} from 'react-redux';
 import {fetchAccount, selectAccount} from 'store/slices/getAccount';
+import TransactionsByAccount from 'components/TransactionsByAccount/TransactionsByAccount';
 import {STATUS} from 'config/constants';
 import {isEmptyObject} from 'utils/object/detectEmptyObject';
 import {formatFromBaseDenom} from 'utils/formatting/coins';
-import {fetchTransactionsByAccount, selectTransactionsByAccount} from 'store/slices/getTransactionsByAccountSlice';
 import {getInfoForDenom} from 'utils/formatting/chain';
-import TransactionList from 'components/TransactionList';
 import {fetchChainStats, selectChainStats} from 'store/slices/getChainStats';
 
 const Assets = dynamic(async () => {
@@ -26,21 +25,16 @@ const Assets = dynamic(async () => {
 
 export default function AccountPage() {
 	
-	const per_page = 10;
 	const router = useRouter();
 	const dispatch = useDispatch();
 	const { t } = useTranslation();
 	
 	const {addressSlug} = router.query;
 	const {data, status} = useSelector(selectAccount)
-	const {data: transactionData, status: transactionsStatus} = useSelector(selectTransactionsByAccount)
 	const {data: chainData, status: chainStatus} = useSelector(selectChainStats)
 	
 	useEffect(() => {
-		if (!!addressSlug) {
-			dispatch(fetchAccount({accountSlug: addressSlug}))
-			dispatch(fetchTransactionsByAccount({addressSlug: addressSlug, per_page: per_page}))
-		}
+		dispatch(fetchAccount({ accountSlug: addressSlug }));
 		dispatch(fetchChainStats());
 		
 	}, [dispatch, addressSlug])
@@ -128,16 +122,16 @@ export default function AccountPage() {
 											</Tab>
 										</TabList>
 										<TabPanel className="tabs-content pt-2">
-											<table className="table">
-												<thead>
-													<tr>
-														<th>{t('labels:validator')}</th>
-														<th>{t('labels:amount')}</th>
-													</tr>
-												</thead>
-												<tbody>
-												{
-													data.delegations.map((delegation, index) => {
+											<div className="account-table box-overlay __y">
+												<table className="table">
+													<thead>
+														<tr>
+															<th>{t('labels:validator')}</th>
+															<th>{t('labels:amount')}</th>
+														</tr>
+													</thead>
+													<tbody>
+													{data.delegations.map((delegation, index) => {
 														return (
 															<tr key={index}>
 																<td data-title={t('labels:validator')}>
@@ -148,10 +142,10 @@ export default function AccountPage() {
 																</td>
 															</tr>
 														)
-													})
-												}
-												</tbody>
-											</table>
+													})}
+													</tbody>
+												</table>
+											</div>
 										</TabPanel>
 										<TabPanel className="tabs-content pt-2">
 											<table className="table">
@@ -240,15 +234,15 @@ export default function AccountPage() {
 						</div>
 					</div>
 					<div className="row">
-						<div className="col-6">
+						<div className="col-12 col-lg-6">
 							<ProgressMultiple data={balanceProgress()} label="bottom"/>
 						</div>
-						<div className="col-6">
+						<div className="col-12 col-lg-6">
 							<ProgressMultiple data={delegationsProgress()} label="bottom"/>
 						</div>
 					</div>
 					<div className="row">
-						<TransactionList transactionData={transactionData} address={addressSlug}/>
+						<TransactionsByAccount address={addressSlug}/>
 					</div>
 				</div>
 			</>

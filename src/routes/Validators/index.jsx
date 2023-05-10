@@ -33,7 +33,7 @@ export default function ValidatorsPage() {
 	const {t} = useTranslation();
 	
 	useEffect(() => {
-		dispatch(fetchValidators({status: ''}))
+		dispatch(fetchValidators({ per_page: 500 }))
 		dispatch(fetchChainStats())
 		dispatch(fetchTokenomics())
 	}, [dispatch])
@@ -267,11 +267,11 @@ export default function ValidatorsPage() {
 									validator_lists[active].map((validator, index) => (
 										<tr key={index}>
 											<td data-title={t('labels:rank')}>
-												<span>{index + 1}</span>
+												<span>{validator.rank}</span>
 											</td>
 											<td data-title={t('labels:validator')}>
 												<Link
-													href={`${routes.public.validators}/${validator.operatorAddress}`}>
+													href={`${routes.public.validators}/${validator.address}`}>
 													<a>
 														<div className="d-inline-flex align-items-center">
 															<div className="thumb size-30 position-left">
@@ -295,8 +295,7 @@ export default function ValidatorsPage() {
 													className="font-12 font-bold color-grey no-space">{(parseInt(validator.tokens) / aggregated.totalVotingPower * 100).toFixed(2)}%</p>
 											</td>
 											<td data-title={`${t('labels:cumulative-share')} %`}>
-												<Progress
-													value={(aggregated.cumulativeShare[index] / aggregated.totalVotingPower * 100).toFixed(2)}/>
+												<Progress value={(aggregated.cumulativeShare[index] / aggregated.totalVotingPower * 100).toFixed(2)}/>
 											</td>
 											<td data-title={t('labels:participation')}>
 												<p className="status">

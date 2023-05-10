@@ -1,6 +1,7 @@
 export const CHAIN = {
     uatom: {
         ticker: "ATOM",
+        origin: 'uatom',
         exponent: 6,
         logo: "https://raw.githubusercontent.com/InterblocDAO/explorer-assets/main/coins/cosmos.png"
     },

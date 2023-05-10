@@ -49,6 +49,36 @@
 				&:-moz-placeholder {
 					color: var(--color-grey-300);
 				}
+				
+				/*
+				button
+				*/
+				&-button{
+					position: absolute;
+					top: 50%;
+					transform: translateY(-50%);
+					right: 15px;
+					width: 30px;
+					height: 30px;
+					border: none;
+					background-color: transparent;
+					padding: 0;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					color: var(--color-grey-500);
+					transition: color var(--duration) var(--ease);
+						svg{
+							width: 50%;
+							height: 50%;
+						}
+						@include hover($md){
+							&:hover{
+								color: var(--color-grey);
+							}
+						}
+				}
+				
 				/*
 				Sizes
 				 */

@@ -17,9 +17,12 @@
 						pointer-events: none;
 						background-color: currentColor;
 						top: 0;
-						right: calc(100% - 15px);
+						right: calc(100% - 25px);
 						width: 30px;
 						bottom: 0;
+							@include d($sm){
+								right: calc(100% - 30px);
+							}
 					}
 				}
 				&:nth-child(1){

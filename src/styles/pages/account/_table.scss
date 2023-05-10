@@ -1,0 +1,11 @@
+.account{
+		&-table{
+				&.box-overlay{
+					max-height: 485px;
+					max-width: 100%;
+						&.__y{
+							overflow-x: hidden;
+						}
+				}
+		}
+}
