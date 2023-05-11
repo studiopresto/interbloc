@@ -8,6 +8,8 @@
 			background-color: var(--color-black-100);
 			border-radius: 7px;
 			padding: 25px 32px;
+			position: relative;
+			transition: opacity var(--duration) var(--ease);
 
 				@include d($md){
 					padding: 16px;
@@ -18,6 +20,23 @@
 				.form{
 						&-control{
 							background-color: var(--color-black-200);
+						}
+				}
+			
+				&-preloader{
+					position: absolute;
+					top: 0;
+					left: 0;
+					width: 100%;
+					height: 100%;
+					z-index: 1;
+					display: none;
+				}
+			
+				&.__loading{
+					opacity: .5;
+						.table-box-preloader{
+							display: block;
 						}
 				}
 		}

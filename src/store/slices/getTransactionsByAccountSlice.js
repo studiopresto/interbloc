@@ -21,9 +21,30 @@ export const fetchTransactionsByAccount = createAsyncThunk(
 			page = 1
 		}) => {
 		return await dataProvider.getList(`${resources.transactionsByAccount}/${addressSlug}`, { limit, per_page, page })
-
 	}
 );
+
+export const fetchSortedTransactionsByAccount = createAsyncThunk(
+	`${transactionsByAccountKey}/sorting/fetch`,
+	async (
+		{
+			addressSlug,
+			limit = QUERY_PARAMETERS.LIMIT,
+			per_page = QUERY_PARAMETERS.PARE_PAGE,
+			page = 1,
+			order_by,
+			order_direction
+		}) => {
+		return await dataProvider.getList(`${resources.transactionsByAccount}/${addressSlug}`,
+			{
+				limit,
+				per_page,
+				page,
+				order_by,
+				order_direction
+			})
+	}
+)
 
 export const getTransactionsByAccountSlice = createSlice({
 	name: transactionsByAccountKey,
@@ -38,6 +59,15 @@ export const getTransactionsByAccountSlice = createSlice({
 			state.status = STATUS.FULFILLED;
 		},
 		[fetchTransactionsByAccount.rejected]: (state, action) => {
+			state.status = STATUS.REJECTED;
+			state.data = null;
+			state.error = action.payload;
+		},
+		[fetchSortedTransactionsByAccount.fulfilled]: (state, action) => {
+			state.data = action.payload;
+			state.status = STATUS.FULFILLED;
+		},
+		[fetchSortedTransactionsByAccount.rejected]: (state, action) => {
 			state.status = STATUS.REJECTED;
 			state.data = null;
 			state.error = action.payload;

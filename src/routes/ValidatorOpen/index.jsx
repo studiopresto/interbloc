@@ -20,6 +20,7 @@ import {
 } from 'utils/formatting/coins';
 import TransactionList from 'components/TransactionList';
 import {fetchBondingHistory, selectBondingHistory} from 'store/slices/getBondingHistory';
+import LatestTransactions from './LatestTransactions';
 
 const ValidatorHistory = dynamic(async () => {
 	return await import('components/PriceStatistics');
@@ -336,7 +337,7 @@ export default function ValidatorOpen() {
 
 					*/}
 					<div className="row">
-						<TransactionList data={data.transactions}/>
+						<LatestTransactions data={data.transactions} status={status}/>
 					</div>
 				</div>
 			</>

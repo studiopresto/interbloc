@@ -16,9 +16,10 @@ import EmptyBlock from 'ui/components/Empty/EmptyBlock';
 import {getDateDifferent} from 'utils/date/getDateDifferent';
 import {formatCoinArrayToString, formatDenomToString} from 'utils/formatting/coins';
 import Preloader from 'ui/components/Preloader';
+import SortButton from 'components/SortButton';
 import coinConfig from '../../../coin.config';
 
-export default function TransactionList({ data, per_page = 10, address, status }) {
+export default function TransactionList({ data, address, status, onSort = undefined, sort = {} }) {
 	
 	const { t } = useTranslation();
 	
@@ -26,18 +27,18 @@ export default function TransactionList({ data, per_page = 10, address, status }
 		<div className="col-12">
 			<div className="table-box mt-5">
 				{isEmptyObject(data) || !data?.transactions.length || status === STATUS.PENDING ? <Preloader/> : null}
-				{!isEmptyObject(data) && data?.transactions.length && status === STATUS.FULFILLED
+				{!isEmptyObject(data) && data.transactions.length && status === STATUS.FULFILLED
 					? (
 						<>
 							<div className="table-header d-flex">
 								<p className="font-16 mb-2 mb-md-0">
-										<span className="mr-3">
-											<SortDirectionIcon/>
-										</span>
+									<span className="mr-3">
+										<SortDirectionIcon/>
+									</span>
 									{t('labels:latest-count-of', {
-										count: (data.pagination.total < per_page)
+										count: (data.pagination.total < 10)
 											? data.pagination.total
-											: per_page
+											: 10
 									})}
 									<span className="color-turquoise"> {data.pagination.total}</span> {t('labels:transactions')}
 								</p>
@@ -73,21 +74,10 @@ export default function TransactionList({ data, per_page = 10, address, status }
 										</div>
 									</th>
 									<th>
-										<div className="d-flex align-items-center">
-											
-											{t('labels:block')}
-											<Dot>
-												<SortIcon/>
-											</Dot>
-										</div>
+										<SortButton label={t('labels:block')} sort={sort} value="height" onSort={onSort}/>
 									</th>
 									<th>
-										<div className="d-flex align-items-center">
-											{t('labels:age')}
-											<Dot>
-												<SortIcon/>
-											</Dot>
-										</div>
+										<SortButton label={t('labels:age')} value="unixTimestamp" sort={sort} onSort={onSort}/>
 									</th>
 									<th>{t('labels:from')}</th>
 									<th/>
@@ -104,7 +94,7 @@ export default function TransactionList({ data, per_page = 10, address, status }
 										const from = (type === 'Send') ? tx.tx.body.messages[0]['fromAddress'] : ''
 										const to = (type === 'Send') ? tx.tx.body.messages[0]['toAddress'] : ''
 										const inOrOut = (type !== 'Send') ? undefined : (tx.tx.body.messages[0]['fromAddress'] === address) ? 'out' : 'in'
-										const value = (type === 'Send') ? tx.tx.body.messages[0]['amount'][0] : ''
+										const value = (type === 'Send') ? tx.tx.body.messages[0]['amount'] : ''
 										return (
 											<tr key={index}>
 												<td className="hidden-xxl">
@@ -152,7 +142,7 @@ export default function TransactionList({ data, per_page = 10, address, status }
 													) : (
 														<>
 															<td data-title={t('labels:from')} colSpan={4} className="text-center-xxl">
-																<span className="status font-book">Not a transfer</span>
+																<span className="status font-book">{t('labels:not-transfer')}</span>
 															</td>
 														</>
 													)

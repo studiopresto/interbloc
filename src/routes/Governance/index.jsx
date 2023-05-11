@@ -13,9 +13,9 @@ import routes from 'config/routes';
 import SelectCustom from 'ui/components/Select';
 import EmptyBlock from 'ui/components/Empty/EmptyBlock';
 import Pagination from 'components/Pagination';
+import SortButton from 'components/SortButton';
 import {isEmptyObject} from 'utils/object/detectEmptyObject';
 import {fetchGovernanceProposals, selectGovernanceProposals} from 'store/slices/getGovernanceProposals';
-import SortButton from '../../components/SortButton';
 
 const GovernanceChart = dynamic(async () => {
 	return await import('components/GovernanceChart');
@@ -26,6 +26,7 @@ export default function GovernancePage() {
 	const dispatch = useDispatch();
 	const {query: {page = 1}} = useRouter();
 	const {data, status} = useSelector(selectGovernanceProposals);
+	const [loading, setLoading] = useState(false);
 	const [sort, setSort] = useState({
 		order_by: 'proposalId',
 		order_direction: 'asc'
@@ -51,9 +52,11 @@ export default function GovernancePage() {
 	
 	const handleSort = useCallback((newSort) => {
 		setSort(newSort)
+		setLoading(true);
 	}, [setSort, sort])
 	
 	const handleSortSelect = useCallback((e) => {
+		setLoading(true);
 		setSort(prevState => {
 			return {...prevState, order_by: e.value}
 		})
@@ -63,13 +66,19 @@ export default function GovernancePage() {
 		console.log('filter, e', e)
 	}, [])
 	
+	useEffect(() => {
+		if (data?.proposals) {
+			setLoading(false);
+		}
+	}, [data])
+	
 	return (
 		<>
 			<div className="page-header-inner">
 				<div className="page-header-thumb __turquoise"><EyeIcon/></div>
 				<div><h1 className="h-2">{t('governance:page-title')}</h1></div>
 			</div>
-			{status === STATUS.PENDING || status === STATUS.IDLE ? <Preloader/> : null}
+			{status === STATUS.IDLE ? <Preloader/> : null}
 			{isEmptyObject(data) || status === STATUS.REJECTED ? <ErrorBlock/> : null}
 			{status === STATUS.FULFILLED && !data.proposals.length ? <EmptyBlock/> : null}
 			{status === STATUS.FULFILLED && data.proposals.length ? (
@@ -89,7 +98,10 @@ export default function GovernancePage() {
 					</div>
 					<div className="row">
 						<div className="col-12">
-							<div className="table-box mt-2">
+							<div className={`table-box mt-2 ${loading ? '__loading' : ''}`}>
+								<div className="table-box-preloader">
+									<Preloader/>
+								</div>
 								<div className="table-header mb-4">
 									<div className="row">
 										<div className="col-12 col-md-4">
@@ -128,7 +140,7 @@ export default function GovernancePage() {
 						</div>
 					</div>
 				</div>
-			) : null}
+			) : <Preloader/>}
 		</>
 	)
 }

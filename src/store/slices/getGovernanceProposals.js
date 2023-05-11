@@ -49,9 +49,9 @@ export const getGovernanceProposalsSlice = createSlice({
 	initialState,
 	reducers: {},
 	extraReducers: {
-		[fetchGovernanceProposals.pending]: (state) => {
-			state.status = STATUS.PENDING;
-		},
+		// [fetchGovernanceProposals.pending]: (state) => {
+		// 	state.status = STATUS.PENDING;
+		// },
 		[fetchGovernanceProposals.fulfilled]: (state, action) => {
 			state.data = action.payload;
 			state.status = STATUS.FULFILLED;
