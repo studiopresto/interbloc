@@ -8,8 +8,7 @@ import {styles} from 'config/chart';
 import {STATUS} from 'config/constants';
 
 const Plot = dynamic(import('../../../node_modules/react-plotly.js/react-plotly'), {
-	ssr: false
-});
+	ssr: false, loading: () => <Preloader/>});
 
 export default function PriceStatistics() {
 

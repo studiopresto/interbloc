@@ -60,7 +60,7 @@ export default function GovernancePage() {
 		setSort(prevState => {
 			return {...prevState, order_by: e.value}
 		})
-	}, [])
+	}, [setSort])
 	
 	const handleFilter = useCallback((e) => {
 		console.log('filter, e', e)

@@ -1,6 +1,6 @@
 import TransactionList from 'components/TransactionList';
 import {useDispatch, useSelector} from 'react-redux';
-import {useEffect, useState} from 'react';
+import {useCallback, useEffect, useState} from 'react';
 import {
 	fetchTransactionsByAccount,
 	selectTransactionsByAccount
@@ -33,7 +33,14 @@ const TransactionsByAccount = ({ address }) => {
 		}
 	}, [data])
 	
-	return <TransactionList data={data} status={status} onSort={handleSort} sort={sort} address={address} loading={loading}/>
+	const handleSortSelect = useCallback((e) => {
+		setLoading(true);
+		setSort(prevState => {
+			return {...prevState, order_by: e.value}
+		})
+	}, [setSort])
+	
+	return <TransactionList data={data} status={status} onSort={handleSort} sort={sort} address={address} loading={loading} onSortSelect={handleSortSelect}/>
 }
 
 export default TransactionsByAccount

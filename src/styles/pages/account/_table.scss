@@ -9,3 +9,22 @@
 				}
 		}
 }
+
+.table-box{
+		&.account{
+				.table-header{
+						&-actions{
+							.table-sort{
+								margin-left: 15px;
+							}
+						}
+						&-action{
+								&.__sort{
+									@include m(1401){
+										display: none;
+									}
+								}
+						}
+				}
+		}
+}

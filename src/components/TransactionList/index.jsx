@@ -16,19 +16,25 @@ import EmptyBlock from 'ui/components/Empty/EmptyBlock';
 import {getDateDifferent} from 'utils/date/getDateDifferent';
 import {formatCoinArrayToString, formatDenomToString} from 'utils/formatting/coins';
 import Preloader from 'ui/components/Preloader';
+import SelectCustom from 'ui/components/Select';
 import SortButton from 'components/SortButton';
 import coinConfig from '../../../coin.config';
 
-export default function TransactionList({ data, address, status, onSort = undefined, sort = {}, loading = false }) {
+export default function TransactionList({ data, address, status, onSort = undefined, sort = {}, loading = false, onSortSelect = undefined }) {
 	
 	const { t } = useTranslation();
+	
+	const sortOptions = [
+		{value: 'height', label: t('labels:block')},
+		{value: 'unixTimestamp', label: t('labels:age')},
+	];
 	
 	return (
 		<div className="col-12">
 				{isEmptyObject(data) || !data?.transactions.length || status === STATUS.PENDING ? <Preloader/> : null}
 				{!isEmptyObject(data) && data.transactions.length && status === STATUS.FULFILLED
 					? (
-						<div className={`table-box mt-5 ${loading ? '__loading' : ''}`}>
+						<div className={`table-box account mt-5 ${loading ? '__loading' : ''}`}>
 							<div className="table-box-preloader">
 								<Preloader/>
 							</div>
@@ -57,6 +63,17 @@ export default function TransactionList({ data, address, status, onSort = undefi
 									{/*	<Button size="md" color="blue">{t('actions:filter')}</Button>*/}
 									{/*	<Button size="md">{t('actions:clear')}</Button>*/}
 									{/*</div>*/}
+									<div className="table-header-action __sort">
+										<p className="color-grey mr-3">{t('labels:sort-by')}:</p>
+										<SelectCustom
+											options={sortOptions}
+											onChange={onSortSelect && onSortSelect}
+											defaultValue={sortOptions.filter(option => option.value === sort.order_by)[0]}/>
+										<SortButton
+											onSort={onSort}
+											sort={sort}
+											value={sort.order_by}/>
+									</div>
 								</div>
 							</div>
 							<table className="table table-large">

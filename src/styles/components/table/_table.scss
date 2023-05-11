@@ -78,6 +78,10 @@
 								}
 						}
 				}
+				&-action{
+					display: flex;
+					align-items: center;
+				}
 				&-datepicker{
 					display: inline-flex;
 					align-items: center;
