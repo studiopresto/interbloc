@@ -1,22 +1,15 @@
+import { Fragment } from 'react';
 import PropTypes from 'prop-types';
+import ProgressMultipleItem from 'ui/components/ProgressMultipleItem/ProgressMultipleItem';
 
 export default function ProgressMultiple({ data, label }) {
 	if (!!data.length) {
 		return (
 			<div className="progress progress-multiple">
 				{data.map((option, key) => (
-					option.value ? (
-						<div
-							key={key}
-							className="progress-multiple-bar"
-							style={{ width: option.value + '%'}}>
-							{!!label
-								? <div
-									className={`progress-multiple-label __${label}`}
-									style={{ left: option.value <= 50 ? 0 : 'auto' }}>{option.title}</div>
-								: null}
-						</div>
-					) : null
+					<Fragment key={key}>
+						<ProgressMultipleItem option={option} label={label}/>
+					</Fragment>
 				))}
 			</div>
 		)

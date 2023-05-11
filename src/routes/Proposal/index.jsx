@@ -2,7 +2,6 @@ import dynamic from 'next/dynamic';
 import {useDispatch, useSelector} from 'react-redux';
 import {useRouter} from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
-import ReactMarkdown from 'react-markdown'
 import Box from 'ui/components/Box';
 import List from 'ui/components/List2';
 import Preloader from 'ui/components/Preloader';
@@ -90,7 +89,7 @@ export default function ProposalPage() {
 							</div>
 							<div className="col-12 col-lg-6">
 								<h3 className="h-3 mb-4">{t('labels:description')}</h3>
-								<ReactMarkdown className="heading-text color-grey mb-4">{data.content.description}</ReactMarkdown>
+								<div className="heading-text color-grey mb-4 proposal-description" dangerouslySetInnerHTML={{ __html: data.content.description.replace(/\\n/g, '<br/>') }}/>
 							</div>
 						</div>
 					</Box>
@@ -133,8 +132,7 @@ export default function ProposalPage() {
 						<div className="progress-detail">
 							<div className="progress-detail-item">
 								<p className="font-book">{t('labels:yes')}</p>
-								<p
-									className="font-16 font-secondary-bold mb-2">{Math.round(data.currentTallyResult.yes / totalVote * 10000) / 100}%</p>
+								<p className="font-16 font-secondary-bold mb-2">{Math.round(data.currentTallyResult.yes / totalVote * 10000) / 100}%</p>
 								<NumberFormat
 									className="color-grey font-secondary-bold"
 									value={formatFromBaseDenom(data.currentTallyResult.yes)}

@@ -1,0 +1,16 @@
+.proposal-description{
+	max-height: 500px;
+	overflow-y: auto;
+	word-break: break-word;
+		h1, h2, h3, h4, h5, h6{
+			font-size: inherit;
+			font-family: var(--font-base);
+		}
+		strong{
+			font-family: var(--font-base-bold);
+		}
+	
+		@include d(1450){
+			max-height: 100%;
+		}
+}
