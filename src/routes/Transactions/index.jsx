@@ -24,13 +24,14 @@ import {fetchChainStats, selectChainStats} from 'store/slices/getChainStats';
 export default function TransactionsPage() {
 	
 	const dispatch = useDispatch();
-	const {query: {page = 1}} = useRouter();
+	const {query} = useRouter();
+	const page = !!Number(query.page) ? Number(query.page) : 1;
 	const {data, status} = useSelector(selectTransactions);
 	const {data: chainData, status: chainStatus} = useSelector(selectChainStats);
 	const {t} = useTranslation();
 	
 	useEffect(() => {
-		dispatch(fetchTransactions({page: page}));
+		dispatch(fetchTransactions({page}));
 		dispatch(fetchChainStats());
 	}, [dispatch, page]);
 	

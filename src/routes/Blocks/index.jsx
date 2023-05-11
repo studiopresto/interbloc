@@ -24,7 +24,8 @@ import {QUERY_PARAMETERS, STATUS} from 'config/constants';
 export default function BlocksPage() {
 	
 	const dispatch = useDispatch();
-	const {query: {page = 1}} = useRouter();
+	const {query} = useRouter();
+	const page = !!Number(query.page) ? Number(query.page) : 1;
 	const {data, status} = useSelector(selectBlocks);
 	const {data: validatorData, status: validatorStatus} = useSelector(selectValidatorsAddressConversion);
 	const {t} = useTranslation();
