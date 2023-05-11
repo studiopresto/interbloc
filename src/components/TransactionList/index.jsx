@@ -19,17 +19,19 @@ import Preloader from 'ui/components/Preloader';
 import SortButton from 'components/SortButton';
 import coinConfig from '../../../coin.config';
 
-export default function TransactionList({ data, address, status, onSort = undefined, sort = {} }) {
+export default function TransactionList({ data, address, status, onSort = undefined, sort = {}, loading = false }) {
 	
 	const { t } = useTranslation();
 	
 	return (
 		<div className="col-12">
-			<div className="table-box mt-5">
 				{isEmptyObject(data) || !data?.transactions.length || status === STATUS.PENDING ? <Preloader/> : null}
 				{!isEmptyObject(data) && data.transactions.length && status === STATUS.FULFILLED
 					? (
-						<>
+						<div className={`table-box mt-5 ${loading ? '__loading' : ''}`}>
+							<div className="table-box-preloader">
+								<Preloader/>
+							</div>
 							<div className="table-header d-flex">
 								<p className="font-16 mb-2 mb-md-0">
 									<span className="mr-3">
@@ -59,33 +61,33 @@ export default function TransactionList({ data, address, status, onSort = undefi
 							</div>
 							<table className="table table-large">
 								<thead>
-								<tr>
-									<th/>
-									<th>{t('labels:txs-hash')}</th>
-									<th>
-										<div className="d-flex align-items-center">
-											{t('labels:method')}
-											<Tooltip
-												text={t('texts:method-description')}>
-												<Dot>
-													<InfoIcon/>
-												</Dot>
-											</Tooltip>
-										</div>
-									</th>
-									<th>
-										<SortButton label={t('labels:block')} sort={sort} value="height" onSort={onSort}/>
-									</th>
-									<th>
-										<SortButton label={t('labels:age')} value="unixTimestamp" sort={sort} onSort={onSort}/>
-									</th>
-									<th>{t('labels:from')}</th>
-									<th/>
-									<th>{t('labels:to')}</th>
-									<th>{t('labels:value')}</th>
-									<th>{t('labels:txn-fee')}</th>
-									<th/>
-								</tr>
+									<tr>
+										<th/>
+										<th>{t('labels:txs-hash')}</th>
+										<th>
+											<div className="d-flex align-items-center">
+												{t('labels:method')}
+												<Tooltip
+													text={t('texts:method-description')}>
+													<Dot>
+														<InfoIcon/>
+													</Dot>
+												</Tooltip>
+											</div>
+										</th>
+										<th>
+											<SortButton label={t('labels:block')} sort={sort} value="height" onSort={onSort}/>
+										</th>
+										<th>
+											<SortButton label={t('labels:age')} value="unixTimestamp" sort={sort} onSort={onSort}/>
+										</th>
+										<th>{t('labels:from')}</th>
+										<th/>
+										<th>{t('labels:to')}</th>
+										<th>{t('labels:value')}</th>
+										<th>{t('labels:txn-fee')}</th>
+										<th/>
+									</tr>
 								</thead>
 								<tbody>
 								{
@@ -157,11 +159,9 @@ export default function TransactionList({ data, address, status, onSort = undefi
 								}
 								</tbody>
 							</table>
-						</>
+						</div>
 					) : <EmptyBlock/>
 				}
-			</div>
 		</div>
-	
 	)
 }
