@@ -1,8 +1,6 @@
 import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
 import NumberFormat from 'react-number-format';
-import Dot from 'ui/components/Dot';
-import SortIcon from 'ui/icons/Sort';
 import {formatFromBaseDenom} from 'utils/formatting/coins';
 import {formatProposalStatus} from 'utils/formatting/governanceProposals';
 import {getDateFromTimestamp} from 'utils/date/getDateFromTimestamp';
@@ -21,33 +19,14 @@ export default function GovernanceList({ data = {}, onSort = null, sort = {} }) 
 					<SortButton label={`#${t('labels:id')}`} value="proposalId" sort={sort} onSort={onSort}/>
 				</th>
 				<th>{t('labels:title')}</th>
-				<th>
-					<div className="d-flex align-items-center">
-						{t('labels:status')}
-						{/*<Dot>*/}
-						{/*	<SortIcon/>*/}
-						{/*</Dot>*/}
-					</div>
-				</th>
+				<th>{t('labels:status')}</th>
 				<th>
 					<SortButton label={t('labels:voting-start')} value="votingStartTime" sort={sort} onSort={onSort}/>
 				</th>
 				<th>
-					<div className="d-flex align-items-center">
-						{t('labels:submit-time')}
-						{/*<Dot>*/}
-						{/*	<SortIcon/>*/}
-						{/*</Dot>*/}
-					</div>
+					<SortButton label={t('labels:submit-time')} value="submitTime" sort={sort} onSort={onSort}/>
 				</th>
-				<th>
-					<div className="d-flex align-items-center">
-						{t('labels:total-deposit')}
-						{/*<Dot>*/}
-						{/*	<SortIcon/>*/}
-						{/*</Dot>*/}
-					</div>
-				</th>
+				<th>{t('labels:total-deposit')}</th>
 			</tr>
 			</thead>
 			<tbody>

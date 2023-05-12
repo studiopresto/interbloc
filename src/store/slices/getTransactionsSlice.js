@@ -17,9 +17,18 @@ export const fetchTransactions = createAsyncThunk(
 		{
 			limit = QUERY_PARAMETERS.LIMIT,
 			per_page = QUERY_PARAMETERS.PARE_PAGE,
-			page = 1
+			page = 1,
+			order_by,
+			order_direction
 		}) => {
-		return await dataProvider.getList(resources.latestTransactions, { limit, per_page, page })
+		return await dataProvider.getList(resources.latestTransactions,
+			{
+				limit,
+				per_page,
+				page,
+				order_by,
+				order_direction
+			})
 	}
 );
 
@@ -28,9 +37,9 @@ export const getTransactionsSlice = createSlice({
 	initialState,
 	reducers: {},
 	extraReducers: {
-		[fetchTransactions.pending]: (state) => {
-			state.status = STATUS.PENDING;
-		},
+		// [fetchTransactions.pending]: (state) => {
+		// 	state.status = STATUS.PENDING;
+		// },
 		[fetchTransactions.fulfilled]: (state, action) => {
 			state.data = action.payload;
 			state.status = STATUS.FULFILLED;

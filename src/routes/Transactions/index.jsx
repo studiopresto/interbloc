@@ -1,4 +1,4 @@
-import {useEffect} from 'react';
+import {useCallback, useEffect, useState} from 'react';
 import Link from 'next/link';
 import {useRouter} from 'next/router';
 import {useDispatch, useSelector} from 'react-redux';
@@ -17,9 +17,11 @@ import {formatDenomToString} from 'utils/formatting/coins';
 import {formatMessageToReadableArray} from 'utils/formatting/transactions';
 import ErrorBlock from 'ui/components/Error';
 import EmptyBlock from 'ui/components/Empty/EmptyBlock';
-import coinConfig from '../../../coin.config';
+import SortButton from 'components/SortButton';
 import {isEmptyObject} from 'utils/object/detectEmptyObject';
 import {fetchChainStats, selectChainStats} from 'store/slices/getChainStats';
+import coinConfig from '../../../coin.config';
+import SelectCustom from '../../ui/components/Select';
 
 export default function TransactionsPage() {
 	
@@ -28,12 +30,41 @@ export default function TransactionsPage() {
 	const page = !!Number(query.page) ? Number(query.page) : 1;
 	const {data, status} = useSelector(selectTransactions);
 	const {data: chainData, status: chainStatus} = useSelector(selectChainStats);
+	const [loading, setLoading] = useState(false);
 	const {t} = useTranslation();
 	
+	const [sort, setSort] = useState({
+		order_by: 'height',
+		order_direction: 'desc'
+	});
+	
+	const sortOptions = [
+		{value: 'height', label: t('labels:block')},
+		{value: 'unixTimestamp', label: t('labels:age')},
+	];
+	
+	const handleSort = useCallback((newSort) => {
+		setSort(newSort)
+		setLoading(true);
+	}, [setSort, sort])
+	
+	const handleSortSelect = useCallback((e) => {
+		setLoading(true);
+		setSort(prevState => {
+			return {...prevState, order_by: e.value}
+		})
+	}, [setSort])
+	
 	useEffect(() => {
-		dispatch(fetchTransactions({page}));
+		dispatch(fetchTransactions({page, ...sort}));
 		dispatch(fetchChainStats());
-	}, [dispatch, page]);
+	}, [dispatch, page, sort]);
+	
+	useEffect(() => {
+		if (data?.transactions) {
+			setLoading(false);
+		}
+	}, [data])
 	
 	return (
 		<>
@@ -48,15 +79,18 @@ export default function TransactionsPage() {
 					</p>
 				</div>
 			</div>
-			{status === STATUS.PENDING || status === STATUS.IDLE ? <Preloader/> : null}
+			{status === STATUS.IDLE ? <Preloader/> : null}
 			{isEmptyObject(data) || status === STATUS.REJECTED ? <ErrorBlock/> : null}
 			{status === STATUS.FULFILLED && !data.transactions.length ? <EmptyBlock/> : null}
 			{!isEmptyObject(data) && status === STATUS.FULFILLED ? (
 				<div className="page-body">
-					<div className="table-box">
+					<div className={`table-box transactions ${loading ? '__loading' : ''}`}>
+						<div className="table-box-preloader">
+							<Preloader/>
+						</div>
 						<div className="table-header">
 							<div className="row">
-								<div className="col-12 col-md-6 mb-3">
+								<div className="col-12 col-lg-6 mb-3">
 									<p className="font-16 font-book mb-1">
 										<NumberFormat
 											value={data.pagination.total}
@@ -69,9 +103,28 @@ export default function TransactionsPage() {
 									</p>
 									<p className="font-12 font-book color-grey">({t('labels:showing-records', {count: QUERY_PARAMETERS.PARE_PAGE})})</p>
 								</div>
-								<div className="col-12 col-md-6">
+								<div className="col-12 col-lg-6">
 									<div className="d-flex justify-content-end left-text">
-										<Pagination page={page} pageCount={data.pagination.totalPages} theme="rounded" url={routes.public.transactions}/>
+										<div className="table-header-actions">
+											<div className="table-header-action">
+												<Pagination
+													page={page}
+													pageCount={data.pagination.totalPages}
+													theme="rounded"
+													url={routes.public.transactions}/>
+											</div>
+											<div className="table-header-action __sort">
+												<p className="color-grey mr-3">{t('labels:sort-by')}:</p>
+												<SelectCustom
+													options={sortOptions}
+													onChange={handleSortSelect}
+													defaultValue={sortOptions.filter(option => option.value === sort.order_by)[0]}/>
+												<SortButton
+													onSort={handleSort}
+													sort={sort}
+													value={sort.order_by}/>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -81,8 +134,12 @@ export default function TransactionsPage() {
 							<tr>
 								<th/>
 								<th>{t('labels:txs-hash')}</th>
-								<th>{t('labels:block')}</th>
-								<th>{t('labels:age')}</th>
+								<th>
+									<SortButton label={t('labels:block')} sort={sort} onSort={handleSort} value="height"/>
+								</th>
+								<th>
+									<SortButton label={t('labels:age')} sort={sort} onSort={handleSort} value="unixTimestamp"/>
+								</th>
 								<th>{t('labels:method')}</th>
 								<th>{t('labels:txn-fee')}</th>
 								<th/>
@@ -145,7 +202,7 @@ export default function TransactionsPage() {
 						</table>
 					</div>
 				</div>
-			) : null}
+			) : <Preloader/>}
 		</>
 	)
 }
