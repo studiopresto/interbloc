@@ -120,5 +120,6 @@
 	"select": "Select",
 	"data-not-available": "Data is not available",
 	"no-results-found": "No results found",
-	"not-transfer": "Not a transfer"
+	"not-transfer": "Not a transfer",
+	"not-identifiable": "Not identifiable"
 }

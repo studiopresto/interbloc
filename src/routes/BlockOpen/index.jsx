@@ -27,6 +27,7 @@ import {
 	selectValidatorsAddressConversion
 } from 'store/slices/getValidatorsAddressConversion';
 import Thumbnail from 'ui/components/Thumbnail/Thumbnail';
+import LatestTransactions from './LatestTransactions';
 
 const TransactionTypes = dynamic(async () => {
 	return await import('components/TransactionTypes');
@@ -191,80 +192,7 @@ export default function BlockOpenPage() {
 					</div>
 					<div className="row">
 						<div className="col-12">
-							<div className="table-box">
-								<div className="table-header">
-									<p className="font-16">
-                    <span className="mr-3">
-	                    <SortDirectionIcon/>
-                    </span>
-										<span className="color-turquoise">{Object.keys(data.data).includes('txs') ? (data.data.txs.length) : (0)}</span> transaction(s) ( {aggregated.failed}
-										<span className="color-danger">Failed</span> )
-									</p>
-								</div>
-								<table className="table">
-									<thead>
-									<tr>
-										<th/>
-										<th>{t('labels:txs-hash')}</th>
-										<th>{t('labels:method')}</th>
-										<th>{t('labels:status')}</th>
-										<th>{t('labels:value')}</th>
-										<th>{t('labels:txn-fee')}</th>
-										<th/>
-									</tr>
-									</thead>
-									<tbody>
-									{Object.keys(data.data).includes('txs') ? (data.data.txs.map((txdata, index) => (
-										<tr key={index}>
-											<td className="hidden-sm">
-												<Link href={`${routes.public.transactions}/${txdata.txhash}`}>
-													<a>
-														<Button icon color="transparent">
-															<EyeIcon/>
-														</Button>
-													</a>
-												</Link>
-											</td>
-											<td data-title={t('labels:txs-hash')}>
-												<Link href={`${routes.public.transactions}/${txdata.txhash}`}>
-                          <a className="color-turquoise font-secondary-bold font-hash">{txdata.txhash}</a>
-												</Link>
-											</td>
-											<td data-title={t('labels:method')}>
-                        <span className="color-violet font-12 font-bold status">
-	                        {formatMessageToObject(txdata.tx.body.messages[0]).title}
-                        </span>
-											</td>
-											<td data-title={t('labels:status')}>
-												{txdata.code === 0 ? (<span
-													className="font-book color-success">Success</span>) : (
-													<span className="font-book color-danger">Error</span>
-												)}
-											</td>
-											<td data-title={t('labels:value')}>
-                        <span className="font-book">
-	                        {
-		                        Object.keys(txdata.tx.body.messages[0]).includes('amount') &&
-		                        formatMessageToObject(txdata.tx.body.messages[0]).amount
-			                        ? (formatMessageToObject(txdata.tx.body.messages[0]).amount.title)
-			                        : 'Not identifiable'
-	                        }
-                        </span>
-											</td>
-											<td data-title={t('labels:txn-fee')}>
-                        <span className="font-book">
-                            {
-	                            txdata.authInfo.fee.amount ?
-		                            formatCoinArrayToString(txdata.authInfo.fee.amount) :
-		                            formatCoinArrayToString(0)
-                            }
-                        </span>
-											</td>
-											<td/>
-										</tr>))) : ('')}
-									</tbody>
-								</table>
-							</div>
+						<LatestTransactions transactions={data.data.txs} aggregated={aggregated}/>
 						</div>
 					</div>
 				</div>

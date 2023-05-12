@@ -8,7 +8,6 @@ import Preloader from 'ui/components/Preloader';
 import ProgressMultiple from 'ui/components/ProgressMultiple';
 import Box from 'ui/components/Box';
 import DirectoryIcon from 'ui/icons/Directory';
-import coinConfig from '../../../coin.config';
 import {useDispatch, useSelector} from 'react-redux';
 import {fetchAccount, selectAccount} from 'store/slices/getAccount';
 import TransactionsByAccount from 'components/TransactionsByAccount/TransactionsByAccount';
@@ -17,11 +16,13 @@ import {isEmptyObject} from 'utils/object/detectEmptyObject';
 import {formatFromBaseDenom} from 'utils/formatting/coins';
 import {getInfoForDenom} from 'utils/formatting/chain';
 import {fetchChainStats, selectChainStats} from 'store/slices/getChainStats';
+import EmptyBlock from 'ui/components/Empty/EmptyBlock';
+import ErrorBlock from 'ui/components/Error';
+import coinConfig from '../../../coin.config';
 
 const Assets = dynamic(async () => {
 	return await import('components/Assets');
 }, {ssr: false, loading: () => <Preloader/>});
-
 
 export default function AccountPage() {
 	
@@ -41,6 +42,9 @@ export default function AccountPage() {
 	
 	if (isEmptyObject(data) && status === STATUS.PENDING) {
 		return <Preloader/>;
+	}
+	if (isEmptyObject(data) || status === STATUS.REJECTED) {
+		return <ErrorBlock/>;
 	}
 	if (!isEmptyObject(data) && status === STATUS.FULFILLED) {
 		const delegationsProgress = () => {
@@ -248,4 +252,6 @@ export default function AccountPage() {
 			</>
 		)
 	}
+	
+	return <EmptyBlock/>
 }

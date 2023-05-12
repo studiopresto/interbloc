@@ -3,12 +3,10 @@ import useTranslation from 'next-translate/useTranslation';
 import {isEmptyObject} from 'utils/object/detectEmptyObject';
 import {STATUS} from 'config/constants';
 import SortDirectionIcon from 'ui/icons/SortDirection';
-import Datepicker from 'ui/components/Datepicker';
 import Button from 'ui/components/Button';
 import Tooltip from 'ui/components/Tooltip';
 import Dot from 'ui/components/Dot';
 import InfoIcon from 'ui/icons/Info';
-import SortIcon from 'ui/icons/Sort';
 import {formatMessageToReadableArray} from 'utils/formatting/transactions';
 import routes from 'config/routes';
 import EyeIcon from 'ui/icons/Eye';
@@ -44,11 +42,9 @@ export default function TransactionList({ data, address, status, onSort = undefi
 										<SortDirectionIcon/>
 									</span>
 									{t('labels:latest-count-of', {
-										count: (data.pagination.total < 10)
-											? data.pagination.total
-											: 10
+										count: data.transactions.length
 									})}
-									<span className="color-turquoise"> {data.pagination.total}</span> {t('labels:transactions')}
+									<span className="color-turquoise"> {data.pagination.total ? data.pagination.total : data.transactions.length}</span> {t('labels:transactions')}
 								</p>
 								<div className="table-header-actions">
 									{/*<div className="table-header-datepicker">*/}

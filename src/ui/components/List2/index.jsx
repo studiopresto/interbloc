@@ -42,7 +42,7 @@ List.propTypes = {
 	data: PropTypes.arrayOf(PropTypes.shape({
 		label: PropTypes.string.isRequired,
 		value: PropTypes.shape({
-			title: PropTypes.string,
+			title: PropTypes.any,
 			href: PropTypes.oneOfType([PropTypes.any, PropTypes.string]),
 			newTab: PropTypes.bool
 		})

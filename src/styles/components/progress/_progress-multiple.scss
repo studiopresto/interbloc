@@ -51,6 +51,9 @@
 									&.__bottom{
 										top: calc(100% + 10px + (#{$i}px * 12));
 									}
+									&.__top{
+										bottom: calc(100% + 10px + (#{$i}px * 12));
+									}
 							}
 					}
 				}
@@ -60,7 +63,7 @@
 			color: inherit;
 			right: 0;
 				&.__top{
-					top: -30px;
+					bottom: calc(100% + 10px);
 				}
 				&.__bottom{
 					top: calc(100% + 10px);

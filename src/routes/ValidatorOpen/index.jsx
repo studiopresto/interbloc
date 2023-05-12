@@ -3,7 +3,6 @@ import {useDispatch, useSelector} from 'react-redux';
 import {useRouter} from 'next/router';
 import dynamic from 'next/dynamic';
 import useTranslation from 'next-translate/useTranslation';
-import Link from 'next/link';
 import moment from 'moment';
 import {fetchValidator, selectValidator} from 'store/slices/getValidatorSlice';
 import Hash from 'ui/components/Hash';
@@ -14,11 +13,11 @@ import {isEmptyObject} from 'utils/object/detectEmptyObject';
 import {STATUS} from 'config/constants';
 import Input from 'ui/components/Input';
 import Image from 'next/image';
+import EmptyBlock from 'ui/components/Empty/EmptyBlock';
 import placeholder from '../../../public/static/images/placeholder.svg';
 import {
 	formatCoinsFromBaseDenom,
 } from 'utils/formatting/coins';
-import TransactionList from 'components/TransactionList';
 import {fetchBondingHistory, selectBondingHistory} from 'store/slices/getBondingHistory';
 import LatestTransactions from './LatestTransactions';
 
@@ -344,5 +343,5 @@ export default function ValidatorOpen() {
 		)
 	}
 	
-	return null
+	return <EmptyBlock/>
 }

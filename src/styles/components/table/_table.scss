@@ -62,6 +62,7 @@
 						@include d($sm){
 							flex-direction: column;
 							align-items: flex-start;
+							padding-top: 15px;
 						}
 					
 						.btns-group{
@@ -81,6 +82,15 @@
 				&-action{
 					display: flex;
 					align-items: center;
+						&:not(:first-child){
+							@include m($sm + 1){
+								margin-left: 30px;
+							}
+						}
+					
+						@include d($sm){
+							margin-bottom: 15px;
+						}
 				}
 				&-datepicker{
 					display: inline-flex;

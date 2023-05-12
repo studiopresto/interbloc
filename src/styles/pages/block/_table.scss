@@ -1,0 +1,13 @@
+.table-box.block{
+		.table-header-action{
+				&.__sort{
+						@include m(1401){
+							display: none;
+						}
+					
+						.table-sort{
+							margin-left: 15px;
+						}
+				}
+		}
+}

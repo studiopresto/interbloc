@@ -22,7 +22,13 @@ const LatestTransactions = ({ data, status }) => {
 		setSort(newSort)
 	}, [setSort, sort])
 	
-	return <TransactionList data={sortedData} status={status} onSort={handleSort} sort={sort}/>
+	const handleSortSelect = useCallback((e) => {
+		setSort(prevState => {
+			return {...prevState, order_by: e.value}
+		})
+	}, [setSort])
+	
+	return <TransactionList data={sortedData} status={status} onSort={handleSort} sort={sort} onSortSelect={handleSortSelect}/>
 }
 
 LatestTransactions.propTypes = {

@@ -97,7 +97,7 @@ export default function SelectCustom({ options, onChange, defaultValue, placehol
 			id={new Date().getTime()}
 			options={options}
 			styles={customStyles}
-			onChange={onChange}
+			onChange={onChange && onChange}
 			defaultValue={defaultValue}
 			placeholder={placeholder}
 			isSearchable={false}
@@ -109,6 +109,6 @@ export default function SelectCustom({ options, onChange, defaultValue, placehol
 
 Select.propTypes = {
 	options: PropTypes.array.isRequired,
-	onChange: PropTypes.func.isRequired,
+	onChange: PropTypes.func,
 	defaultValue: PropTypes.object,
 };
