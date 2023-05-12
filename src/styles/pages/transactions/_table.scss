@@ -1,0 +1,36 @@
+.table-box.transactions{
+		.table-header{
+				&-actions{
+					@include d(1400){
+						width: 100%;
+						flex-direction: column;
+						align-items: flex-start;
+					}
+				}
+				
+				&-action {
+					width: 100%;
+					.table-sort {
+						margin-left: 15px;
+					}
+					
+					&.__sort {
+						@include m(1401) {
+							display: none;
+						}
+					}
+					
+					&:not(:last-child){
+						@include d(1400){
+							margin-bottom: 30px;
+						}
+					}
+					
+					@include d($xs){
+						& > div{
+							width: 100%;
+						}
+					}
+				}
+		}
+}
